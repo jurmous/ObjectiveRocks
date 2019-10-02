@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "851B86C323449295009721CC"
-               BuildableName = "libobjectiveRocks-iOS.a"
-               BlueprintName = "objectiveRocks-iOS"
+               BlueprintIdentifier = "851B84612343EA66009721CC"
+               BuildableName = "libobjectiveRocks-macOS.a"
+               BlueprintName = "objectiveRocks-macOS"
                ReferencedContainer = "container:ObjectiveRocks.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "851B86C323449295009721CC"
-            BuildableName = "libobjectiveRocks-iOS.a"
-            BlueprintName = "objectiveRocks-iOS"
+            BlueprintIdentifier = "851B84612343EA66009721CC"
+            BuildableName = "libobjectiveRocks-macOS.a"
+            BlueprintName = "objectiveRocks-macOS"
             ReferencedContainer = "container:ObjectiveRocks.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
