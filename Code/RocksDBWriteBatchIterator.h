@@ -15,7 +15,10 @@ typedef NS_ENUM(NSUInteger, RocksDBWriteBatchEntryType)
 	RocksDBWriteBatchEntryTypePutRecord,
 	RocksDBWriteBatchEntryTypeMergeRecord,
 	RocksDBWriteBatchEntryTypeDeleteRecord,
-	RocksDBWriteBatchEntryTypeLogDataRecord
+	RocksDBWriteBatchEntryTypeSingleDeleteRecord,
+	RocksDBWriteBatchEntryTypeDeleteRangeRecord,
+	RocksDBWriteBatchEntryTypeLogDataRecord,
+	RocksDBWriteBatchEntryTypeXIDRecord
 };
 
 @interface RocksDBWriteBatchEntry : NSObject
