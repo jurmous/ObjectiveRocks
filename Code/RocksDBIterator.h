@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param error RocksDBError  if error happens in underlying native library.
  */
-- (void)status:(NSError * __autoreleasing *)error;
+- (BOOL)status:(NSError * __autoreleasing *)error;
 
 /**
  Executes a given block for each key in the iterator.

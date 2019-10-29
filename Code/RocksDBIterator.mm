@@ -103,7 +103,7 @@
 	return value;
 }
 
-- (void)status:(NSError * __autoreleasing *)error
+- (BOOL)status:(NSError * __autoreleasing *)error
 {
     rocksdb::Status status = _iterator->status();
 
@@ -112,7 +112,9 @@
         if (error && *error == nil) {
             *error = temp;
         }
+		return NO;
     }
+	return YES;
 }
 
 #pragma mark - Enumerate Keys
