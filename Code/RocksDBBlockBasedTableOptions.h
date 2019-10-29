@@ -19,7 +19,7 @@ typedef NS_ENUM(char, BlockBasedTableIndexType)
 	 @brief A space efficient index block that is optimized for
 	 binary-search-based index.
 	 */
-	BlockBasedTableIndexBinarySearch,
+	BlockBasedTableIndexBinarySearch = 0x0,
 
 	/**
 	 @brief The hash index, if enabled, will do the hash lookup when
@@ -27,7 +27,7 @@ typedef NS_ENUM(char, BlockBasedTableIndexType)
 	 
 	 @see RocksDBPrefixExtractor
 	 */
-	BlockBasedTableIndexHashSearch
+	BlockBasedTableIndexHashSearch = 0x1
 };
 
 typedef NS_ENUM(char, BlockBasedTableChecksumType) {

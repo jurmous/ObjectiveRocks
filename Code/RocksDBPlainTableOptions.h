@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(char, PlainTableEncodingType)
 {
-	PlainTableEncodingPlain,
-	PlainTableEncodingPrefix
+	PlainTableEncodingPlain = 0x0,
+	PlainTableEncodingPrefix = 0x1
 };
 
 @interface RocksDBPlainTableOptions : NSObject
