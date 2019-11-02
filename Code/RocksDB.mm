@@ -836,6 +836,43 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return [[RocksDBIterator alloc] initWithDBIterator:iterator];
 }
 
+- (NSArray<RocksDBIterator *> *)iteratorsOverColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+													  error:(NSError * _Nullable *)error
+{
+	return [self iteratorsWithReadOptions:_readOptions overColumnFamilies:columnFamilies error:error];
+}
+
+- (NSArray<RocksDBIterator *> *)iteratorsWithReadOptions:(RocksDBReadOptions *)readOptions
+									  overColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+												   error:(NSError * _Nullable *)error
+{
+
+
+	std::vector<rocksdb::ColumnFamilyHandle *> families;
+	for (RocksDBColumnFamilyHandle* handle in columnFamilies) {
+		families.push_back(handle.columnFamily);
+	}
+
+	std::vector<rocksdb::Iterator *> iterators;
+
+	rocksdb::Status status = _db->NewIterators(readOptions.options, families, &iterators);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+	}
+
+	NSMutableArray<RocksDBIterator *> *resultIterators = [NSMutableArray array];
+
+	for (auto &i : iterators) {
+		RocksDBIterator *it = [[RocksDBIterator alloc] initWithDBIterator:i];
+		[resultIterators addObject:it];
+	}
+
+	return resultIterators;
+}
+
 #pragma mark - Snapshot
 
 - (RocksDBSnapshot *)snapshot
