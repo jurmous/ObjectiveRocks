@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RocksDBColumnFamilyHandle.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param aKey The key for object.
  @param columnFamily The column family where data should be written.
  */
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(nullable RocksDBColumnFamily *)columnFamily;
+- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 /**
  Merges the given key-object pair into the Write Batch.
@@ -55,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param aKey The key for object.
  @param columnFamily The column family where data should be written.
  */
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(nullable RocksDBColumnFamily *)columnFamily;
+- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 /**
  Deletes the object for the given key from this Write Batch.
@@ -70,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param aKey The key for object.
  @param columnFamily The column family from which the data should be deleted.
  */
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(nullable RocksDBColumnFamily *)columnFamily;
+- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 /**
  Append a blob of arbitrary size to the records in this batch. Blobs, puts, deletes, and merges 

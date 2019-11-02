@@ -19,7 +19,7 @@ extern const unsigned char ObjectiveRocksVersionString[];
 #import "RocksDBRange.h"
 
 // Column Family
-#import "RocksDBColumnFamily.h"
+#import "RocksDBColumnFamilyHandle.h"
 #import "RocksDBColumnFamilyDescriptor.h"
 
 // Iterator

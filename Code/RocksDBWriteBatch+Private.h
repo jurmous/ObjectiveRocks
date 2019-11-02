@@ -7,6 +7,7 @@
 //
 
 #import "RocksDBWriteBatch.h"
+#import "RocksDBColumnFamilyHandle.h"
 
 namespace rocksdb {
 	class DB;
@@ -24,28 +25,28 @@ namespace rocksdb {
 @property (nonatomic, readonly) rocksdb::WriteBatchBase *writeBatchBase;
 
 /** @brief The rocksdb::ColumnFamilyHandle associated with this instance. */
-@property (nonatomic, readonly) rocksdb::ColumnFamilyHandle *columnFamily;
+@property (nonatomic, readonly) RocksDBColumnFamilyHandle *columnFamily;
 
 /**
  Initializes a new instance of `RocksDBWriteBatch` with the given native rocksdb::WriteBatchBase 
- instance, encoding options and rocksdb::ColumnFamilyHandle instance.
+ instance, encoding options and RocksDBColumnFamilyHandle instance.
 
  @discussion This initializer is used by the subclasses of `RocksDBWriteBatch`.
 
  @param writeBatchBase An instance of a concrete subclass implementation of rocksdb::WriteBatchBase.
- @param columnFamily The rocks::ColumnFamilyHandle instance.
+ @param columnFamily The RocksDBColumnFamilyHandle instance.
  @return a newly-initialized instance of `RocksDBWriteBatch`.
  */
 - (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatchBase *)writeBatchBase
-							columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily;
+							columnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 /**
  Initializes a new instance of a simple `RocksDBWriteBatch` with the given options and
  rocksdb::ColumnFamilyHandle instance.
 
- @param columnFamily The rocks::ColumnFamilyHandle instance.
+ @param columnFamily The RocksDBColumnFamilyHandle instance.
  @return a newly-initialized instance of `RocksDBWriteBatch`.
  */
-- (instancetype)initWithColumnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily;
+- (instancetype)initWithColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 @end

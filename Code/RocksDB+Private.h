@@ -23,7 +23,7 @@ namespace rocksdb {
 @property (nonatomic, assign) rocksdb::DB *db;
 
 /** @brief The underlying rocksdb::ColumnFamilyHandle associated with this instance. */
-@property (nonatomic, assign) rocksdb::ColumnFamilyHandle *columnFamily;
+@property (nonatomic, assign) RocksDBColumnFamilyHandle *columnFamily;
 
 /** @brief The DB options. 
  @see RocksDBOptions

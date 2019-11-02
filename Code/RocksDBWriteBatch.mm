@@ -8,8 +8,8 @@
 
 #import "RocksDBWriteBatch.h"
 #import "RocksDBWriteBatch+Private.h"
-#import "RocksDBColumnFamily.h"
-#import "RocksDBColumnFamily+Private.h"
+#import "RocksDBColumnFamilyHandle.h"
+#import "RocksDBColumnFamilyHandle+Private.h"
 #import "RocksDBSlice.h"
 
 #import <rocksdb/write_batch_base.h>
@@ -17,7 +17,7 @@
 
 @interface RocksDBWriteBatch ()
 {
-	rocksdb::ColumnFamilyHandle *_columnFamily;
+	RocksDBColumnFamilyHandle *_columnFamily;
 }
 @property (nonatomic, assign) rocksdb::WriteBatchBase *writeBatchBase;
 @end
@@ -27,14 +27,14 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithColumnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
+- (instancetype)initWithColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
 	return [self initWithNativeWriteBatch:new rocksdb::WriteBatch()
 							 columnFamily:columnFamily];
 }
 
 - (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatchBase *)writeBatchBase
-							columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
+							columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
 	self = [super init];
 	if (self) {
@@ -58,18 +58,13 @@
 
 - (void)setData:(NSData *)anObject forKey:(NSData *)aKey
 {
-	[self setData:anObject forKey:aKey inColumnFamily:nil];
+	[self setData:anObject forKey:aKey inColumnFamily:_columnFamily];
 }
 
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamily *)columnFamily
+- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
 	if (aKey != nil && anObject != nil) {
-		rocksdb::ColumnFamilyHandle *handle = _columnFamily;
-		if (columnFamily != nil) {
-			handle = columnFamily.columnFamily;
-		}
-
-		_writeBatchBase->Put(handle, SliceFromData(aKey), SliceFromData(anObject));
+		_writeBatchBase->Put(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
 	}
 }
 
@@ -77,18 +72,13 @@
 
 - (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey
 {
-	[self mergeData:anObject forKey:aKey inColumnFamily:nil];
+	[self mergeData:anObject forKey:aKey inColumnFamily:_columnFamily];
 }
 
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamily *)columnFamily
+- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
 	if (aKey != nil && anObject != nil) {
-		rocksdb::ColumnFamilyHandle *handle = _columnFamily;
-		if (columnFamily != nil) {
-			handle = columnFamily.columnFamily;
-		}
-
-		_writeBatchBase->Merge(handle, SliceFromData(aKey), SliceFromData(anObject));
+		_writeBatchBase->Merge(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
 	}
 }
 
@@ -96,18 +86,13 @@
 
 - (void)deleteDataForKey:(NSData *)aKey
 {
-	[self deleteDataForKey:aKey inColumnFamily:nil];
+	[self deleteDataForKey:aKey inColumnFamily:_columnFamily];
 }
 
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamily *)columnFamily
+- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
 	if (aKey != nil) {
-		rocksdb::ColumnFamilyHandle *handle = _columnFamily;
-		if (columnFamily != nil) {
-			handle = columnFamily.columnFamily;
-		}
-
-		_writeBatchBase->Delete(handle, SliceFromData(aKey));
+		_writeBatchBase->Delete(columnFamily.columnFamily, SliceFromData(aKey));
 	}
 }
 

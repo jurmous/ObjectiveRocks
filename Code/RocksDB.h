@@ -10,6 +10,7 @@
 #import <TargetConditionals.h>
 
 #import "RocksDBColumnFamilyDescriptor.h"
+#import "RocksDBColumnFamilyHandle.h"
 #import "RocksDBOptions.h"
 #import "RocksDBReadOptions.h"
 #import "RocksDBWriteOptions.h"
@@ -203,14 +204,32 @@ NS_ASSUME_NONNULL_BEGIN
  new Column Family.
  @return The newly-created Column Family with the given name and options.
 
- @see RocksDBColumnFamily
+ @see RocksDBColumnFamilyHandle
  @see RocksDBColumnFamilyOptions
  */
-- (nullable RocksDBColumnFamily *)createColumnFamilyWithName:(NSString *)name
+- (nullable RocksDBColumnFamilyHandle *)createColumnFamilyWithName:(NSString *)name
 														andOptions:(RocksDBColumnFamilyOptions *)options;
 
+/**
+ Drops a Column family.
+ Throws an exception if it fails.
+
+ @param columnFamily the handle to columnFamily to drop
+
+ @see RocksDBColumnFamilyHandle
+ */
+- (void)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
+ Bulk drop column families. This call only records drop records in the
+ manifest and prevents the column families from flushing and compacting.
+ In case of error, the request may succeed partially. User may call
+ ListColumnFamilies to check the result.
+ */
+- (BOOL)dropColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *>*)columnFamilies error:(NSError *__autoreleasing  _Nullable *)error;
+
 /** @brief Returns an array */
-- (NSArray<RocksDBColumnFamily *> *)columnFamilies;
+- (NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies;
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 
@@ -222,6 +241,15 @@ NS_ASSUME_NONNULL_BEGIN
  @warning Not available in RocksDB Lite.
  */
 - (RocksDBColumnFamilyMetaData *)columnFamilyMetaData;
+
+/**
+ Returns the Meta Data object for the Column Family associated with this instance.
+
+ @see RocksDBColumnFamilyMetaData
+
+ @warning Not available in RocksDB Lite.
+ */
+- (RocksDBColumnFamilyMetaData *)columnFamilyMetaData: (RocksDBColumnFamilyHandle *)columnFamily;
 
 #endif
 
@@ -248,6 +276,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)valueForProperty:(NSString *)property;
 
 /**
+ Returns the string value for the given property.
+
+ @param property The property name.
+ @param columnFamily To read from
+ @return The string value of the property.
+
+ @warning Not available in RocksDB Lite.
+ */
+- (nullable NSString *)valueForProperty:(NSString *)property
+						 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
  Returns the integer value for the given int property name.
 
  @param property The property name.
@@ -258,6 +298,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (uint64_t)valueForIntProperty:(NSString *)property;
 
 /**
+ Returns the integer value for the given int property name.
+
+ @param property The property name.
+ @param columnFamily To read from
+ @return The integer value of the property.
+
+ @warning Not available in RocksDB Lite.
+ */
+- (uint64_t)valueForIntProperty:(NSString *)property
+				 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
  Returns the map value for the given map property name.
 
  @param property The property name.
@@ -266,6 +318,18 @@ NS_ASSUME_NONNULL_BEGIN
  @warning Not available in RocksDB Lite.
  */
 - (NSDictionary<NSString *, NSString*> *)valueForMapProperty:(NSString *)property;
+
+/**
+ Returns the map value for the given map property name.
+
+ @param property The property name.
+ @param columnFamily Column Family to read from.
+ @return The map value of the property.
+
+ @warning Not available in RocksDB Lite.
+ */
+- (NSDictionary<NSString *, NSString *> *)valueForMapProperty:(NSString *)property
+				 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
 
 @end
 
@@ -296,6 +360,20 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param anObject The object for key.
  @param aKey The key for object.
+ @param columnFamily The column family to put in
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @return `YES` if the operation succeeded, `NO` otherwise
+ */
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		  error:(NSError * _Nullable *)error;
+
+/**
+ Stores the given key-object pair into the DB.
+
+ @param anObject The object for key.
+ @param aKey The key for object.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
  @param writeOptions `RocksDBWriteOptions` instance for configuring this write operation.
  @return `YES` if the operation succeeded, `NO` otherwise
@@ -304,6 +382,24 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)setData:(NSData *)anObject
 		 forKey:(NSData *)aKey
+   writeOptions:(RocksDBWriteOptions *) writeOptions
+		  error:(NSError * _Nullable *)error;
+
+/**
+ Stores the given key-object pair into the DB.
+
+ @param anObject The object for key.
+ @param aKey The key for object.
+ @param columnFamily The column family to put in
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @param writeOptions `RocksDBWriteOptions` instance for configuring this write operation.
+ @return `YES` if the operation succeeded, `NO` otherwise
+
+ @see RocksDBWriteOptions
+ */
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
    writeOptions:(RocksDBWriteOptions *) writeOptions
 		  error:(NSError * _Nullable *)error;
 
@@ -354,6 +450,49 @@ NS_ASSUME_NONNULL_BEGIN
 	 writeOptions:(RocksDBWriteOptions *) writeOptions
 			error:(NSError * _Nullable *)error;
 
+
+/**
+ Merges the given object with the existing data for the given key.
+
+ @discussion A merge is an atomic read-modify-write operation, whose semantics are defined
+ by the user-provided merge operator.
+ This method can be used to configure single write operations bypassing the defaults.
+
+ @param anObject The object being merged.
+ @param aKey The key for the object.
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @param columnFamily The column family to merge in
+ @return `YES` if the operation succeeded, `NO` otherwise
+
+ @see RocksDBMergeOperator
+ */
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * _Nullable *)error;
+
+/**
+ Merges the given object with the existing data for the given key.
+
+ @discussion A merge is an atomic read-modify-write operation, whose semantics are defined
+ by the user-provided merge operator.
+ This method can be used to configure single write operations bypassing the defaults.
+
+ @param anObject The object being merged.
+ @param aKey The key for the object.
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @param columnFamily The column family to merge in
+ @param writeOptions  `RocksDBWriteOptions` instance for configuring this merge operation.
+ @return `YES` if the operation succeeded, `NO` otherwise
+
+ @see RocksDBMergeOperator
+ */
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+	 writeOptions:(RocksDBWriteOptions *) writeOptions
+			error:(NSError * _Nullable *)error;
+
 @end
 
 #pragma mark - Read operations
@@ -367,7 +506,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns the object for the given key.
 
- @peram aKey The key for object.
+ @param aKey The key for object.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
  @return The object for the given key.
  */
@@ -376,7 +515,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns the object for the given key.
 
- @peram aKey The key for object.
+ @param aKey The key for object.
+ @param columnFamily The column family to get from
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @return The object for the given key.
+ */
+- (nullable NSData *)dataForKey:(NSData *)aKey
+				 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+						  error:(NSError * _Nullable *)error;
+
+/**
+ Returns the object for the given key.
+
+ @param aKey The key for object.
  @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
  @return The object for the given key.
@@ -384,6 +535,22 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBReadOptions
  */
 - (nullable NSData *)dataForKey:(NSData *)aKey
+					readOptions:(RocksDBReadOptions *)readOptions
+						  error:(NSError * _Nullable *)error;
+
+/**
+ Returns the object for the given key.
+
+ @param aKey The key for object.
+ @param columnFamily The column family to get from
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @return The object for the given key.
+
+ @see RocksDBReadOptions
+ */
+- (nullable NSData *)dataForKey:(NSData *)aKey
+				 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					readOptions:(RocksDBReadOptions *)readOptions
 						  error:(NSError * _Nullable *)error;
 
@@ -400,7 +567,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Deletes the object for the given key.
 
- @peram aKey The key to delete.
+ @param aKey The key to delete.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
  @return `YES` if the operation succeeded, `NO` otherwise
  */
@@ -409,7 +576,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Deletes the object for the given key.
 
- @peram aKey The key to delete.
+ @param aKey The key to delete.
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @param columnFamily To delete key from
+ @return `YES` if the operation succeeded, `NO` otherwise
+ */
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError * _Nullable *)error;
+
+/**
+ Deletes the object for the given key.
+
+ @param aKey The key to delete.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
  @param writeOptions `RocksDBWriteOptions` instance for configuring this delete operation.
  @return `YES` if the operation succeeded, `NO` otherwise
@@ -417,8 +596,24 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBWriteOptions
  */
 - (BOOL)deleteDataForKey:(NSData *)aKey
-		withOptions:(RocksDBWriteOptions *)options
-			  error:(NSError * _Nullable *)error;
+			writeOptions:(RocksDBWriteOptions *)writeOptions
+				   error:(NSError * _Nullable *)error;
+
+/**
+ Deletes the object for the given key.
+
+ @param aKey The key to delete.
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @param columnFamily To delete key from
+ @param writeOptions `RocksDBWriteOptions` instance for configuring this delete operation.
+ @return `YES` if the operation succeeded, `NO` otherwise
+
+ @see RocksDBWriteOptions
+ */
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			writeOptions:(RocksDBWriteOptions *)writeOptions
+				   error:(NSError * _Nullable *)error;
 
 @end
 
@@ -439,6 +634,18 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBWriteBatch
  */
 - (RocksDBWriteBatch *)writeBatch;
+
+/**
+Returns a write batch instance, which can be used to perform a set of updates to the database atomically in given column family.
+
+@param columnFamily to apply batch to
+
+@discussion This batch instance can be applied at a later point to the DB, making it more flexible
+for “scattered” logic.
+
+@see RocksDBWriteBatch
+*/
+- (RocksDBWriteBatch *)writeBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily;
 
 /**
  Performs a write batch on this DB.
@@ -522,6 +729,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (RocksDBIterator *)iterator;
 
 /**
+ Returns an iterator instance for scan operations inside a specified column family.
+
+ @param columnFamily The column family to iterate over
+ @return An iterator instace.
+
+ @see RocksDBIterator
+ */
+- (RocksDBIterator *)iteratorOverColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
  Returns an iterator instance for scan operations
 
  @param readOptions `RocksDBReadOptions` instance for configuring the iterator instance.
@@ -531,6 +748,45 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBReadOptions
  */
 - (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions;
+
+/**
+ Returns an iterator instance for scan operations
+
+ @param readOptions `RocksDBReadOptions` instance for configuring the iterator instance.
+ @param columnFamily The column family to iterate over
+ @return An iterator instace.
+
+ @see RocksDBIterator
+ @see RocksDBReadOptions
+ */
+- (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions
+							overColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
+ Returns iterator instances for scan operations over specified column families
+
+ @param columnFamilies The column family to iterate over
+ @return An iterator instace.
+
+ @see RocksDBIterator
+ @see RocksDBReadOptions
+ */
+- (NSArray<RocksDBIterator *> *)iteratorsOverColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+													  error:(NSError * _Nullable *)error;
+
+/**
+ Returns iterator instances for scan operations over specified column families
+
+ @param readOptions `RocksDBReadOptions` instance for configuring the iterator instance.
+ @param columnFamilies The column family to iterate over
+ @return An iterator instace.
+
+ @see RocksDBIterator
+ @see RocksDBReadOptions
+ */
+- (NSArray<RocksDBIterator *> *)iteratorsWithReadOptions:(RocksDBReadOptions *)readOptions
+									  overColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+												   error:(NSError * _Nullable *)error;
 
 @end
 
@@ -585,6 +841,26 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)compactRange:(RocksDBKeyRange *)range
 		 withOptions:(RocksDBCompactRangeOptions *)options
+			   error:(NSError * _Nullable *)error;
+
+/**
+ Compacts the underlying storage for the specified key range [begin, end].
+
+ A `nil` start key is treated as a key before all keys, and a `nil` end key is treated as a key
+ after all keys in the database. Thus, in order to compact the entire database, the `RocksDBOpenRange` can be used.
+
+ @param range The key range for the compcation.
+ @param options The options for the compact range operation.
+ @param columnFamily The column family to compact
+ @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
+ @return `YES` if the operation succeeded, `NO` otherwise.
+
+ @see RocksDBKeyRange
+ @see RocksDBCompactRangeOptions
+ */
+- (BOOL)compactRange:(RocksDBKeyRange *)range
+		 withOptions:(RocksDBCompactRangeOptions *)options
+	  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 			   error:(NSError * _Nullable *)error;
 
 @end

@@ -51,7 +51,7 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		
 		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
-		columnFamily?.drop()
+		rocks.dropColumnFamily(columnFamily!)
 		columnFamily?.close()
 		rocks.close()
 
@@ -104,9 +104,6 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		XCTAssertNotNil(defaultColumnFamily)
 		XCTAssertNotNil(newColumnFamily)
-
-		defaultColumnFamily.close()
-		newColumnFamily.close()
 	}
 
 	func testSwift_ColumnFamilies_Open_ComparatorMismatch() {
@@ -160,8 +157,8 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
-		try! columnFamily?.setData("cf_value", forKey: "cf_key1")
-		try! columnFamily?.setData("cf_value", forKey: "cf_key2")
+		try! rocks.setData("cf_value", forKey: "cf_key1", forColumnFamily: columnFamily!)
+		try! rocks.setData("cf_value", forKey: "cf_key2", forColumnFamily: columnFamily!)
 
 		columnFamily?.close()
 		rocks.close()
@@ -185,26 +182,23 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		XCTAssertNil(try? rocks.data(forKey: "cf_key1"))
 		XCTAssertNil(try? rocks.data(forKey: "cf_key2"))
 
-		XCTAssertEqual(try! defaultColumnFamily.data(forKey: "df_key1"), "df_value".data)
-		XCTAssertEqual(try! defaultColumnFamily.data(forKey: "df_key2"), "df_value".data)
+		XCTAssertEqual(try! rocks.data(forKey: "df_key1", inColumnFamily: defaultColumnFamily), "df_value".data)
+		XCTAssertEqual(try! rocks.data(forKey: "df_key2", inColumnFamily: defaultColumnFamily), "df_value".data)
 
-		XCTAssertNil(try? defaultColumnFamily.data(forKey: "cf_key1"))
-		XCTAssertNil(try? defaultColumnFamily.data(forKey: "cf_key2"))
+		XCTAssertNil(try? rocks.data(forKey: "cf_key1", inColumnFamily: defaultColumnFamily))
+		XCTAssertNil(try? rocks.data(forKey: "cf_key2", inColumnFamily: defaultColumnFamily))
 
-		XCTAssertEqual(try! newColumnFamily.data(forKey: "cf_key1"), "cf_value".data)
-		XCTAssertEqual(try! newColumnFamily.data(forKey: "cf_key2"), "cf_value".data)
+		XCTAssertEqual(try! rocks.data(forKey: "cf_key1", inColumnFamily: newColumnFamily), "cf_value".data)
+		XCTAssertEqual(try! rocks.data(forKey: "cf_key2", inColumnFamily: newColumnFamily), "cf_value".data)
 
-		XCTAssertNil(try? newColumnFamily.data(forKey: "df_key1"))
-		XCTAssertNil(try? newColumnFamily.data(forKey: "df_key2"))
+		XCTAssertNil(try? rocks.data(forKey: "df_key1", inColumnFamily: newColumnFamily))
+		XCTAssertNil(try? rocks.data(forKey: "df_key2", inColumnFamily: newColumnFamily))
 
-		try! newColumnFamily.deleteData(forKey: "cf_key1")
-		XCTAssertNil(try? newColumnFamily.data(forKey: "cf_key1"))
+		try! rocks.deleteData(forKey: "cf_key1", forColumnFamily: newColumnFamily)
+		XCTAssertNil(try? rocks.data(forKey: "cf_key1", inColumnFamily: newColumnFamily))
 
-		try! newColumnFamily.deleteData(forKey: "cf_key1")
-		XCTAssertNil(try? newColumnFamily.data(forKey: "cf_key1"))
-
-		defaultColumnFamily.close()
-		newColumnFamily.close()
+		try! rocks.deleteData(forKey: "cf_key1", forColumnFamily: newColumnFamily)
+		XCTAssertNil(try? rocks.data(forKey: "cf_key1", inColumnFamily: newColumnFamily))
 	}
 
 	func testSwift_ColumnFamilies_WriteBatch() {
@@ -222,28 +216,27 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]
 
-		try! newColumnFamily.setData("xyz_value", forKey: "xyz")
+		try! rocks.setData("xyz_value", forKey: "xyz", forColumnFamily: newColumnFamily)
 
-		let batch = newColumnFamily.writeBatch()
-
+		let batch = rocks.writeBatch(inColumnFamily: newColumnFamily)
 		batch.setData("cf_value1", forKey:"cf_key1")
-		batch.setData("df_value", forKey:"df_key", in:defaultColumnFamily)
+		batch.setData("df_value", forKey:"df_key", inColumnFamily:defaultColumnFamily)
 		batch.setData("cf_value2", forKey:"cf_key2")
-		batch.deleteData(forKey: "xyz", in:defaultColumnFamily)
+		batch.deleteData(forKey: "xyz", inColumnFamily:defaultColumnFamily)
 		batch.deleteData(forKey: "xyz")
 
 		try! rocks.applyWriteBatch(batch, writeOptions:RocksDBWriteOptions())
 
-		XCTAssertEqual(try! defaultColumnFamily.data(forKey: "df_key"), "df_value".data)
-		XCTAssertNil(try? defaultColumnFamily.data(forKey: "df_key1"))
-		XCTAssertNil(try? defaultColumnFamily.data(forKey: "df_key2"))
+		XCTAssertEqual(try! rocks.data(forKey: "df_key", inColumnFamily: defaultColumnFamily), "df_value".data)
+		XCTAssertNil(try? rocks.data(forKey: "df_key1", inColumnFamily: defaultColumnFamily))
+		XCTAssertNil(try? rocks.data(forKey: "df_key2", inColumnFamily: defaultColumnFamily))
 
-		XCTAssertEqual(try! newColumnFamily.data(forKey: "cf_key1"), "cf_value1".data)
-		XCTAssertEqual(try! newColumnFamily.data(forKey: "cf_key2"), "cf_value2".data)
-		XCTAssertNil(try? newColumnFamily.data(forKey: "df_key"))
+		XCTAssertEqual(try! rocks.data(forKey: "cf_key1", inColumnFamily: newColumnFamily), "cf_value1".data)
+		XCTAssertEqual(try! rocks.data(forKey: "cf_key2", inColumnFamily: newColumnFamily), "cf_value2".data)
+		XCTAssertNil(try? rocks.data(forKey: "df_key", inColumnFamily: newColumnFamily))
 
-		XCTAssertNil(try? defaultColumnFamily.data(forKey: "xyz"))
-		XCTAssertNil(try? newColumnFamily.data(forKey: "xyz"))
+		XCTAssertNil(try? rocks.data(forKey: "xyz", inColumnFamily: defaultColumnFamily))
+		XCTAssertNil(try? rocks.data(forKey: "xyz", inColumnFamily: newColumnFamily))
 
 		defaultColumnFamily.close()
 		newColumnFamily.close()
@@ -264,13 +257,13 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]
 
-		try! defaultColumnFamily.setData("df_value1", forKey: "df_key1")
-		try! defaultColumnFamily.setData("df_value2", forKey: "df_key2")
+		try! rocks.setData("df_value1", forKey: "df_key1", forColumnFamily: defaultColumnFamily)
+		try! rocks.setData("df_value2", forKey: "df_key2", forColumnFamily: defaultColumnFamily)
 
-		try! newColumnFamily.setData("cf_value1", forKey: "cf_key1")
-		try! newColumnFamily.setData("cf_value2", forKey: "cf_key2")
+		try! rocks.setData("cf_value1", forKey: "cf_key1", forColumnFamily: newColumnFamily)
+		try! rocks.setData("cf_value2", forKey: "cf_key2", forColumnFamily: newColumnFamily)
 
-		let dfIterator = defaultColumnFamily.iterator()
+		let dfIterator = rocks.iteratorOverColumnFamily(defaultColumnFamily)
 
 		var actual = [String]()
 
@@ -286,7 +279,7 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		dfIterator.close()
 
-		let cfIterator = newColumnFamily.iterator()
+		let cfIterator = rocks.iteratorOverColumnFamily(newColumnFamily)
 
 		actual.removeAll()
 
@@ -301,8 +294,5 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		XCTAssertEqual(actual, expected)
 
 		cfIterator.close()
-	
-		defaultColumnFamily.close()
-		newColumnFamily.close()
 	}
 }

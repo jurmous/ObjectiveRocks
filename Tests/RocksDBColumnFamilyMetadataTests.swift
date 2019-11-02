@@ -25,16 +25,16 @@ class RocksDBColumnFamilyMetadataTests : RocksDBTests {
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]
 
-		try! defaultColumnFamily.setData("df_value1", forKey: "df_key1")
-		try! defaultColumnFamily.setData("df_value2", forKey: "df_key2")
+		try! rocks.setData("df_value1", forKey: "df_key1", forColumnFamily: defaultColumnFamily)
+		try! rocks.setData("df_value2", forKey: "df_key2", forColumnFamily: defaultColumnFamily)
 
-		try! newColumnFamily.setData("cf_value1", forKey: "cf_key1")
-		try! newColumnFamily.setData("cf_value2", forKey: "cf_key2")
+		try! rocks.setData("cf_value1", forKey: "cf_key1", forColumnFamily: newColumnFamily)
+		try! rocks.setData("cf_value2", forKey: "cf_key2", forColumnFamily: newColumnFamily)
 
-		let defaultMetadata = defaultColumnFamily.columnFamilyMetaData()
+		let defaultMetadata = rocks.columnFamilyMetaData(defaultColumnFamily)
 		XCTAssertNotNil(defaultMetadata);
 
-		let newColumnFamilyMetadata = newColumnFamily.columnFamilyMetaData()
+		let newColumnFamilyMetadata = rocks.columnFamilyMetaData(newColumnFamily)
 		XCTAssertNotNil(newColumnFamilyMetadata);
 	}
 }

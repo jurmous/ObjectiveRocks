@@ -12,7 +12,7 @@
 #import "RocksDBOptions+Private.h"
 #import "RocksDBWriteBatch+Private.h"
 #import "RocksDBWriteBatchIterator+Private.h"
-#import "RocksDBColumnFamily+Private.h"
+#import "RocksDBColumnFamilyHandle+Private.h"
 
 #import "RocksDBError.h"
 #import "RocksDBSlice.h"
@@ -34,7 +34,7 @@
 #pragma mark - Lifecycle 
 
 - (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
+					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					   readOptions:(RocksDBReadOptions *)readOptions
 {
 	self = [super initWithNativeWriteBatch:new rocksdb::WriteBatchWithIndex()
@@ -50,7 +50,7 @@
 #pragma mark - Queries
 
 - (NSData *)dataForKey:(NSData *)aKey
-		inColumnFamily:(RocksDBColumnFamily *)columnFamily
+		inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 				 error:(NSError * __autoreleasing *)error
 {
 	rocksdb::ColumnFamilyHandle *columnFamilyHandle = columnFamily != nil ? columnFamily.columnFamily : nullptr;
@@ -72,7 +72,7 @@
 }
 
 - (NSData *)dataForKeyIncludingDatabase:(NSData *)aKey
-						 inColumnFamily:(RocksDBColumnFamily *)columnFamily
+						 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 							readOptions:(void (^)(RocksDBReadOptions *readOptions))readOptionsBlock
 								  error:(NSError * __autoreleasing *)error
 {
@@ -104,7 +104,7 @@
 
 - (RocksDBWriteBatchIterator *)iterator
 {
-	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator(self.columnFamily);
+	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator(self.columnFamily.columnFamily);
 	return [[RocksDBWriteBatchIterator alloc] initWithWriteBatchIterator:nativeIterator];
 }
 

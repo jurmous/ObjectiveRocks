@@ -10,8 +10,8 @@
 
 #import "RocksDBOptions+Private.h"
 
-#import "RocksDBColumnFamily.h"
-#import "RocksDBColumnFamily+Private.h"
+#import "RocksDBColumnFamilyHandle.h"
+#import "RocksDBColumnFamilyHandle+Private.h"
 
 #import "RocksDBEnv.h"
 #import "RocksDBEnv+Private.h"
@@ -50,18 +50,18 @@
 {
 	NSString *_path;
 	rocksdb::DB *_db;
-	rocksdb::ColumnFamilyHandle *_columnFamily;
 	std::vector<rocksdb::ColumnFamilyHandle *> *_columnFamilyHandles;
 
 	NSMutableArray *_columnFamilies;
 
+	RocksDBColumnFamilyHandle *_columnFamily;
 	RocksDBOptions *_options;
 	RocksDBReadOptions *_readOptions;
 	RocksDBWriteOptions *_writeOptions;
 }
 @property (nonatomic, strong) NSString *path;
 @property (nonatomic, assign) rocksdb::DB *db;
-@property (nonatomic, assign) rocksdb::ColumnFamilyHandle *columnFamily;
+@property (nonatomic, strong) RocksDBColumnFamilyHandle *columnFamily;
 @property (nonatomic, strong) RocksDBOptions *options;
 @property (nonatomic, strong) RocksDBReadOptions *readOptions;
 @property (nonatomic, strong) RocksDBWriteOptions *writeOptions;
@@ -194,7 +194,7 @@
 		[self close];
 		return NO;
 	}
-	_columnFamily = _db->DefaultColumnFamily();
+	_columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:_db->DefaultColumnFamily()];
 
 	return YES;
 }
@@ -225,7 +225,7 @@
 		[self close];
 		return NO;
 	}
-	_columnFamily = _db->DefaultColumnFamily();
+	_columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:_db->DefaultColumnFamily()];
 
 	return YES;
 }
@@ -248,7 +248,7 @@
 	return columnFamilies;
 }
 
-- (RocksDBColumnFamily *)createColumnFamilyWithName:(NSString *)name
+- (RocksDBColumnFamilyHandle *)createColumnFamilyWithName:(NSString *)name
 											   andOptions:(RocksDBColumnFamilyOptions *)columnFamilyOptions
 {
 	rocksdb::ColumnFamilyHandle *handle;
@@ -258,27 +258,29 @@
 		return nil;
 	}
 
-	RocksDBOptions *options = [[RocksDBOptions alloc] initWithDatabaseOptions:_options.databaseOptions
-													   andColumnFamilyOptions:columnFamilyOptions];
-
-	RocksDBColumnFamily *columnFamily = [[RocksDBColumnFamily alloc] initWithDBInstance:_db
-																		   columnFamily:handle
-																			 andOptions:options];
+	RocksDBColumnFamilyHandle *columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:handle];
 	return columnFamily;
+}
+
+- (void)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	rocksdb::Status status = _db->DropColumnFamily(columnFamily.columnFamily);
+	if (!status.ok()) {
+		NSLog(@"Error dropping column family: %@", [RocksDBError errorWithRocksStatus:status]);
+		throw [RocksDBError errorWithRocksStatus:status];
+	}
 }
 
 - (NSArray *)columnFamilies
 {
 	if (_columnFamilyHandles == nullptr) {
-		return nil;
+		return [NSArray init];
 	}
 
 	if (_columnFamilies == nil) {
 		_columnFamilies = [NSMutableArray new];
 		for(auto it = std::begin(*_columnFamilyHandles); it != std::end(*_columnFamilyHandles); ++it) {
-			RocksDBColumnFamily *columnFamily = [[RocksDBColumnFamily alloc] initWithDBInstance:_db
-																				   columnFamily:*it
-																					 andOptions:_options];
+			RocksDBColumnFamilyHandle *columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:*it];
 			[_columnFamilies addObject:columnFamily];
 		}
 	}
@@ -291,7 +293,16 @@
 - (RocksDBColumnFamilyMetaData *)columnFamilyMetaData
 {
 	rocksdb::ColumnFamilyMetaData metadata;
-	_db->GetColumnFamilyMetaData(_columnFamily, &metadata);
+	_db->GetColumnFamilyMetaData(_columnFamily.columnFamily, &metadata);
+
+	RocksDBColumnFamilyMetaData *columnFamilyMetaData = [[RocksDBColumnFamilyMetaData alloc] initWithMetaData:metadata];
+	return columnFamilyMetaData;
+}
+
+- (RocksDBColumnFamilyMetaData *)columnFamilyMetaData:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	rocksdb::ColumnFamilyMetaData metadata;
+	_db->GetColumnFamilyMetaData(columnFamily.columnFamily, &metadata);
 
 	RocksDBColumnFamilyMetaData *columnFamilyMetaData = [[RocksDBColumnFamilyMetaData alloc] initWithMetaData:metadata];
 	return columnFamilyMetaData;
@@ -313,8 +324,13 @@
 
 - (NSString *)valueForProperty:(NSString *)property
 {
+	return [self valueForProperty:property inColumnFamily:_columnFamily];
+}
+
+- (NSString *)valueForProperty:(NSString *)property inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
 	std::string value;
-	bool ok = _db->GetProperty(_columnFamily,
+	bool ok = _db->GetProperty(columnFamily.columnFamily,
 							   SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
 							   &value);
 	if (!ok) {
@@ -327,8 +343,13 @@
 
 - (uint64_t)valueForIntProperty:(NSString *)property
 {
+	return [self valueForIntProperty:property inColumnFamily:_columnFamily];
+}
+
+- (uint64_t)valueForIntProperty:(NSString *)property inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
 	uint64_t value;
-	bool ok = _db->GetIntProperty(_columnFamily,
+	bool ok = _db->GetIntProperty(columnFamily.columnFamily,
 								  SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
 								  &value);
 	if (!ok) {
@@ -339,11 +360,17 @@
 
 - (NSDictionary<NSString *,NSString *> *)valueForMapProperty:(NSString *)property
 {
+	return [self valueForMapProperty:property inColumnFamily:_columnFamily];
+}
+
+- (NSDictionary<NSString *,NSString *> *)valueForMapProperty:(NSString *)property
+											inColumnFamily:(nonnull RocksDBColumnFamilyHandle *)columnFamily
+{
 	NSMutableDictionary<NSString *,NSString *> *newDictionary = [NSMutableDictionary dictionary];
 
 	std::map<std::string, std::string> value;
 
-	bool ok = _db->GetMapProperty(_columnFamily,
+	bool ok = _db->GetMapProperty(_columnFamily.columnFamily,
 								  SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
 								  &value);
 	if (ok) {
@@ -370,9 +397,25 @@
    writeOptions:(RocksDBWriteOptions *) writeOptions
 		  error:(NSError * __autoreleasing *)error
 {
+	return [self setData:anObject forKey:aKey forColumnFamily:_columnFamily writeOptions:_writeOptions error:error];
+}
 
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		  error:(NSError * __autoreleasing *)error
+{
+	return [self setData:anObject forKey:aKey forColumnFamily:columnFamily writeOptions:_writeOptions error:error];
+}
+
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+   writeOptions:(RocksDBWriteOptions *) writeOptions
+		  error:(NSError * __autoreleasing *)error
+{
 	rocksdb::Status status = _db->Put(writeOptions.options,
-									  _columnFamily,
+									  columnFamily.columnFamily,
 									  SliceFromData(aKey),
 									  SliceFromData(anObject));
 
@@ -399,9 +442,26 @@
 	 writeOptions:(RocksDBWriteOptions *)writeOptions
 			error:(NSError * __autoreleasing *)error
 {
+	return [self mergeData:anObject forKey:aKey forColumnFamily:_columnFamily writeOptions:writeOptions error:error];
+}
 
+
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+  forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * __autoreleasing *)error
+{
+	return [self mergeData:anObject forKey:aKey forColumnFamily:columnFamily writeOptions:_writeOptions error:error];
+}
+
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+  forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+	 writeOptions:(RocksDBWriteOptions *)writeOptions
+			error:(NSError * __autoreleasing *)error
+{
 	rocksdb::Status status = _db->Merge(_writeOptions.options,
-										_columnFamily,
+										columnFamily.columnFamily,
 										SliceFromData(aKey),
 										SliceFromData(anObject));
 
@@ -427,10 +487,24 @@
 		   readOptions:(RocksDBReadOptions *)readOptions
 				 error:(NSError * __autoreleasing *)error
 {
+	return [self dataForKey:aKey inColumnFamily:_columnFamily readOptions:_readOptions error:error];
+}
 
+- (NSData *)dataForKey:(NSData *)aKey
+		inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				 error:(NSError * __autoreleasing *)error
+{
+	return [self dataForKey:aKey inColumnFamily:columnFamily readOptions:_readOptions error:error];
+}
+
+- (NSData *)dataForKey:(NSData *)aKey
+		inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		   readOptions:(RocksDBReadOptions *)readOptions
+				 error:(NSError * __autoreleasing *)error
+{
 	std::string value;
 	rocksdb::Status status = _db->Get(readOptions.options,
-									  _columnFamily,
+									  columnFamily.columnFamily,
 									  SliceFromData(aKey),
 									  &value);
 	if (!status.ok()) {
@@ -455,9 +529,23 @@
 			writeOptions:(RocksDBWriteOptions *)writeOptions
 				   error:(NSError * __autoreleasing *)error
 {
+	return [self deleteDataForKey:aKey forColumnFamily:_columnFamily writeOptions:_writeOptions error:error];
+}
 
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError * __autoreleasing *)error
+{
+	return [self deleteDataForKey:aKey forColumnFamily:columnFamily writeOptions:_writeOptions error:error];
+}
+
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			writeOptions:(RocksDBWriteOptions *)writeOptions
+				   error:(NSError * __autoreleasing *)error
+{
 	rocksdb::Status status = _db->Delete(writeOptions.options,
-										 _columnFamily,
+										 columnFamily.columnFamily,
 										 SliceFromData(aKey));
 
 	if (!status.ok()) {
@@ -476,6 +564,11 @@
 - (RocksDBWriteBatch *)writeBatch
 {
 	return [[RocksDBWriteBatch alloc] initWithColumnFamily:_columnFamily];
+}
+
+- (RocksDBWriteBatch *)writeBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily
+{
+	return [[RocksDBWriteBatch alloc] initWithColumnFamily:columnFamily];
 }
 
 - (BOOL)performWriteBatch:(void (^)(RocksDBWriteBatch *batch, RocksDBWriteOptions *options))batchBlock
@@ -522,7 +615,7 @@
 - (RocksDBIndexedWriteBatch *)indexedWriteBatch
 {
 	return [[RocksDBIndexedWriteBatch alloc] initWithDBInstance:_db
-												   columnFamily:_columnFamily
+												   columnFamily:_columnFamily.columnFamily
 													readOptions:_readOptions];
 }
 
@@ -559,8 +652,19 @@
 
 - (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions
 {
+	return [self iteratorWithReadOptions:readOptions overColumnFamily:_columnFamily];
+}
+
+- (RocksDBIterator *)iteratorOverColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	return [self iteratorWithReadOptions:_readOptions overColumnFamily:columnFamily];
+}
+
+- (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions
+							overColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
 	rocksdb::Iterator *iterator = _db->NewIterator(readOptions.options,
-												   _columnFamily);
+												   columnFamily.columnFamily);
 
 	return [[RocksDBIterator alloc] initWithDBIterator:iterator];
 }
@@ -588,11 +692,18 @@
 		 withOptions:(RocksDBCompactRangeOptions *)rangeOptions
 			   error:(NSError * __autoreleasing *)error
 {
+	return [self compactRange:range withOptions:rangeOptions inColumnFamily:_columnFamily error:error];
+}
 
+- (BOOL)compactRange:(RocksDBKeyRange *)range
+		 withOptions:(RocksDBCompactRangeOptions *)rangeOptions
+	  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			   error:(NSError * __autoreleasing *)error
+{
 	rocksdb::Slice startSlice = SliceFromData(range.start);
 	rocksdb::Slice endSlice = SliceFromData(range.end);
 
-	rocksdb::Status status = _db->CompactRange(rangeOptions.options, _columnFamily, &startSlice, &endSlice);
+	rocksdb::Status status = _db->CompactRange(rangeOptions.options, columnFamily.columnFamily, &startSlice, &endSlice);
 
 	if (!status.ok()) {
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];

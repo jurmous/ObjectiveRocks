@@ -20,7 +20,7 @@
 #pragma mark - Lifecycle
 
 - (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
+					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					andReadOptions:(RocksDBReadOptions *)readOptions
 {
 	self = [super init];

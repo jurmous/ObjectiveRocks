@@ -37,12 +37,14 @@ class RocksDBPropertiesTests : RocksDBTests {
 
 		rocks = RocksDB.database(atPath: path, columnFamilies: descriptor, andOptions: options)
 
-		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[0]).value(forIntProperty: "rocksdb.estimate-num-keys"), 0 as UInt64);
-		XCTAssertNotNil((rocks.columnFamilies()[0]).value(forProperty: "rocksdb.stats"));
-		XCTAssertNotNil((rocks.columnFamilies()[0]).value(forProperty: "rocksdb.sstables"));
+		let columnFamilies = rocks.columnFamilies()
 
-		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[1]).value(forIntProperty: "rocksdb.estimate-num-keys"), 0 as UInt64);
-		XCTAssertNotNil((rocks.columnFamilies()[1]).value(forProperty: "rocksdb.stats"));
-		XCTAssertNotNil((rocks.columnFamilies()[1]).value(forProperty: "rocksdb.sstables"));
+		XCTAssertGreaterThanOrEqual(rocks.value(forIntProperty: "rocksdb.estimate-num-keys", inColumnFamily: columnFamilies[0]), 0 as UInt64);
+		XCTAssertNotNil(rocks.value(forProperty: "rocksdb.stats", inColumnFamily: columnFamilies[0]));
+		XCTAssertNotNil(rocks.value(forProperty: "rocksdb.sstables", inColumnFamily: columnFamilies[0]));
+
+		XCTAssertGreaterThanOrEqual(rocks.value(forIntProperty: "rocksdb.estimate-num-keys", inColumnFamily: columnFamilies[1]), 0 as UInt64);
+		XCTAssertNotNil(rocks.value(forProperty: "rocksdb.stats", inColumnFamily: columnFamilies[1]));
+		XCTAssertNotNil(rocks.value(forProperty: "rocksdb.sstables", inColumnFamily: columnFamilies[1]));
 	}
 }

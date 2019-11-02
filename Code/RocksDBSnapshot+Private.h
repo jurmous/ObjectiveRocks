@@ -31,7 +31,7 @@ namespace rocksdb {
  @see RocksDBReadOptions
  */
 - (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
+					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					andReadOptions:(RocksDBReadOptions *)readOptions;
 
 @end

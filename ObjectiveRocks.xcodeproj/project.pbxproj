@@ -52,7 +52,6 @@
 		624203CA1BED64F70043DD6F /* ObjectiveRocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 62AEF9B81A1D5CF000E63E89 /* ObjectiveRocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203CB1BED64F70043DD6F /* RocksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 6299F80C1A17B28200123F56 /* RocksDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203CE1BED64F70043DD6F /* RocksDBError.h in Headers */ = {isa = PBXBuildFile; fileRef = 628B0CE81A1C104D0099C39B /* RocksDBError.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		624203CF1BED64F70043DD6F /* RocksDBColumnFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203D01BED64F70043DD6F /* RocksDBColumnFamilyDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203D11BED64F80043DD6F /* RocksDBColumnFamilyMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A74F841A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203D21BED64F80043DD6F /* RocksDBIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6051B85632500E2577F /* RocksDBIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -85,7 +84,6 @@
 		624203EE1BED64FA0043DD6F /* RocksDBBackupInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A8B05F1A58CC400069B4C8 /* RocksDBBackupInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624203EF1BED650D0043DD6F /* RocksDB+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78A1A62970800D28BF5 /* RocksDB+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203F01BED650D0043DD6F /* RocksDBOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		624203F11BED650D0043DD6F /* RocksDBColumnFamily+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203F21BED650E0043DD6F /* RocksDBColumnFamilyMetaData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203F31BED650E0043DD6F /* RocksDBIterator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203F41BED650E0043DD6F /* RocksDBWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -98,7 +96,6 @@
 		624203FB1BED650F0043DD6F /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203FC1BED65250043DD6F /* RocksDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6299F80E1A17B28200123F56 /* RocksDB.mm */; };
 		624203FE1BED65250043DD6F /* RocksDBError.mm in Sources */ = {isa = PBXBuildFile; fileRef = 628B0CE91A1C104D0099C39B /* RocksDBError.mm */; };
-		624203FF1BED65250043DD6F /* RocksDBColumnFamily.mm in Sources */ = {isa = PBXBuildFile; fileRef = 620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */; };
 		624204001BED65250043DD6F /* RocksDBColumnFamilyDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */; };
 		624204011BED65250043DD6F /* RocksDBColumnFamilyMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A74F851A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.mm */; };
 		624204021BED65250043DD6F /* RocksDBIterator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F8C6061B85632500E2577F /* RocksDBIterator.mm */; };
@@ -135,7 +132,6 @@
 		624204CF1BED6B750043DD6F /* ObjectiveRocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624203C01BED64410043DD6F /* ObjectiveRocks.framework */; };
 		624F5DA01BEE41F500497FEF /* ObjectiveRocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 62AEF9B81A1D5CF000E63E89 /* ObjectiveRocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624F5DA11BEE41F500497FEF /* RocksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 6299F80C1A17B28200123F56 /* RocksDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		624F5DA51BEE41F500497FEF /* RocksDBColumnFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624F5DA61BEE41F500497FEF /* RocksDBColumnFamilyDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624F5DA81BEE41F500497FEF /* RocksDBIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6051B85632500E2577F /* RocksDBIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624F5DA91BEE41F500497FEF /* RocksDBPrefixExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2551A4DD25000A81ED6 /* RocksDBPrefixExtractor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -157,7 +153,6 @@
 		624F5DC01BEE41F700497FEF /* RocksDBMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B51A34FEE100624DA2 /* RocksDBMergeOperator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		624F5DC61BEE437C00497FEF /* RocksDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6299F80E1A17B28200123F56 /* RocksDB.mm */; };
 		624F5DC91BEE437C00497FEF /* RocksDBError.mm in Sources */ = {isa = PBXBuildFile; fileRef = 628B0CE91A1C104D0099C39B /* RocksDBError.mm */; };
-		624F5DCA1BEE437C00497FEF /* RocksDBColumnFamily.mm in Sources */ = {isa = PBXBuildFile; fileRef = 620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */; };
 		624F5DCB1BEE437C00497FEF /* RocksDBColumnFamilyDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */; };
 		624F5DCD1BEE437C00497FEF /* RocksDBIterator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F8C6061B85632500E2577F /* RocksDBIterator.mm */; };
 		624F5DCE1BEE437C00497FEF /* RocksDBPrefixExtractor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2561A4DD25000A81ED6 /* RocksDBPrefixExtractor.mm */; };
@@ -186,7 +181,6 @@
 		624F5ED01BEE456100497FEF /* RocksDBError.h in Headers */ = {isa = PBXBuildFile; fileRef = 628B0CE81A1C104D0099C39B /* RocksDBError.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5ED91BEE456100497FEF /* RocksDB+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78A1A62970800D28BF5 /* RocksDB+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EDA1BEE456100497FEF /* RocksDBOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		624F5EDB1BEE456100497FEF /* RocksDBColumnFamily+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EDD1BEE456100497FEF /* RocksDBIterator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EDE1BEE456100497FEF /* RocksDBWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EE01BEE456200497FEF /* RocksDBSnapshot+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79E1A629A4F00D28BF5 /* RocksDBSnapshot+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1123,7 +1117,6 @@
 		851B846D2344910C009721CC /* RocksDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6299F80E1A17B28200123F56 /* RocksDB.mm */; };
 		851B846E2344910C009721CC /* RocksDBRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 625EF4961D0C3A960058ACDA /* RocksDBRange.mm */; };
 		851B846F2344910C009721CC /* RocksDBError.mm in Sources */ = {isa = PBXBuildFile; fileRef = 628B0CE91A1C104D0099C39B /* RocksDBError.mm */; };
-		851B84702344910C009721CC /* RocksDBColumnFamily.mm in Sources */ = {isa = PBXBuildFile; fileRef = 620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */; };
 		851B84712344910C009721CC /* RocksDBColumnFamilyDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */; };
 		851B84722344910C009721CC /* RocksDBColumnFamilyMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A74F851A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.mm */; };
 		851B84732344910C009721CC /* RocksDBIterator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F8C6061B85632500E2577F /* RocksDBIterator.mm */; };
@@ -1364,7 +1357,6 @@
 		851B856D23449134009721CC /* RocksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 6299F80C1A17B28200123F56 /* RocksDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B856E23449134009721CC /* RocksDBRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 625EF4951D0C3A960058ACDA /* RocksDBRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B856F23449134009721CC /* RocksDBError.h in Headers */ = {isa = PBXBuildFile; fileRef = 628B0CE81A1C104D0099C39B /* RocksDBError.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B857023449134009721CC /* RocksDBColumnFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B857123449134009721CC /* RocksDBColumnFamilyDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B857223449134009721CC /* RocksDBColumnFamilyMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A74F841A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B857323449134009721CC /* RocksDBIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6051B85632500E2577F /* RocksDBIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1399,7 +1391,6 @@
 		851B859123449134009721CC /* RocksDB+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78A1A62970800D28BF5 /* RocksDB+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859223449134009721CC /* RocksDBOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859323449134009721CC /* RocksDBCompactRangeOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6273A5121D0C647E00CF8BF1 /* RocksDBCompactRangeOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B859423449134009721CC /* RocksDBColumnFamily+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859523449134009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859623449134009721CC /* RocksDBIterator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859723449134009721CC /* RocksDBWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1704,7 +1695,6 @@
 		851B86C523449295009721CC /* ObjectiveRocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 62AEF9B81A1D5CF000E63E89 /* ObjectiveRocks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86C623449295009721CC /* RocksDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 6299F80C1A17B28200123F56 /* RocksDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86C723449295009721CC /* RocksDBRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 625EF4951D0C3A960058ACDA /* RocksDBRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		851B86C823449295009721CC /* RocksDBColumnFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86C923449295009721CC /* RocksDBColumnFamilyDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86CA23449295009721CC /* RocksDBColumnFamilyMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 62A74F841A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86CB23449295009721CC /* RocksDBIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6051B85632500E2577F /* RocksDBIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1734,7 +1724,6 @@
 		851B86EA23449295009721CC /* RocksDB+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78A1A62970800D28BF5 /* RocksDB+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86EB23449295009721CC /* RocksDBOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86EC23449295009721CC /* RocksDBCompactRangeOptions+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6273A5121D0C647E00CF8BF1 /* RocksDBCompactRangeOptions+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B86ED23449295009721CC /* RocksDBColumnFamily+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86EE23449295009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86EF23449295009721CC /* RocksDBIterator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F023449295009721CC /* RocksDBWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -2242,7 +2231,6 @@
 		851B88EB23449295009721CC /* RocksDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6299F80E1A17B28200123F56 /* RocksDB.mm */; };
 		851B88EC23449295009721CC /* RocksDBRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 625EF4961D0C3A960058ACDA /* RocksDBRange.mm */; };
 		851B88ED23449295009721CC /* RocksDBError.mm in Sources */ = {isa = PBXBuildFile; fileRef = 628B0CE91A1C104D0099C39B /* RocksDBError.mm */; };
-		851B88EE23449295009721CC /* RocksDBColumnFamily.mm in Sources */ = {isa = PBXBuildFile; fileRef = 620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */; };
 		851B88EF23449295009721CC /* RocksDBColumnFamilyDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */; };
 		851B88F023449295009721CC /* RocksDBColumnFamilyMetadata.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A74F851A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.mm */; };
 		851B88F123449295009721CC /* RocksDBIterator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62F8C6061B85632500E2577F /* RocksDBIterator.mm */; };
@@ -2335,6 +2323,18 @@
 		85971BB82351E79100A6DB0B /* RocksDBCallbackMergeOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6214FD071A3F698300B92E5C /* RocksDBCallbackMergeOperator.cpp */; };
 		85971BB92351E79400A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
 		85971BBA2351E79500A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
+		85EC27D6235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85EC27D7235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85EC27D8235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85EC27D9235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85EC27DB235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */; };
+		85EC27DC235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */; };
+		85EC27DD235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */; };
+		85EC27DE235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */; };
+		85EC27E0235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */; };
+		85EC27E1235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		85EC27E2235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		85EC27E3235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2361,8 +2361,6 @@
 		6206295F1A509DF1001DEDC4 /* RocksDBColumnFamilyOptions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBColumnFamilyOptions.mm; sourceTree = "<group>"; };
 		620629641A510056001DEDC4 /* RocksDBDatabaseOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBDatabaseOptions.h; sourceTree = "<group>"; };
 		620629651A510056001DEDC4 /* RocksDBDatabaseOptions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBDatabaseOptions.mm; sourceTree = "<group>"; };
-		620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBColumnFamily.h; sourceTree = "<group>"; };
-		620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBColumnFamily.mm; sourceTree = "<group>"; };
 		62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBColumnFamilyDescriptor.h; sourceTree = "<group>"; };
 		62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBColumnFamilyDescriptor.mm; sourceTree = "<group>"; };
 		62102D411A643A13007E63F0 /* RocksDBComparatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocksDBComparatorTests.swift; sourceTree = "<group>"; };
@@ -2377,7 +2375,6 @@
 		621CD71A1A4FB24700853E16 /* RocksDBBackupEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBBackupEngine.h; sourceTree = "<group>"; };
 		621CD71B1A4FB24700853E16 /* RocksDBBackupEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBBackupEngine.mm; sourceTree = "<group>"; };
 		6221B78A1A62970800D28BF5 /* RocksDB+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDB+Private.h"; sourceTree = "<group>"; };
-		6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBColumnFamily+Private.h"; sourceTree = "<group>"; };
 		6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBColumnFamilyMetaData+Private.h"; sourceTree = "<group>"; };
 		6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBIterator+Private.h"; sourceTree = "<group>"; };
 		6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBWriteBatch+Private.h"; sourceTree = "<group>"; };
@@ -2965,6 +2962,9 @@
 		8575C6C823395035009BAC2B /* concurrent_task_limiter_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concurrent_task_limiter_impl.h; sourceTree = "<group>"; };
 		8575C6CD23395064009BAC2B /* in_memory_stats_history.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = in_memory_stats_history.h; sourceTree = "<group>"; };
 		8575C6CE23395064009BAC2B /* in_memory_stats_history.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = in_memory_stats_history.cc; sourceTree = "<group>"; };
+		85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBColumnFamilyHandle.h; sourceTree = "<group>"; };
+		85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBColumnFamilyHandle.mm; sourceTree = "<group>"; };
+		85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBColumnFamilyHandle+Private.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3038,12 +3038,12 @@
 		620629671A510D24001DEDC4 /* Column Family */ = {
 			isa = PBXGroup;
 			children = (
-				620629681A510D36001DEDC4 /* RocksDBColumnFamily.h */,
-				620629691A510D36001DEDC4 /* RocksDBColumnFamily.mm */,
 				62074F2B1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.h */,
 				62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */,
 				62A74F841A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.h */,
 				62A74F851A603DDB00BAD95B /* RocksDBColumnFamilyMetadata.mm */,
+				85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */,
+				85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */,
 			);
 			name = "Column Family";
 			sourceTree = "<group>";
@@ -3090,7 +3090,7 @@
 				6221B78A1A62970800D28BF5 /* RocksDB+Private.h */,
 				62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */,
 				6273A5121D0C647E00CF8BF1 /* RocksDBCompactRangeOptions+Private.h */,
-				6221B78E1A62973500D28BF5 /* RocksDBColumnFamily+Private.h */,
+				85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */,
 				6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */,
 				6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */,
 				6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */,
@@ -4098,10 +4098,10 @@
 				629767F520B7610300DEBF89 /* snapshot_checker.h in Headers */,
 				62976AA020B7623600DEBF89 /* internal_iterator.h in Headers */,
 				62976A9420B7623600DEBF89 /* plain_table_index.h in Headers */,
-				624203CF1BED64F70043DD6F /* RocksDBColumnFamily.h in Headers */,
 				6297686320B7611D00DEBF89 /* env_chroot.h in Headers */,
 				62976D9D20B762AC00DEBF89 /* blob_log_writer.h in Headers */,
 				6297675720B7610300DEBF89 /* version_edit.h in Headers */,
+				85EC27D6235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				62976BBC20B7626300DEBF89 /* auto_roll_logger.h in Headers */,
 				6297690920B7618000DEBF89 /* version.h in Headers */,
 				624203D01BED64F70043DD6F /* RocksDBColumnFamilyDescriptor.h in Headers */,
@@ -4339,6 +4339,7 @@
 				6297696720B7618000DEBF89 /* options.h in Headers */,
 				629767A520B7610300DEBF89 /* write_callback.h in Headers */,
 				624203EE1BED64FA0043DD6F /* RocksDBBackupInfo.h in Headers */,
+				85EC27E0235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
 				624203CE1BED64F70043DD6F /* RocksDBError.h in Headers */,
 				629768D320B7617F00DEBF89 /* perf_context.h in Headers */,
 				624203EF1BED650D0043DD6F /* RocksDB+Private.h in Headers */,
@@ -4364,7 +4365,6 @@
 				62976BFE20B7626300DEBF89 /* thread_local.h in Headers */,
 				6297682720B7610300DEBF89 /* column_family.h in Headers */,
 				62976D5320B762AC00DEBF89 /* write_batch_with_index_internal.h in Headers */,
-				624203F11BED650D0043DD6F /* RocksDBColumnFamily+Private.h in Headers */,
 				6297695F20B7618000DEBF89 /* experimental.h in Headers */,
 				62976A0D20B761BC00DEBF89 /* options_helper.h in Headers */,
 				624203F21BED650E0043DD6F /* RocksDBColumnFamilyMetaData+Private.h in Headers */,
@@ -4437,12 +4437,14 @@
 				6297695A20B7618000DEBF89 /* flush_block_policy.h in Headers */,
 				62976D6620B762AC00DEBF89 /* remove_emptyvalue_compactionfilter.h in Headers */,
 				629767F420B7610300DEBF89 /* compaction.h in Headers */,
+				85EC27D7235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				629769CD20B761B500DEBF89 /* file_read_sample.h in Headers */,
 				629768EA20B7617F00DEBF89 /* write_batch.h in Headers */,
 				62976D8420B762AC00DEBF89 /* blob_db_iterator.h in Headers */,
 				62976DEA20B762AC00DEBF89 /* pessimistic_transaction_db.h in Headers */,
 				6297676620B7610300DEBF89 /* compaction_iterator.h in Headers */,
 				6297691620B7618000DEBF89 /* cache.h in Headers */,
+				85EC27E1235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
 				629767C220B7610300DEBF89 /* forward_iterator.h in Headers */,
 				62976DF020B762AC00DEBF89 /* transaction_base.h in Headers */,
 				62976BBF20B7626300DEBF89 /* build_version.h in Headers */,
@@ -4454,7 +4456,6 @@
 				6297696820B7618000DEBF89 /* options.h in Headers */,
 				6297691A20B7618000DEBF89 /* backupable_db.h in Headers */,
 				62976E0020B762AC00DEBF89 /* transaction_util.h in Headers */,
-				624F5DA51BEE41F500497FEF /* RocksDBColumnFamily.h in Headers */,
 				624F5DA61BEE41F500497FEF /* RocksDBColumnFamilyDescriptor.h in Headers */,
 				629768E220B7617F00DEBF89 /* convenience.h in Headers */,
 				62976E0620B762AC00DEBF89 /* write_prepared_txn.h in Headers */,
@@ -4645,7 +4646,6 @@
 				62976B0520B7623600DEBF89 /* plain_table_reader.h in Headers */,
 				629769FE20B761BC00DEBF89 /* options_parser.h in Headers */,
 				62976ACD20B7623600DEBF89 /* full_filter_bits_builder.h in Headers */,
-				624F5EDB1BEE456100497FEF /* RocksDBColumnFamily+Private.h in Headers */,
 				62976BB720B7626300DEBF89 /* murmurhash.h in Headers */,
 				62976A7B20B7623600DEBF89 /* bloom_block.h in Headers */,
 				6297690E20B7618000DEBF89 /* ldb_tool.h in Headers */,
@@ -4749,8 +4749,8 @@
 			files = (
 				851B856C23449134009721CC /* ObjectiveRocks.h in Headers */,
 				851B856D23449134009721CC /* RocksDB.h in Headers */,
+				85EC27D8235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				851B856E23449134009721CC /* RocksDBRange.h in Headers */,
-				851B857023449134009721CC /* RocksDBColumnFamily.h in Headers */,
 				851B857123449134009721CC /* RocksDBColumnFamilyDescriptor.h in Headers */,
 				851B857223449134009721CC /* RocksDBColumnFamilyMetadata.h in Headers */,
 				851B857323449134009721CC /* RocksDBIterator.h in Headers */,
@@ -4786,7 +4786,6 @@
 				851B859123449134009721CC /* RocksDB+Private.h in Headers */,
 				851B859223449134009721CC /* RocksDBOptions+Private.h in Headers */,
 				851B859323449134009721CC /* RocksDBCompactRangeOptions+Private.h in Headers */,
-				851B859423449134009721CC /* RocksDBColumnFamily+Private.h in Headers */,
 				851B859523449134009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */,
 				851B859623449134009721CC /* RocksDBIterator+Private.h in Headers */,
 				851B859723449134009721CC /* RocksDBWriteBatch+Private.h in Headers */,
@@ -4797,6 +4796,7 @@
 				851B859C23449134009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */,
 				851B859D23449134009721CC /* RocksDBCallbackMergeOperator.h in Headers */,
 				851B859E23449134009721CC /* RocksDBCallbackSliceTransform.h in Headers */,
+				85EC27E2235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
 				851B859F23449134009721CC /* RocksDBSlice.h in Headers */,
 				851B85A023449134009721CC /* clock_cache.h in Headers */,
 				851B85A123449134009721CC /* lru_cache.h in Headers */,
@@ -5099,7 +5099,7 @@
 				851B86C523449295009721CC /* ObjectiveRocks.h in Headers */,
 				851B86C623449295009721CC /* RocksDB.h in Headers */,
 				851B86C723449295009721CC /* RocksDBRange.h in Headers */,
-				851B86C823449295009721CC /* RocksDBColumnFamily.h in Headers */,
+				85EC27D9235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				851B86C923449295009721CC /* RocksDBColumnFamilyDescriptor.h in Headers */,
 				851B86CA23449295009721CC /* RocksDBColumnFamilyMetadata.h in Headers */,
 				851B86CB23449295009721CC /* RocksDBIterator.h in Headers */,
@@ -5125,11 +5125,11 @@
 				851B86E423449295009721CC /* RocksDBMergeOperator.h in Headers */,
 				851B86E523449295009721CC /* RocksDBStatistics.h in Headers */,
 				851B86E623449295009721CC /* RocksDBStatisticsHistogram.h in Headers */,
+				85EC27E3235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
 				851B86E923449295009721CC /* RocksDBError.h in Headers */,
 				851B86EA23449295009721CC /* RocksDB+Private.h in Headers */,
 				851B86EB23449295009721CC /* RocksDBOptions+Private.h in Headers */,
 				851B86EC23449295009721CC /* RocksDBCompactRangeOptions+Private.h in Headers */,
-				851B86ED23449295009721CC /* RocksDBColumnFamily+Private.h in Headers */,
 				851B86EE23449295009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */,
 				851B86EF23449295009721CC /* RocksDBIterator+Private.h in Headers */,
 				851B86F023449295009721CC /* RocksDBWriteBatch+Private.h in Headers */,
@@ -5693,9 +5693,9 @@
 				6297698C20B761AB00DEBF89 /* alloc_tracker.cc in Sources */,
 				624203FE1BED65250043DD6F /* RocksDBError.mm in Sources */,
 				62976B8C20B7626300DEBF89 /* auto_roll_logger.cc in Sources */,
+				85EC27DB235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */,
 				62976D4F20B762AC00DEBF89 /* write_batch_with_index.cc in Sources */,
 				62976A6E20B7623600DEBF89 /* partitioned_filter_block.cc in Sources */,
-				624203FF1BED65250043DD6F /* RocksDBColumnFamily.mm in Sources */,
 				6297698620B761AB00DEBF89 /* vectorrep.cc in Sources */,
 				62976A8A20B7623600DEBF89 /* sst_file_writer.cc in Sources */,
 				62976A0720B761BC00DEBF89 /* cf_options.cc in Sources */,
@@ -5940,7 +5940,6 @@
 				6297671020B7610300DEBF89 /* db_impl_readonly.cc in Sources */,
 				6297699D20B761AB00DEBF89 /* skiplistrep.cc in Sources */,
 				629767D620B7610300DEBF89 /* compaction_picker.cc in Sources */,
-				624F5DCA1BEE437C00497FEF /* RocksDBColumnFamily.mm in Sources */,
 				62976B8B20B7626300DEBF89 /* murmurhash.cc in Sources */,
 				62976D1E20B762AC00DEBF89 /* memory_util.cc in Sources */,
 				62976D1020B762AC00DEBF89 /* stringappend.cc in Sources */,
@@ -6104,6 +6103,7 @@
 				62976A7D20B7623600DEBF89 /* cuckoo_table_reader.cc in Sources */,
 				624F5DE11BEE437C00497FEF /* RocksDBMemTableRepFactory.mm in Sources */,
 				62976BA320B7626300DEBF89 /* dynamic_bloom.cc in Sources */,
+				85EC27DC235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */,
 				62976E0420B762AC00DEBF89 /* write_prepared_txn.cc in Sources */,
 				629769ED20B761B500DEBF89 /* thread_status_impl.cc in Sources */,
 				62976B7320B7626300DEBF89 /* sst_file_manager_impl.cc in Sources */,
@@ -6235,6 +6235,7 @@
 				851B84BA23449115009721CC /* external_sst_file_ingestion_job.cc in Sources */,
 				851B84BB23449115009721CC /* file_indexer.cc in Sources */,
 				851B84BC23449115009721CC /* flush_job.cc in Sources */,
+				85EC27DD235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */,
 				851B84BD23449115009721CC /* flush_scheduler.cc in Sources */,
 				851B84BE23449115009721CC /* forward_iterator.cc in Sources */,
 				851B84BF23449115009721CC /* in_memory_stats_history.cc in Sources */,
@@ -6415,7 +6416,6 @@
 				851B846D2344910C009721CC /* RocksDB.mm in Sources */,
 				851B846E2344910C009721CC /* RocksDBRange.mm in Sources */,
 				851B846F2344910C009721CC /* RocksDBError.mm in Sources */,
-				851B84702344910C009721CC /* RocksDBColumnFamily.mm in Sources */,
 				851B84712344910C009721CC /* RocksDBColumnFamilyDescriptor.mm in Sources */,
 				851B84722344910C009721CC /* RocksDBColumnFamilyMetadata.mm in Sources */,
 				851B84732344910C009721CC /* RocksDBIterator.mm in Sources */,
@@ -6459,6 +6459,7 @@
 				851B881F23449295009721CC /* sharded_cache.cc in Sources */,
 				851B882023449295009721CC /* builder.cc in Sources */,
 				851B882123449295009721CC /* column_family.cc in Sources */,
+				85EC27DE235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm in Sources */,
 				851B882223449295009721CC /* compacted_db_impl.cc in Sources */,
 				851B882323449295009721CC /* compaction_iterator.cc in Sources */,
 				851B882423449295009721CC /* compaction_job.cc in Sources */,
@@ -6666,7 +6667,6 @@
 				851B88EB23449295009721CC /* RocksDB.mm in Sources */,
 				851B88EC23449295009721CC /* RocksDBRange.mm in Sources */,
 				851B88ED23449295009721CC /* RocksDBError.mm in Sources */,
-				851B88EE23449295009721CC /* RocksDBColumnFamily.mm in Sources */,
 				851B88EF23449295009721CC /* RocksDBColumnFamilyDescriptor.mm in Sources */,
 				851B88F023449295009721CC /* RocksDBColumnFamilyMetadata.mm in Sources */,
 				851B88F123449295009721CC /* RocksDBIterator.mm in Sources */,

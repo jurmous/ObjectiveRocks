@@ -4,7 +4,7 @@
 
 #import <ObjectiveRocks/RocksDB.h>
 
-#import <ObjectiveRocks/RocksDBColumnFamily.h>
+#import <ObjectiveRocks/RocksDBColumnFamilyHandle.h>
 #import <ObjectiveRocks/RocksDBColumnFamilyDescriptor.h>
 
 #import <ObjectiveRocks/RocksDBIterator.h>
