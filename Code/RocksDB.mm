@@ -145,8 +145,14 @@
 
 - (void)close
 {
+	[self close: nil];
+}
+
+- (BOOL)close:(NSError *__autoreleasing  _Nullable *)error
+{
 	@synchronized(self) {
 		[_columnFamilies makeObjectsPerformSelector:@selector(close)];
+		[_columnFamilies removeAllObjects];
 
 		if (_columnFamilyHandles != nullptr) {
 			delete _columnFamilyHandles;
@@ -154,9 +160,19 @@
 		}
 
 		if (_db != nullptr) {
+			rocksdb::Status status = _db->Close();
+			if (!status.ok()) {
+				NSError *temp = [RocksDBError errorWithRocksStatus:status];
+				if (error && *error == nil) {
+					*error = temp;
+				}
+				return NO;
+			}
+
 			delete _db;
 			_db = nullptr;
 		}
+		return YES;
 	}
 }
 

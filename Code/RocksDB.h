@@ -144,6 +144,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** @brief Closes the database instance */
 - (void)close;
 
+/**
+ @brief Closes the database instance
+ @param error if error is caught while closing the db
+ */
+- (BOOL)close:(NSError *__autoreleasing  _Nullable *)error;
+
 /** @brief Whether or not the database instance is closed */
 - (BOOL)isClosed;
 
