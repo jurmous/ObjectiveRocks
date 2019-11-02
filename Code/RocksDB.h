@@ -1078,6 +1078,160 @@ for “scattered” logic.
  @param error RocksDBError If an error occurs
  */
 - (BOOL)enableAutoCompaction:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies error:(NSError * __autoreleasing *)error;
+
+@end
+
+#pragma mark - File Deletions
+
+@interface RocksDB (FileDeletion)
+
+///--------------------------------
+/// @name File Deletion
+///--------------------------------
+
+/**
+ Prevent file deletions. Compactions will continue to occur,
+ but no obsolete files will be deleted. Calling this multiple
+ times have the same effect as calling it once.
+ @param error RocksDBError If an error occurs
+ */
+- (BOOL)disableFileDeletions:(NSError * __autoreleasing *)error;
+
+/**
+ Allow compactions to delete obsolete files.
+ If force == true, the call to EnableFileDeletions()
+ will guarantee that file deletions are enabled after
+ the call, even if DisableFileDeletions() was called
+ multiple times before.
+
+ If force == false, EnableFileDeletions will only
+ enable file deletion after it's been called at least
+ as many times as DisableFileDeletions(), enabling
+ the two methods to be called by two threads
+ concurrently without synchronization
+ -- i.e., file deletions will be enabled only after both
+ threads call EnableFileDeletions()
+
+ @param force boolean value described above.
+ @param error RocksDBError If an error occurs
+ */
+- (BOOL)enableFileDelections:(BOOL)force error:(NSError * __autoreleasing *)error;
+
+/**
+ Delete the file name from the db directory and update the internal state to
+ reflect that. Supports deletion of sst and log files only. 'name' must be
+ path relative to the db directory. eg. 000001.sst, /archive/000003.log
+ 
+ @param name the file name
+ @param error RocksDBError If an error occurs
+ */
+- (BOOL)deleteFile:(NSString *)name error:(NSError * __autoreleasing *)error;
+
+@end
+
+#pragma mark - Background Work
+
+@interface RocksDB (BackgroundWork)
+
+///--------------------------------
+/// @name Background Work
+///--------------------------------
+
+/**
+ This function will wait until all currently running background processes
+ finish. After it returns, no background process will be run until
+ .continueBackgroundWork] is called
+
+ @param error RocksDBError If an error occurs when pausing background work
+ */
+- (BOOL)pauseBackgroundWork:(NSError * __autoreleasing *)error;
+
+/**
+ Resumes background work which was suspended by previously calling .pauseBackground
+ @param error RocksDBError If an error occurs when resuming background work
+ */
+- (BOOL)continueBackgroundWork:(NSError * __autoreleasing *)error;
+
+@end
+
+#pragma mark Sequence number
+
+@interface RocksDB (SequenceNumber)
+
+/**
+ The sequence number of the most recent transaction.
+ */
+@property (nonatomic, readonly) uint64_t latestSequenceNumber;
+
+/**
+ Instructs DB to preserve deletes with sequence numbers >= sequenceNumber.
+
+ Has no effect if DBOptions#preserveDeletes() is set to false.
+
+ This function assumes that user calls this function with monotonically
+ increasing seqnums (otherwise we can't guarantee that a particular delete
+ hasn't been already processed).
+
+ @param sequenceNumber the minimum sequence number to preserve
+
+ @return true if the value was successfully updated,
+ false if user attempted to call if with
+ sequenceNumber <= current value.
+*/
+- (BOOL)setPreserveDeletesSequenceNumber:(uint64_t)sequenceNumber;
+
+@end
+
+#pragma mark - Level operations
+
+@interface RocksDB (LevelOperations)
+
+/**
+ Number of levels used for this DB.
+*/
+- (int)numberLevels;
+
+/**
+ Number of levels used for this DB.
+ @param columnFamily ColumnFamilyHandle instance
+*/
+- (int)numberLevelsInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
+ Maximum level to which a new compacted memtable is pushed if it does not create overlap.
+*/
+- (int)maxMemCompactionLevel;
+
+/**
+ Maximum level to which a new compacted memtable is pushed if it does not create overlap.
+ @param columnFamily ColumnFamilyHandle instance
+*/
+- (int)maxMemCompactionLevelInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
+/**
+ Number of files in level-0 that would stop writes.
+*/
+- (int)level0StopWriteTrigger;
+
+/**
+ Promote L0
+ */
+- (BOOL)promoteL0:(int)targetLevel
+			error:(NSError * _Nullable __autoreleasing *)error;
+
+/**
+ Promote L0
+ */
+- (BOOL)promoteL0:(int)targetLevel
+   inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * _Nullable __autoreleasing *)error;
+
+/**
+ Number of files in level-0 that would stop writes.
+ @param columnFamily ColumnFamilyHandle instance
+*/
+- (int)level0StopWriteTriggerInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
 @end
 
 #pragma mark - WAL

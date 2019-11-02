@@ -939,6 +939,148 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return YES;
 }
 
+#pragma mark - File Deletions
+
+- (BOOL)disableFileDeletions:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _db->DisableFileDeletions();
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)enableFileDelections:(BOOL)force error:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _db->EnableFileDeletions(force);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)deleteFile:(NSString *)name error:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _db->DeleteFile(name.UTF8String);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+#pragma mark - Background Work
+
+- (BOOL)pauseBackgroundWork:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _db->PauseBackgroundWork();
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)continueBackgroundWork:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _db->ContinueBackgroundWork();
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+#pragma mark Sequence number
+
+- (uint64_t)latestSequenceNumber
+{
+	return _db->GetLatestSequenceNumber();
+}
+
+- (BOOL)setPreserveDeletesSequenceNumber:(uint64_t)sequenceNumber
+{
+	return _db->SetPreserveDeletesSequenceNumber(sequenceNumber);
+}
+
+#pragma mark - Level operations
+
+- (int)numberLevels
+{
+	return _db->NumberLevels();
+}
+
+- (int)numberLevelsInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	return _db->NumberLevels(columnFamily.columnFamily);
+}
+
+- (int)maxMemCompactionLevel
+{
+	return _db->MaxMemCompactionLevel();
+}
+
+- (int)maxMemCompactionLevelInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	return _db->MaxMemCompactionLevel(columnFamily.columnFamily);
+}
+
+- (int)level0StopWriteTrigger
+{
+	return _db->Level0StopWriteTrigger();
+}
+
+- (int)level0StopWriteTriggerInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	return _db->Level0StopWriteTrigger(columnFamily.columnFamily);
+}
+
+- (BOOL)promoteL0:(int)targetLevel
+			error:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Status status = _db->PromoteL0(_columnFamily.columnFamily, targetLevel);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)promoteL0:(int)targetLevel
+   inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Status status = _db->PromoteL0(columnFamily.columnFamily, targetLevel);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
 #pragma mark - WAL
 
 - (BOOL)syncWal:(NSError *__autoreleasing  _Nullable *)error
