@@ -38,7 +38,6 @@
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 #import "RocksDBColumnFamilyMetaData+Private.h"
 #import "RocksDBIndexedWriteBatch+Private.h"
-#import "RocksDBProperties.h"
 #endif
 
 #pragma mark -
@@ -310,13 +309,13 @@
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 
-#pragma mark - Peroperties
+#pragma mark - Properties
 
-- (NSString *)valueForProperty:(RocksDBProperty)property
+- (NSString *)valueForProperty:(NSString *)property
 {
 	std::string value;
 	bool ok = _db->GetProperty(_columnFamily,
-							   SliceFromData([ResolveProperty(property) dataUsingEncoding:NSUTF8StringEncoding]),
+							   SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
 							   &value);
 	if (!ok) {
 		return nil;
@@ -326,16 +325,35 @@
 	return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-- (uint64_t)valueForIntProperty:(RocksDBIntProperty)property
+- (uint64_t)valueForIntProperty:(NSString *)property
 {
 	uint64_t value;
 	bool ok = _db->GetIntProperty(_columnFamily,
-								  SliceFromData([ResolveIntProperty(property) dataUsingEncoding:NSUTF8StringEncoding]),
+								  SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
 								  &value);
 	if (!ok) {
 		return 0;
 	}
 	return value;
+}
+
+- (NSDictionary<NSString *,NSString *> *)valueForMapProperty:(NSString *)property
+{
+	NSMutableDictionary<NSString *,NSString *> *newDictionary = [NSMutableDictionary dictionary];
+
+	std::map<std::string, std::string> value;
+
+	bool ok = _db->GetMapProperty(_columnFamily,
+								  SliceFromData([property dataUsingEncoding:NSUTF8StringEncoding]),
+								  &value);
+	if (ok) {
+		for(auto const &entry : value) {
+			NSString* newKey = [NSString stringWithUTF8String:entry.first.c_str()];
+			newDictionary[newKey] = [NSString stringWithUTF8String:entry.second.c_str()];
+		}
+	}
+
+	return newDictionary;
 }
 
 #endif

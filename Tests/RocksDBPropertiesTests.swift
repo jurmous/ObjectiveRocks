@@ -23,12 +23,10 @@ class RocksDBPropertiesTests : RocksDBTests {
 		try! rocks.setData("value 2".data, forKey: "key 2".data)
 		try! rocks.setData("value 3".data, forKey: "key 3".data)
 
-		XCTAssertGreaterThan(rocks.value(for: .numEntriesActiveMemtable), 0 as UInt64);
-		XCTAssertGreaterThan(rocks.value(for: .curSizeActiveMemTable), 0 as UInt64);
+		XCTAssertGreaterThan(rocks.value(forIntProperty: "rocksdb.num-entries-active-mem-table"), 0 as UInt64);
 	}
 
 	func testSwift_Properties_ColumnFamily() {
-
 		let descriptor = RocksDBColumnFamilyDescriptor()
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
@@ -39,12 +37,12 @@ class RocksDBPropertiesTests : RocksDBTests {
 
 		rocks = RocksDB.database(atPath: path, columnFamilies: descriptor, andOptions: options)
 
-		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[0]).value(for: .estimatedNumKeys), 0 as UInt64);
-		XCTAssertNotNil((rocks.columnFamilies()[0]).value(for: .stats));
-		XCTAssertNotNil((rocks.columnFamilies()[0]).value(for: .ssTables));
+		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[0]).value(forIntProperty: "rocksdb.estimate-num-keys"), 0 as UInt64);
+		XCTAssertNotNil((rocks.columnFamilies()[0]).value(forProperty: "rocksdb.stats"));
+		XCTAssertNotNil((rocks.columnFamilies()[0]).value(forProperty: "rocksdb.sstables"));
 
-		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[1]).value(for: .estimatedNumKeys), 0 as UInt64);
-		XCTAssertNotNil((rocks.columnFamilies()[1]).value(for: .stats));
-		XCTAssertNotNil((rocks.columnFamilies()[1]).value(for: .ssTables));
+		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[1]).value(forIntProperty: "rocksdb.estimate-num-keys"), 0 as UInt64);
+		XCTAssertNotNil((rocks.columnFamilies()[1]).value(forProperty: "rocksdb.stats"));
+		XCTAssertNotNil((rocks.columnFamilies()[1]).value(forProperty: "rocksdb.sstables"));
 	}
 }

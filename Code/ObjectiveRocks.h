@@ -76,9 +76,6 @@ extern const unsigned char ObjectiveRocksVersionString[];
 #import "RocksDBPlainTableOptions.h"
 #import "RocksDBCuckooTableOptions.h"
 
-// Properties
-#import "RocksDBProperties.h"
-
 // Snapshot
 #import "RocksDBCheckpoint.h"
 

@@ -21,7 +21,6 @@
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 #import "RocksDBColumnFamilyMetadata.h"
 #import "RocksDBIndexedWriteBatch.h"
-#import "RocksDBProperties.h"
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -244,11 +243,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param property The property name.
  @return The string value of the property.
 
- @see RocksDBProperties.h
-
  @warning Not available in RocksDB Lite.
  */
-- (nullable NSString *)valueForProperty:(RocksDBProperty)property;
+- (nullable NSString *)valueForProperty:(NSString *)property;
 
 /**
  Returns the integer value for the given int property name.
@@ -256,11 +253,19 @@ NS_ASSUME_NONNULL_BEGIN
  @param property The property name.
  @return The integer value of the property.
 
- @see RocksDBProperties.h
+ @warning Not available in RocksDB Lite.
+ */
+- (uint64_t)valueForIntProperty:(NSString *)property;
+
+/**
+ Returns the map value for the given map property name.
+
+ @param property The property name.
+ @return The map value of the property.
 
  @warning Not available in RocksDB Lite.
  */
-- (uint64_t)valueForIntProperty:(RocksDBIntProperty)property;
+- (NSDictionary<NSString *, NSString*> *)valueForMapProperty:(NSString *)property;
 
 @end
 

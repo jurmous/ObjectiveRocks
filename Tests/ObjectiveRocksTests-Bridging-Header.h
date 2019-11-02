@@ -45,5 +45,3 @@
 
 #import <ObjectiveRocks/RocksDBBackupEngine.h>
 #import <ObjectiveRocks/RocksDBBackupInfo.h>
-
-#import <ObjectiveRocks/RocksDBProperties.h>
