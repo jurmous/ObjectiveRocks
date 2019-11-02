@@ -162,6 +162,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)setDefaultReadOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions
 			  writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions NS_SWIFT_NAME(setDefault(readOptions:writeOptions:));
+@end
+
+#pragma mark - Name & Env
+
+@interface RocksDB (NameAndEnv)
+/**
+ Get DB name -- the exact same name that was provided as an argument to as path to [.open].
+ */
+@property (nonatomic, readonly) NSString* name;
+
+/**
+ Get the Env object from the DB
+ */
+@property (nonatomic, readonly) RocksDBEnv* env;
 
 @end
 
@@ -568,6 +582,53 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)compactRange:(RocksDBKeyRange *)range
 		 withOptions:(nullable void (^)(RocksDBCompactRangeOptions *options))options
 			   error:(NSError * _Nullable *)error;
+
+@end
+
+#pragma mark - WAL
+
+@interface RocksDB (WAL)
+
+/**
+ Sync the WAL.
+
+ Note that [.write] followed by [.syncWal] is not exactly the same as [.write] with
+ [WriteOptions.sync] set to true; In the latter case the changes
+ won't be visible until the sync is done.
+
+ Currently only works if [Options.allowMmapWrites] is set to false.
+*/
+- (BOOL)syncWal:(NSError * __autoreleasing *)error;
+
+/**
+ Flush the WAL memory buffer to the file. If `sync` is true, it calls [.syncWal] afterwards.
+ @param sync true to also fsync to disk.
+ */
+- (BOOL)flushWal:(BOOL)sync error:(NSError *__autoreleasing  _Nullable *)error;
+
+@end
+
+#pragma mark Verification
+
+@interface RocksDB (Verification)
+
+/**
+ Verify checksum
+ @param error RocksDBError if the checksum is not valid
+ */
+- (BOOL)verifyChecksum:(NSError * __autoreleasing *)error;
+
+@end
+
+#pragma mark Stats
+
+@interface RocksDB (Stats)
+
+/**
+ Reset internal stats for DB and all column families.
+ Note this doesn't reset [Options.statistics] as it is not owned by DB.
+*/
+- (BOOL)resetStats:(NSError * __autoreleasing *)error;
 
 @end
 

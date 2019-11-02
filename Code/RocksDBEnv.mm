@@ -59,6 +59,15 @@
 	return self;
 }
 
+- (instancetype)initWithEnv:(rocksdb::Env *)env
+{
+	self = [super init];
+	if (self) {
+		_env = env;
+	}
+	return self;
+}
+
 - (void)dealloc
 {
 	@synchronized(self) {

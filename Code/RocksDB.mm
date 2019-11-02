@@ -13,6 +13,9 @@
 #import "RocksDBColumnFamily.h"
 #import "RocksDBColumnFamily+Private.h"
 
+#import "RocksDBEnv.h"
+#import "RocksDBEnv+Private.h"
+
 #import "RocksDBOptions.h"
 #import "RocksDBReadOptions.h"
 #import "RocksDBWriteOptions.h"
@@ -182,6 +185,18 @@
 	@synchronized(self) {
 		return _db == nullptr;
 	}
+}
+
+#pragma mark - Name & Env
+
+- (NSString *)name
+{
+	return [NSString stringWithUTF8String:_db->GetName().c_str()];
+}
+
+- (RocksDBEnv *)env
+{
+	return [[RocksDBEnv alloc] initWithEnv:_db->GetEnv()];
 }
 
 #pragma mark - Open
@@ -627,6 +642,64 @@
 
 	rocksdb::Status status = _db->CompactRange(rangeOptions.options, _columnFamily, &startSlice, &endSlice);
 
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+#pragma mark - WAL
+
+- (BOOL)syncWal:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = _db->SyncWAL();
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+- (BOOL)flushWal:(BOOL)sync error:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = _db->FlushWAL(sync);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+#pragma mark Verification
+
+- (BOOL)verifyChecksum:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = _db->VerifyChecksum();
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
+#pragma mark Stats
+
+- (BOOL)resetStats:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = _db->ResetStats();
 	if (!status.ok()) {
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
