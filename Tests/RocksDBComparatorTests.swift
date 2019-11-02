@@ -12,10 +12,11 @@ import ObjectiveRocks
 class RocksDBComparatorTests : RocksDBTests {
 
 	func testSwift_Comparator_Native_Bytewise_Ascending() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .bytewiseAscending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .bytewiseAscending)
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abc1", forKey: "abc1")
 		try! rocks.setData("abc2", forKey: "abc2")
@@ -61,10 +62,11 @@ class RocksDBComparatorTests : RocksDBTests {
 	}
 
 	func testSwift_Comparator_Native_Bytewise_Descending() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abc1", forKey: "abc1")
 		try! rocks.setData("abc2", forKey: "abc2")
@@ -114,10 +116,11 @@ class RocksDBComparatorTests : RocksDBTests {
 	}
 
 	func testSwift_Comparator_StringCompare_Ascending() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		var expected = [String]()
 
@@ -140,10 +143,11 @@ class RocksDBComparatorTests : RocksDBTests {
 	}
 
 	func testSwift_Comparator_StringCompare_Descending() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareDescending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .stringCompareDescending)
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		var expected = [String]()
 

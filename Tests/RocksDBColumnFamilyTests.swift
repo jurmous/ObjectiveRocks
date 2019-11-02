@@ -12,9 +12,10 @@ import ObjectiveRocks
 class RocksDBColumnFamilyTests : RocksDBTests {
 
 	func testSwift_ColumnFamilies_List() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		rocks.close()
 
@@ -25,11 +26,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	}
 
 	func testSwift_ColumnFamilies_Create() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: nil)
+		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		XCTAssertNotNil(columnFamily)
 		columnFamily?.close()
@@ -43,11 +44,12 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	}
 
 	func testSwift_ColumnFamilies_Drop() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: nil)
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		
+		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
 		columnFamily?.drop()
 		columnFamily?.close()
@@ -60,15 +62,15 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	}
 
 	func testSwift_ColumnFamilies_Open() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: {
-			(options) in
-			options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
-		})
+		let columnFamilyOptions = RocksDBColumnFamilyOptions()
+		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+
+		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
 		XCTAssertNotNil(columnFamily)
 		columnFamily?.close()
 		rocks.close()
@@ -88,9 +90,10 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 			options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
 		})
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options2 = RocksDBOptions()
+		options2.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options2)
 
 		XCTAssertNotNil(rocks);
 
@@ -107,15 +110,17 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	}
 
 	func testSwift_ColumnFamilies_Open_ComparatorMismatch() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: {
-			(options) in
-			options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
-		})
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+
+		let columnFamilyOptions = RocksDBColumnFamilyOptions()
+		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+
+		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
+
 
 		XCTAssertNotNil(columnFamily)
 		columnFamily?.close()
@@ -136,22 +141,24 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
 		})
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options2 = RocksDBOptions()
+		options2.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options2)
 
 		XCTAssertNil(rocks)
 	}
 
 	func testSwift_ColumnFamilies_CRUD() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("df_value", forKey: "df_key1")
 		try! rocks.setData("df_value", forKey: "df_key2")
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: nil)
+		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
 		try! columnFamily?.setData("cf_value", forKey: "cf_key1")
 		try! columnFamily?.setData("cf_value", forKey: "cf_key2")
@@ -164,10 +171,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.createMissingColumnFamilies = true
-		})
+		let options2 = RocksDBOptions()
+		options2.createIfMissing = true
+		options2.createMissingColumnFamilies = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options2)
 
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]
@@ -205,10 +213,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.createMissingColumnFamilies = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.createMissingColumnFamilies = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options)
 
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]
@@ -223,7 +232,7 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		batch.deleteData(forKey: "xyz", in:defaultColumnFamily)
 		batch.deleteData(forKey: "xyz")
 
-		try! rocks.applyWriteBatch(batch, writeOptions:nil)
+		try! rocks.applyWriteBatch(batch, writeOptions:RocksDBWriteOptions())
 
 		XCTAssertEqual(try! defaultColumnFamily.data(forKey: "df_key"), "df_value".data)
 		XCTAssertNil(try? defaultColumnFamily.data(forKey: "df_key1"))
@@ -246,10 +255,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.createMissingColumnFamilies = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.createMissingColumnFamilies = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options)
 
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]

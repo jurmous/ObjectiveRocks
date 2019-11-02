@@ -12,9 +12,10 @@ import ObjectiveRocks
 class RocksDBSnapshotTests : RocksDBTests {
 
 	func testSwift_Snapshot() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		});
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -37,9 +38,10 @@ class RocksDBSnapshotTests : RocksDBTests {
 	}
 
 	func testSwift_Snapshot_Iterator() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -73,9 +75,9 @@ class RocksDBSnapshotTests : RocksDBTests {
 	}
 
 	func testSwift_Snapshot_SequenceNumber() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		let snapshot1 = rocks.snapshot()

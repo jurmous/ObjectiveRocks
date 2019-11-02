@@ -65,10 +65,11 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 			return (prev + plus).data
 		}
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.mergeOperator = mergeOp
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.mergeOperator = mergeOp
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.merge(1.data, forKey: "key 1")
 		try! rocks.merge(5.data, forKey: "key 1")
@@ -91,10 +92,11 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 			return (prev + plus).data
 		}
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.mergeOperator = mergeOp
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.mergeOperator = mergeOp
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.merge(100.541.data, forKey: "key 1")
 		try! rocks.merge(200.125.data, forKey: "key 1")
@@ -117,10 +119,11 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 			return dict.data
 		}
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.mergeOperator = mergeOp
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.mergeOperator = mergeOp
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData(["key 1": "value 1"].data, forKey: "dict key")
 		try! rocks.merge(["key 1": "value 1 new"].data, forKey: "dict key")
@@ -173,10 +176,11 @@ class RocksDBMergeOperatorTests : RocksDBTests {
 
 		let mergeOp = RocksDBMergeOperator(name: "operator", partialMerge: partial, fullMerge: full)
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.mergeOperator = mergeOp
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.mergeOperator = mergeOp
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let object: [String: Any] = ["key 1" : "value 1",
 		                             "key 2" : "value 2",

@@ -12,30 +12,32 @@ import ObjectiveRocks
 class RocksDBReadOnlyTests : RocksDBTests {
 
 	func testDB_Open_ReadOnly_NilIfMissing() {
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andDBOptions:nil)
+		let options = RocksDBOptions();
+		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions:options)
 		XCTAssertNil(rocks);
 	}
 
 	func testDB_Open_ReadOnly() {
-		rocks = RocksDB.database(atPath: path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true;
-		});
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: path, andOptions: options);
 		XCTAssertNotNil(rocks);
 		rocks.close()
 
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andDBOptions:nil)
+		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions: options)
 		XCTAssertNotNil(rocks);
 	}
 
 	func testDB_ReadOnly_NotWritable() {
-		rocks = RocksDB.database(atPath: path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true;
-		});
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: path, andOptions: options);
 		XCTAssertNotNil(rocks);
 		try! rocks.setData("data", forKey: "key")
 		rocks.close()
 
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andDBOptions:nil)
+		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions:RocksDBOptions())
 
 		try! rocks.data(forKey: "key")
 

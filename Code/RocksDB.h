@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  further tuning. If the options block is `nil`, then default settings will be used.
 
  @param path The file path of the DB.
- @param options A block with a single argument, an instance of `RocksDBOptions`.
+ @param options RocksDBOptions to tune the database
  @return The newly-intialized DB instance with the given path and options.
 
  @see RocksDBOptions
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  that currently exist in the DB.
  */
 + (nullable instancetype)databaseAtPath:(NSString *)path
-						   andDBOptions:(nullable void (^)(RocksDBOptions *options))options;
+							andOptions:(RocksDBOptions *)options;
 
 /**
  Intializes a DB instance and opens the defined Column Families.
@@ -64,8 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param path The file path of the database.
  @param descriptor The descriptor holds the names and the options of the existing Column Families
  in the DB.
- @param options A block with a single argument, an instance of `RocksDBDatabaseOptions`, which can
- be used to tune the DB configuration.
+ @param options RocksDBOptions to tune the database
  @return The newly-intialized DB instance with the given path and database options. Furthermore, the
  DB instance also opens the defined Column Families.
 
@@ -82,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable instancetype)databaseAtPath:(NSString *)path
 						 columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-					 andDatabaseOptions:(nullable void (^)(RocksDBDatabaseOptions *options))options;
+							 andOptions:(RocksDBOptions *)options;
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 
@@ -98,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  compactions will happen.
 
  @param path The file path of the DB.
- @param options A block with a single argument, an instance of `RocksDBOptions`.
+ @param options RocksDBOptions to tune the database
  @return The newly-intialized DB instance with the given path and options.
 
  @see RocksDBOptions
@@ -107,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  if `createIfMissing` option is set.
  */
 + (nullable instancetype)databaseForReadOnlyAtPath:(NSString *)path
-									  andDBOptions:(nullable void (^)(RocksDBOptions *options))options;
+										andOptions:(RocksDBOptions *)options;
 
 /**
  Intializes a DB instance for read-only and opens the defined Column Families.
@@ -118,8 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param path The file path of the database.
  @param descriptor The descriptor holds the names and the options of the existing Column Families
  in the DB.
- @param options A block with a single argument, an instance of `RocksDBDatabaseOptions`, which can
- be used to tune the DB configuration.
+ @param options RocksDBOptions to tune the database
  @return The newly-intialized DB instance with the given path and database options. Furthermore, the
  DB instance also opens the defined Column Families.
 
@@ -139,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable instancetype)databaseForReadOnlyAtPath:(NSString *)path
 									columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-								andDatabaseOptions:(nullable void (^)(RocksDBDatabaseOptions *options))options;
+										andOptions:(RocksDBOptions *)options;
 
 #endif
 
@@ -152,16 +150,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Sets the default read & write options for all database operations.
 
- @param readOptions A block with an instance of `RocksDBReadOptions` which configures the behaviour of read
+ @param readOptions An instance of `RocksDBReadOptions` which configures the behaviour of read
  operations in the DB.
- @param writeOptions A block with an instance of `RocksDBWriteOptions` which configures the behaviour of write
+ @param writeOptions An instance of `RocksDBWriteOptions` which configures the behaviour of write
  operations in the DB.
 
  @see RocksDBReadOptions
  @see RocksDBWriteOptions
  */
-- (void)setDefaultReadOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions
-			  writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions NS_SWIFT_NAME(setDefault(readOptions:writeOptions:));
+- (void)setDefaultReadOptions:(RocksDBReadOptions *)readOptions
+				 writeOptions:(RocksDBWriteOptions *)writeOptions NS_SWIFT_NAME(setDefault(readOptions:writeOptions:));
+
 @end
 
 #pragma mark - Name & Env
@@ -209,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBColumnFamilyOptions
  */
 - (nullable RocksDBColumnFamily *)createColumnFamilyWithName:(NSString *)name
-												  andOptions:(nullable void (^)(RocksDBColumnFamilyOptions *options))options;
+														andOptions:(RocksDBColumnFamilyOptions *)options;
 
 /** @brief Returns an array */
 - (NSArray<RocksDBColumnFamily *> *)columnFamilies;
@@ -293,15 +292,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param anObject The object for key.
  @param aKey The key for object.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @param writeOptions A block with a `RocksDBWriteOptions` instance for configuring this write operation.
+ @param writeOptions `RocksDBWriteOptions` instance for configuring this write operation.
  @return `YES` if the operation succeeded, `NO` otherwise
 
  @see RocksDBWriteOptions
  */
 - (BOOL)setData:(NSData *)anObject
-		   forKey:(NSData *)aKey
-	 writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions
-			error:(NSError * _Nullable *)error;
+		 forKey:(NSData *)aKey
+   writeOptions:(RocksDBWriteOptions *) writeOptions
+		  error:(NSError * _Nullable *)error;
 
 @end
 
@@ -340,14 +339,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param anObject The object being merged.
  @param aKey The key for the object.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @param writeOptions A block with a `RocksDBWriteOptions` instance for configuring this merge operation.
+ @param writeOptions  `RocksDBWriteOptions` instance for configuring this merge operation.
  @return `YES` if the operation succeeded, `NO` otherwise
 
  @see RocksDBMergeOperator
  */
 - (BOOL)mergeData:(NSData *)anObject
 		   forKey:(NSData *)aKey
-	 writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions
+	 writeOptions:(RocksDBWriteOptions *) writeOptions
 			error:(NSError * _Nullable *)error;
 
 @end
@@ -373,14 +372,14 @@ NS_ASSUME_NONNULL_BEGIN
  Returns the object for the given key.
 
  @peram aKey The key for object.
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @param readOptions A block with a `RocksDBReadOptions` instance for configuring this read operation.
  @return The object for the given key.
 
  @see RocksDBReadOptions
  */
 - (nullable NSData *)dataForKey:(NSData *)aKey
-					readOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions
+					readOptions:(RocksDBReadOptions *)readOptions
 						  error:(NSError * _Nullable *)error;
 
 @end
@@ -407,14 +406,14 @@ NS_ASSUME_NONNULL_BEGIN
 
  @peram aKey The key to delete.
  @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @param writeOptions A block with a `RocksDBWriteOptions` instance for configuring this delete operation.
+ @param writeOptions `RocksDBWriteOptions` instance for configuring this delete operation.
  @return `YES` if the operation succeeded, `NO` otherwise
 
  @see RocksDBWriteOptions
  */
 - (BOOL)deleteDataForKey:(NSData *)aKey
-			writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions
-				   error:(NSError * _Nullable *)error;
+		withOptions:(RocksDBWriteOptions *)options
+			  error:(NSError * _Nullable *)error;
 
 @end
 
@@ -466,7 +465,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBWriteOptions
  */
 - (BOOL)applyWriteBatch:(RocksDBWriteBatch *)writeBatch
-		   writeOptions:(nullable void (^)(RocksDBWriteOptions *writeOptions))writeOptions
+		   writeOptions:(RocksDBWriteOptions *)writeOptions
 				  error:(NSError * _Nullable *)error;
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
@@ -520,13 +519,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns an iterator instance for scan operations
 
- @param readOptions A block with a `RocksDBReadOptions` instance for configuring the iterator instance.
+ @param readOptions `RocksDBReadOptions` instance for configuring the iterator instance.
  @return An iterator instace.
 
  @see RocksDBIterator
  @see RocksDBReadOptions
  */
-- (RocksDBIterator *)iteratorWithReadOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions;
+- (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions;
 
 @end
 
@@ -548,12 +547,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns a snapshot of the DB. A snapshot provides consistent read-only view over the state of the key-value store.
 
- @param readOptions A block with a `RocksDBReadOptions` instance for configuring the returned snapshot instance.
+ @param readOptions  `RocksDBReadOptions` instance for configuring the returned snapshot instance.
 
  @see RocksDBSnapshot
  @see RocksDBReadOptions
  */
-- (RocksDBSnapshot *)snapshotWithReadOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions;
+- (RocksDBSnapshot *)snapshotWithReadOptions:(RocksDBReadOptions *)readOptions;
 
 @end
 
@@ -580,7 +579,7 @@ NS_ASSUME_NONNULL_BEGIN
  @see RocksDBCompactRangeOptions
  */
 - (BOOL)compactRange:(RocksDBKeyRange *)range
-		 withOptions:(nullable void (^)(RocksDBCompactRangeOptions *options))options
+		 withOptions:(RocksDBCompactRangeOptions *)options
 			   error:(NSError * _Nullable *)error;
 
 @end

@@ -12,10 +12,11 @@ import ObjectiveRocks
 class RocksDBPrefixExtractorTests : RocksDBTests {
 
 	func testSwift_PrefixExtractor_FixedLength() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.prefixExtractor = RocksDBPrefixExtractor(type: .fixedLength, length: 3)
-		})
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		options.prefixExtractor = RocksDBPrefixExtractor(type: .fixedLength, length: 3)
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("x", forKey: "100A")
 		try! rocks.setData("x", forKey: "100B")
@@ -78,15 +79,16 @@ class RocksDBPrefixExtractorTests : RocksDBTests {
 			}
 		}
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.comparator = cmp
-			options.prefixExtractor = RocksDBPrefixExtractor(type: .fixedLength, length: 2)
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		options.comparator = cmp
+		options.prefixExtractor = RocksDBPrefixExtractor(type: .fixedLength, length: 2)
 
-			options.tableFacotry = RocksDBTableFactory.blockBasedTableFactory(options: { (options) -> Void in
-				options.filterPolicy = RocksDBFilterPolicy.bloomFilterPolicy(withBitsPerKey: 10, useBlockBasedBuilder: true)
-			})
+		options.tableFacotry = RocksDBTableFactory.blockBasedTableFactory(options: { (options) -> Void in
+			options.filterPolicy = RocksDBFilterPolicy.bloomFilterPolicy(withBitsPerKey: 10, useBlockBasedBuilder: true)
 		})
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("x", forKey: "1010")
 		try! rocks.setData("x", forKey: "4211")

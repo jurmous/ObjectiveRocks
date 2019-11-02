@@ -12,9 +12,9 @@ import ObjectiveRocks
 class RocksDBIteratorTests : RocksDBTests {
 
 	func testSwift_DB_Iterator() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -36,9 +36,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_Seek() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -79,9 +80,9 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeys() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -101,9 +102,9 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeys_Reverse() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -123,9 +124,9 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeys_RangeStart() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -146,9 +147,9 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeys_RangeEnd() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -169,9 +170,9 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeys_RangeStartEnd() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -192,9 +193,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeysAndValues() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -215,9 +217,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeysAndValues_Reverse() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -238,9 +241,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeysAndValues_RangeStart() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -262,9 +266,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeysAndValues_RangeEnd() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -286,9 +291,10 @@ class RocksDBIteratorTests : RocksDBTests {
 	}
 
 	func testSwift_DB_Iterator_EnumerateKeysAndValues_RangeStartEnd() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -308,5 +314,4 @@ class RocksDBIteratorTests : RocksDBTests {
 
 		iterator.close()
 	}
-
 }

@@ -12,9 +12,10 @@ import ObjectiveRocks
 class RocksDBBackupTests : RocksDBTests {
 
 	func testSwift_Backup_Create() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -31,9 +32,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_BackupInfo() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -56,9 +58,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_BackupInfo_Multiple() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
@@ -86,9 +89,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_PurgeBackups() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
@@ -118,9 +122,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_DeleteBackup() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
@@ -147,9 +152,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_Restore() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 		try! rocks.setData("value 2", forKey: "key 2")
@@ -167,7 +173,7 @@ class RocksDBBackupTests : RocksDBTests {
 
 		try! backupEngine.restoreBackup(toDestinationPath: self.restorePath)
 
-		let backupRocks = RocksDB.database(atPath: restorePath, andDBOptions: nil)
+		let backupRocks = RocksDB.database(atPath: restorePath, andOptions: RocksDBOptions())
 
 		XCTAssertNotNil(backupRocks)
 		XCTAssertEqual(try! backupRocks?.data(forKey: "key 1"), "value 1")
@@ -178,9 +184,10 @@ class RocksDBBackupTests : RocksDBTests {
 	}
 
 	func testSwift_Backup_Restore_Specific() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let backupEngine = RocksDBBackupEngine(path: self.backupPath)
 
@@ -197,7 +204,7 @@ class RocksDBBackupTests : RocksDBTests {
 
 		try! backupEngine.restoreBackup(withId: 1, toDestinationPath: self.restorePath)
 
-		var backupRocks = RocksDB.database(atPath: restorePath, andDBOptions: nil)
+		var backupRocks = RocksDB.database(atPath: restorePath, andOptions: RocksDBOptions())
 
 		XCTAssertEqual(try! backupRocks?.data(forKey: "key 1"), "value 1")
 
@@ -208,7 +215,7 @@ class RocksDBBackupTests : RocksDBTests {
 
 		try! backupEngine.restoreBackup(withId: 2, toDestinationPath: self.restorePath)
 
-		backupRocks = RocksDB.database(atPath: restorePath, andDBOptions: nil)
+		backupRocks = RocksDB.database(atPath: restorePath, andOptions: RocksDBOptions())
 
 		XCTAssertEqual(try! backupRocks?.data(forKey: "key 1"), "value 1")
 		XCTAssertEqual(try! backupRocks?.data(forKey: "key 2"), "value 2")

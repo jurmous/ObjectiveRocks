@@ -16,10 +16,11 @@ class RocksDBColumnFamilyMetadataTests : RocksDBTests {
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.createMissingColumnFamilies = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.createMissingColumnFamilies = true
+
+		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options)
 
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]

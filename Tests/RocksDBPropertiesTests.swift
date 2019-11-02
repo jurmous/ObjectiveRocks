@@ -12,11 +12,12 @@ import ObjectiveRocks
 class RocksDBPropertiesTests : RocksDBTests {
 
 	func testSwift_Properties() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.maxWriteBufferNumber = 10;
-			options.minWriteBufferNumberToMerge = 10;
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.maxWriteBufferNumber = 10;
+		options.minWriteBufferNumberToMerge = 10;
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1".data, forKey: "key 1".data)
 		try! rocks.setData("value 2".data, forKey: "key 2".data)
@@ -32,10 +33,11 @@ class RocksDBPropertiesTests : RocksDBTests {
 		descriptor.addDefaultColumnFamily(options: nil)
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
 
-		rocks = RocksDB.database(atPath: path, columnFamilies: descriptor, andDatabaseOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.createMissingColumnFamilies = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.createMissingColumnFamilies = true
+
+		rocks = RocksDB.database(atPath: path, columnFamilies: descriptor, andOptions: options)
 
 		XCTAssertGreaterThanOrEqual((rocks.columnFamilies()[0]).value(for: .estimatedNumKeys), 0 as UInt64);
 		XCTAssertNotNil((rocks.columnFamilies()[0]).value(for: .stats));

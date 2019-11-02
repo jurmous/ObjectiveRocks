@@ -78,13 +78,9 @@
 
 #pragma mark - Lifecycle
 
-+ (instancetype)databaseAtPath:(NSString *)path andDBOptions:(void (^)(RocksDBOptions *))optionsBlock
++ (instancetype)databaseAtPath:(NSString *)path andOptions:(RocksDBOptions *)options
 {
-	RocksDB *rocks = [[RocksDB alloc] initWithPath:path];
-
-	if (optionsBlock) {
-		optionsBlock(rocks.options);
-	}
+	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
 	if ([rocks openDatabaseReadOnly:NO] == NO) {
 		return nil;
@@ -94,15 +90,9 @@
 
 + (instancetype)databaseAtPath:(NSString *)path
 				columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-			andDatabaseOptions:(void (^)(RocksDBDatabaseOptions *options))optionsBlock
+					andOptions:(RocksDBOptions *)options
 {
-	RocksDB *rocks = [[RocksDB alloc] initWithPath:path];
-
-	RocksDBDatabaseOptions *dbOptions = [RocksDBDatabaseOptions new];
-	if (optionsBlock) {
-		optionsBlock(dbOptions);
-	}
-	rocks.options.databaseOptions = dbOptions;
+	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
 	if ([rocks openColumnFamilies:descriptor readOnly:NO] == NO) {
 		return nil;
@@ -113,13 +103,9 @@
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 
 + (instancetype)databaseForReadOnlyAtPath:(NSString *)path
-							 andDBOptions:(void (^)(RocksDBOptions *options))optionsBlock
+							   andOptions:(RocksDBOptions *)options
 {
-	RocksDB *rocks = [[RocksDB alloc] initWithPath:path];
-
-	if (optionsBlock) {
-		optionsBlock(rocks.options);
-	}
+	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
 	if ([rocks openDatabaseReadOnly:YES] == NO) {
 		return nil;
@@ -129,15 +115,9 @@
 
 + (instancetype)databaseForReadOnlyAtPath:(NSString *)path
 						   columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-					   andDatabaseOptions:(void (^)(RocksDBDatabaseOptions *options))optionsBlock
+							   andOptions:(RocksDBOptions *)options
 {
-	RocksDB *rocks = [[RocksDB alloc] initWithPath:path];
-
-	RocksDBDatabaseOptions *dbOptions = [RocksDBDatabaseOptions new];
-	if (optionsBlock) {
-		optionsBlock(dbOptions);
-	}
-	rocks.options.databaseOptions = dbOptions;
+	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
 	if ([rocks openColumnFamilies:descriptor readOnly:YES] == NO) {
 		return nil;
@@ -147,12 +127,12 @@
 
 #endif
 
-- (instancetype)initWithPath:(NSString *)path
+- (instancetype)initWithPath:(NSString *)path withOptions:(RocksDBOptions *)options
 {
 	self = [super init];
 	if (self) {
 		_path = [path copy];
-		_options = [RocksDBOptions new];
+		_options = options;
 		_readOptions = [RocksDBReadOptions new];
 		_writeOptions = [RocksDBWriteOptions new];
 	}
@@ -269,13 +249,9 @@
 	return columnFamilies;
 }
 
-- (RocksDBColumnFamily *)createColumnFamilyWithName:(NSString *)name andOptions:(void (^)(RocksDBColumnFamilyOptions *options))optionsBlock
+- (RocksDBColumnFamily *)createColumnFamilyWithName:(NSString *)name
+											   andOptions:(RocksDBColumnFamilyOptions *)columnFamilyOptions
 {
-	RocksDBColumnFamilyOptions *columnFamilyOptions = [RocksDBColumnFamilyOptions new];
-	if (optionsBlock) {
-		optionsBlock(columnFamilyOptions);
-	}
-
 	rocksdb::ColumnFamilyHandle *handle;
 	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, name.UTF8String, &handle);
 	if (!status.ok()) {
@@ -326,18 +302,10 @@
 
 #pragma mark - Read/Write Options
 
-- (void)setDefaultReadOptions:(void (^)(RocksDBReadOptions *))readOptionsBlock writeOptions:(void (^)(RocksDBWriteOptions *))writeOptionsBlock
+- (void)setDefaultReadOptions:(RocksDBReadOptions *)readOptions writeOptions:(RocksDBWriteOptions *)writeOptions
 {
-	_readOptions = [RocksDBReadOptions new];
-	_writeOptions = [RocksDBWriteOptions new];
-
-	if (readOptionsBlock) {
-		readOptionsBlock(_readOptions);
-	}
-
-	if (writeOptionsBlock) {
-		writeOptionsBlock(_writeOptions);
-	}
+	_readOptions = readOptions;
+	_writeOptions = writeOptions;
 }
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
@@ -376,18 +344,14 @@
 
 - (BOOL)setData:(NSData *)anObject forKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
 {
-	return [self setData:anObject forKey:aKey writeOptions:nil error:error];
+	return [self setData:anObject forKey:aKey writeOptions:_writeOptions error:error];
 }
 
 - (BOOL)setData:(NSData *)anObject
-		   forKey:(NSData *)aKey
-	 writeOptions:(void (^)(RocksDBWriteOptions *writeOptions))writeOptionsBlock
-			error:(NSError * __autoreleasing *)error
+		 forKey:(NSData *)aKey
+   writeOptions:(RocksDBWriteOptions *) writeOptions
+		  error:(NSError * __autoreleasing *)error
 {
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-	if (writeOptionsBlock) {
-		writeOptionsBlock(writeOptions);
-	}
 
 	rocksdb::Status status = _db->Put(writeOptions.options,
 									  _columnFamily,
@@ -409,18 +373,14 @@
 
 - (BOOL)mergeData:(NSData *)anObject forKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
 {
-	return [self mergeData:anObject forKey:aKey writeOptions:nil error:error];
+	return [self mergeData:anObject forKey:aKey writeOptions:_writeOptions error:error];
 }
 
 - (BOOL)mergeData:(NSData *)anObject
 		   forKey:(NSData *)aKey
-	 writeOptions:(void (^)(RocksDBWriteOptions *writeOptions))writeOptionsBlock
+	 writeOptions:(RocksDBWriteOptions *)writeOptions
 			error:(NSError * __autoreleasing *)error
 {
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-	if (writeOptionsBlock) {
-		writeOptionsBlock(writeOptions);
-	}
 
 	rocksdb::Status status = _db->Merge(_writeOptions.options,
 										_columnFamily,
@@ -442,17 +402,13 @@
 
 - (NSData *)dataForKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
 {
-	return [self dataForKey:aKey readOptions:nil error:error];
+	return [self dataForKey:aKey readOptions:_readOptions error:error];
 }
 
 - (NSData *)dataForKey:(NSData *)aKey
-		   readOptions:(void (^)(RocksDBReadOptions *readOptions))readOptionsBlock
+		   readOptions:(RocksDBReadOptions *)readOptions
 				 error:(NSError * __autoreleasing *)error
 {
-	RocksDBReadOptions *readOptions = [_readOptions copy];
-	if (readOptionsBlock) {
-		readOptionsBlock(readOptions);
-	}
 
 	std::string value;
 	rocksdb::Status status = _db->Get(readOptions.options,
@@ -474,17 +430,13 @@
 
 - (BOOL)deleteDataForKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
 {
-	return [self deleteDataForKey:aKey writeOptions:nil error:error];
+	return [self deleteDataForKey:aKey writeOptions:_writeOptions error:error];
 }
 
 - (BOOL)deleteDataForKey:(NSData *)aKey
-			writeOptions:(void (^)(RocksDBWriteOptions *writeOptions))writeOptionsBlock
+			writeOptions:(RocksDBWriteOptions *)writeOptions
 				   error:(NSError * __autoreleasing *)error
 {
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-	if (writeOptionsBlock) {
-		writeOptionsBlock(writeOptions);
-	}
 
 	rocksdb::Status status = _db->Delete(writeOptions.options,
 										 _columnFamily,
@@ -531,14 +483,9 @@
 }
 
 - (BOOL)applyWriteBatch:(RocksDBWriteBatch *)writeBatch
-		   writeOptions:(void (^)(RocksDBWriteOptions *writeOptions))writeOptionsBlock
+		   writeOptions:(RocksDBWriteOptions *)writeOptions
 				  error:(NSError * __autoreleasing *)error
 {
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-	if (writeOptionsBlock) {
-		writeOptionsBlock(writeOptions);
-	}
-
 	rocksdb::WriteBatch *batch = writeBatch.writeBatchBase->GetWriteBatch();
 	rocksdb::Status status = _db->Write(writeOptions.options, batch);
 
@@ -589,15 +536,11 @@
 
 - (RocksDBIterator *)iterator
 {
-	return [self iteratorWithReadOptions:nil];
+	return [self iteratorWithReadOptions:_readOptions];
 }
 
-- (RocksDBIterator *)iteratorWithReadOptions:(void (^)(RocksDBReadOptions *readOptions))readOptionsBlock
+- (RocksDBIterator *)iteratorWithReadOptions:(RocksDBReadOptions *)readOptions
 {
-	RocksDBReadOptions *readOptions = [_readOptions copy];
-	if (readOptionsBlock) {
-		readOptionsBlock(readOptions);
-	}
 	rocksdb::Iterator *iterator = _db->NewIterator(readOptions.options,
 												   _columnFamily);
 
@@ -608,16 +551,11 @@
 
 - (RocksDBSnapshot *)snapshot
 {
-	return [self snapshotWithReadOptions:nil];
+	return [self snapshotWithReadOptions:[_readOptions copy]];
 }
 
-- (RocksDBSnapshot *)snapshotWithReadOptions:(void (^)(RocksDBReadOptions *readOptions))readOptionsBlock
+- (RocksDBSnapshot *)snapshotWithReadOptions:(RocksDBReadOptions *)readOptions
 {
-	RocksDBReadOptions *readOptions = [_readOptions copy];
-	if (readOptionsBlock) {
-		readOptionsBlock(readOptions);
-	}
-
 	rocksdb::ReadOptions options = readOptions.options;
 	options.snapshot = _db->GetSnapshot();
 	readOptions.options = options;
@@ -629,13 +567,9 @@
 #pragma mark - Compaction
 
 - (BOOL)compactRange:(RocksDBKeyRange *)range
-		 withOptions:(void (^)(RocksDBCompactRangeOptions *options))optionsBlock
+		 withOptions:(RocksDBCompactRangeOptions *)rangeOptions
 			   error:(NSError * __autoreleasing *)error
 {
-	RocksDBCompactRangeOptions *rangeOptions = [RocksDBCompactRangeOptions new];
-	if (optionsBlock) {
-		optionsBlock(rangeOptions);
-	}
 
 	rocksdb::Slice startSlice = SliceFromData(range.start);
 	rocksdb::Slice endSlice = SliceFromData(range.end);

@@ -12,9 +12,10 @@ import ObjectiveRocks
 class RocksDBCheckpointTests : RocksDBTests {
 
 	func testSwift_Checkpoint() {
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -28,18 +29,14 @@ class RocksDBCheckpointTests : RocksDBTests {
 
 		rocks.close()
 
-		rocks = RocksDB.database(atPath: self.checkpointPath1, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		rocks = RocksDB.database(atPath: self.checkpointPath1, andOptions: options)
 
 		XCTAssertEqual(try! rocks.data(forKey: "key 1"), "value 1".data)
 		XCTAssertNil(try? rocks.data(forKey: "key 2"))
 
 		rocks.close()
 
-		rocks = RocksDB.database(atPath: self.checkpointPath2, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-		})
+		rocks = RocksDB.database(atPath: self.checkpointPath2, andOptions: options)
 
 		XCTAssertEqual(try! rocks.data(forKey: "key 1"), "value 1".data)
 		XCTAssertEqual(try! rocks.data(forKey: "key 2"), "value 2".data)

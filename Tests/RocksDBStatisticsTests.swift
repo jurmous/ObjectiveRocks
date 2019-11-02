@@ -14,10 +14,11 @@ class RocksDBStatisticsTests : RocksDBTests {
 	func testSwift_Statistics() {
 		let statistics = RocksDBStatistics()
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.statistics = statistics;
-		})
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		options.statistics = statistics;
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -27,10 +28,11 @@ class RocksDBStatisticsTests : RocksDBTests {
 	func testSwift_Statistics_Ticker() {
 		let statistics = RocksDBStatistics()
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.statistics = statistics;
-		})
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		options.statistics = statistics;
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abcd", forKey: "abcd")
 
@@ -45,10 +47,11 @@ class RocksDBStatisticsTests : RocksDBTests {
 	func testSwift_Statistics_Histogram() {
 		let statistics = RocksDBStatistics()
 
-		rocks = RocksDB.database(atPath: self.path, andDBOptions: { (options) -> Void in
-			options.createIfMissing = true
-			options.statistics = statistics;
-		})
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		options.statistics = statistics;
+
+		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		for i in 0...10000 {
 			let str = String(format: "a%d", i)
