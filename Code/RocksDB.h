@@ -257,6 +257,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (RocksDBColumnFamilyMetaData *)columnFamilyMetaData: (RocksDBColumnFamilyHandle *)columnFamily;
 
+/**
+ Gets the handle for the default column family
+ */
+@property (nonatomic, readonly) RocksDBColumnFamilyHandle* defaultColumnFamily;
+
 #endif
 
 @end

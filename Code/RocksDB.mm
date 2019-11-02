@@ -287,6 +287,25 @@
 	}
 }
 
+- (BOOL)dropColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *>*)columnFamilies error:(NSError *__autoreleasing  _Nullable *)error
+{
+	__block std::vector<rocksdb::ColumnFamilyHandle*> families;
+    families.reserve([columnFamilies count]);
+    [columnFamilies enumerateObjectsUsingBlock:^(RocksDBColumnFamilyHandle * _Nonnull family, NSUInteger idx, BOOL * _Nonnull stop) {
+        families.push_back(family.columnFamily);
+    }];
+
+	rocksdb::Status status = _db->DropColumnFamilies(families);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
 - (NSArray *)columnFamilies
 {
 	if (_columnFamilyHandles == nullptr) {
@@ -302,6 +321,11 @@
 	}
 
 	return _columnFamilies;
+}
+
+- (RocksDBColumnFamilyHandle *)defaultColumnFamily
+{
+	return _columnFamily;
 }
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
