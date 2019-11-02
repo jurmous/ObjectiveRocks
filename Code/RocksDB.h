@@ -608,6 +608,69 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 			   inColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
 					readOptions:(RocksDBReadOptions *)readOptions;
 
+/**
+ If the [key] definitely does not exist in the database, then this method
+ returns false, else true.
+
+ This check is potentially lighter-weight than invoking dataForKey. One way
+ to make this lighter weight is to avoid doing any IOs.
+
+ @param aKey The key for object to check.
+ @param value out parameter if a value is found in block-cache.
+ @return The object for the given key.
+ */
+- (BOOL)keyMayExist:(NSData *)aKey value:(NSString * _Nullable *_Nullable)value;
+
+/**
+ If the [key] definitely does not exist in the database, then this method
+ returns false, else true.
+
+ This check is potentially lighter-weight than invoking dataForKey. One way
+ to make this lighter weight is to avoid doing any IOs.
+
+ @param aKey The key for object to check.
+ @param columnFamily The column family to check in
+ @param value out parameter if a value is found in block-cache.
+ @return The object for the given key.
+ */
+- (BOOL)keyMayExist:(NSData *)aKey
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  value:(NSString * _Nullable *_Nullable)value;
+
+/**
+ If the [key] definitely does not exist in the database, then this method
+ returns false, else true.
+
+ This check is potentially lighter-weight than invoking dataForKey. One way
+ to make this lighter weight is to avoid doing any IOs.
+
+ @param aKey The key for object to check.
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
+ @param value out parameter if a value is found in block-cache.
+ @return The object for the given key.
+ */
+- (BOOL)keyMayExist:(NSData *)aKey
+		readOptions:(RocksDBReadOptions *)readOptions
+			  value:(NSString * _Nullable *_Nullable)value;
+
+/**
+ If the [key] definitely does not exist in the database, then this method
+ returns false, else true.
+
+ This check is potentially lighter-weight than invoking dataForKey. One way
+ to make this lighter weight is to avoid doing any IOs.
+
+ @param aKey The key for object to check.
+ @param columnFamily The column family to check in
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
+ @param value out parameter if a value is found in block-cache.
+ @return The object for the given key.
+ */
+- (BOOL)keyMayExist:(NSData *)aKey
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		readOptions:(RocksDBReadOptions *)readOptions
+			  value:(NSString * _Nullable *_Nullable)value;
+
 @end
 
 #pragma mark - Delete operations

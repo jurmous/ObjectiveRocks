@@ -586,6 +586,42 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return results;
 }
 
+- (BOOL)keyMayExist:(NSData *)aKey value:(NSString * _Nullable *)value
+{
+	return [self keyMayExist:aKey readOptions:_readOptions value:value];
+}
+
+- (BOOL)keyMayExist:(NSData *)aKey
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  value:(NSString * _Nullable *)value
+{
+	return [self keyMayExist:aKey inColumnFamily:columnFamily readOptions:_readOptions value:value];
+}
+
+- (BOOL)keyMayExist:(NSData *)aKey
+		readOptions:(RocksDBReadOptions *)readOptions
+			  value:(NSString * _Nullable *)value
+{
+	return [self keyMayExist:aKey inColumnFamily:_columnFamily readOptions:_readOptions value:value];
+}
+
+- (BOOL)keyMayExist:(NSData *)aKey
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		readOptions:(RocksDBReadOptions *)readOptions
+			  value:(NSString * _Nullable *)value
+{
+	bool found = NO;
+	std::string stringValue;
+	_db->KeyMayExist(readOptions.options,
+					 columnFamily.columnFamily,
+					 SliceFromData(aKey),
+					 &stringValue,
+					 &found);
+
+	*value = [NSString stringWithUTF8String:stringValue.c_str()];
+	return found;
+}
+
 #pragma mark - Delete Operations
 
 - (BOOL)deleteDataForKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
