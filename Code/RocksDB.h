@@ -560,6 +560,54 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					readOptions:(RocksDBReadOptions *)readOptions
 						  error:(NSError * _Nullable *)error;
 
+/**
+ Returns a list of values for the given keys.
+
+ @param keys The keys to get
+ @return The object for the given key.
+
+ @see RocksDBReadOptions
+ */
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys;
+
+/**
+ Returns a list of values for the given keys.
+
+ @param keys The keys to get
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
+ @return The object for the given key.
+
+ @see RocksDBReadOptions
+ */
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys
+					readOptions:(RocksDBReadOptions *)readOptions;
+
+/**
+ Returns a list of values for the given keys.
+
+ @param keys The keys to get
+ @param columnFamilies The column families to get from
+ @return The object for the given key.
+
+ @see RocksDBReadOptions
+ */
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys
+			   inColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies;
+
+/**
+ Returns a list of values for the given keys.
+
+ @param keys The keys to get
+ @param columnFamilies The column families to get from
+ @param readOptions `RocksDBReadOptions` instance for configuring this read operation.
+ @return The object for the given key.
+
+ @see RocksDBReadOptions
+ */
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys
+			   inColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+					readOptions:(RocksDBReadOptions *)readOptions;
+
 @end
 
 #pragma mark - Delete operations

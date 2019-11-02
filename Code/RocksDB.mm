@@ -534,6 +534,58 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return DataFromSlice(rocksdb::Slice(value));
 }
 
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys
+{
+	return [self multiGet:keys readOptions:_readOptions];
+}
+
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys
+					readOptions:(nonnull RocksDBReadOptions *)readOptions
+{
+	std::vector<rocksdb::Slice> vKeys;
+	for (NSData* key in keys) {
+		vKeys.push_back(SliceFromData(key));
+	}
+
+	std::vector<std::string> values;
+	_db->MultiGet(readOptions.options, vKeys, &values);
+
+	NSMutableArray<NSData *> * results = [NSMutableArray array];
+	for (auto &value : values) {
+		NSString * v = [NSString stringWithUTF8String:value.c_str()];
+		[results addObject:[v dataUsingEncoding:NSUTF8StringEncoding]];
+	}
+	return results;
+}
+
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys inColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies
+{
+	return [self multiGet:keys inColumnFamilies:columnFamilies readOptions:_readOptions];
+}
+
+- (NSArray<NSData *> *)multiGet:(NSArray<NSData *> *)keys inColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies readOptions:(RocksDBReadOptions *)readOptions
+{
+	std::vector<rocksdb::ColumnFamilyHandle *> families;
+	for (RocksDBColumnFamilyHandle* handle in columnFamilies) {
+		families.push_back(handle.columnFamily);
+	}
+
+	std::vector<rocksdb::Slice> vKeys;
+	for (NSData* key in keys) {
+		vKeys.push_back(SliceFromData(key));
+	}
+
+	std::vector<std::string> values;
+	_db->MultiGet(readOptions.options, families, vKeys, &values);
+
+	NSMutableArray<NSData *> * results = [NSMutableArray array];
+	for (auto &value : values) {
+		NSString * v = [NSString stringWithUTF8String:value.c_str()];
+		[results addObject:[v dataUsingEncoding:NSUTF8StringEncoding]];
+	}
+	return results;
+}
+
 #pragma mark - Delete Operations
 
 - (BOOL)deleteDataForKey:(NSData *)aKey error:(NSError * __autoreleasing *)error
