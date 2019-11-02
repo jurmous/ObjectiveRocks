@@ -1061,6 +1061,23 @@ for “scattered” logic.
 	  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 			   error:(NSError * _Nullable *)error;
 
+/**
+ Enable automatic compactions for the given column
+ families if they were previously disabled.
+
+ The function will first set the
+ [ColumnFamilyOptions.disableAutoCompactions] option for each
+ column family to false, after which it will schedule a flush/compaction.
+
+ NOTE: Setting disableAutoCompactions to 'false' through
+ [.setOptions]
+ does NOT schedule a flush/compaction afterwards, and only changes the
+ parameter itself within the column family option.
+
+ @param columnFamilies the column family handles
+ @param error RocksDBError If an error occurs
+ */
+- (BOOL)enableAutoCompaction:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies error:(NSError * __autoreleasing *)error;
 @end
 
 #pragma mark - WAL

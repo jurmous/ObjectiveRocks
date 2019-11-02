@@ -882,6 +882,26 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return YES;
 }
 
+- (BOOL)enableAutoCompaction:(NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies error:(NSError *__autoreleasing  _Nullable *)error
+{
+	std::vector<rocksdb::ColumnFamilyHandle *> families;
+
+	for (RocksDBColumnFamilyHandle* columnFamily in columnFamilies){
+		families.push_back(columnFamily.columnFamily);
+	}
+
+	rocksdb::Status status = _db->EnableAutoCompaction(families);
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
 #pragma mark - WAL
 
 - (BOOL)syncWal:(NSError *__autoreleasing  _Nullable *)error
