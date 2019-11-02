@@ -737,6 +737,82 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 			writeOptions:(RocksDBWriteOptions *)writeOptions
 				   error:(NSError * _Nullable *)error;
 
+/**
+ Removes the database entries in the range , i.e.,
+ including "beginKey" and excluding "endKey". a non-OK status on error. It
+ is not an error if no keys exist in the range ["beginKey", "endKey").
+ Delete the database entry (if any) for "key". Returns OK on success, and a
+ non-OK status on error. It is not an error if "key" did not exist in the
+ database.
+
+ @param range to delete
+ @param error if something went wrong deleting
+
+ @see RocksDBKeyRange
+ @see RocksDBWriteOptions
+ */
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+			  error:(NSError * _Nullable *)error;
+
+/**
+ Removes the database entries in the range , i.e.,
+ including "beginKey" and excluding "endKey". a non-OK status on error. It
+ is not an error if no keys exist in the range ["beginKey", "endKey").
+ Delete the database entry (if any) for "key". Returns OK on success, and a
+ non-OK status on error. It is not an error if "key" did not exist in the
+ database.
+
+ @param range to delete
+ @param columnFamily ColumnFamilyHandle instance
+ @param error if something went wrong deleting
+
+ @see RocksDBKeyRange
+ @see RocksDBWriteOptions
+ */
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  error:(NSError * _Nullable *)error;
+
+/**
+ Removes the database entries in the range , i.e.,
+ including "beginKey" and excluding "endKey". a non-OK status on error. It
+ is not an error if no keys exist in the range ["beginKey", "endKey").
+ Delete the database entry (if any) for "key". Returns OK on success, and a
+ non-OK status on error. It is not an error if "key" did not exist in the
+ database.
+
+ @param range to delete
+ @param options Write options for deletion
+ @param error if something went wrong deleting
+
+ @see RocksDBKeyRange
+ @see RocksDBWriteOptions
+ */
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+		withOptions:(RocksDBWriteOptions *)options
+			  error:(NSError * _Nullable *)error;
+
+/**
+ Removes the database entries in the range , i.e.,
+ including "beginKey" and excluding "endKey". a non-OK status on error. It
+ is not an error if no keys exist in the range ["beginKey", "endKey").
+ Delete the database entry (if any) for "key". Returns OK on success, and a
+ non-OK status on error. It is not an error if "key" did not exist in the
+ database.
+
+ @param range to delete
+ @param columnFamily ColumnFamilyHandle instance
+ @param options Write options for deletion
+ @param error if something went wrong deleting
+
+ @see RocksDBKeyRange
+ @see RocksDBWriteOptions
+ */
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+		withOptions:(RocksDBWriteOptions *)options
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  error:(NSError * _Nullable *)error;
+
 @end
 
 #pragma mark - Atomic Writes

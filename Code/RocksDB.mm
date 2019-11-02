@@ -687,6 +687,45 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return YES;
 }
 
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+			  error:(NSError * _Nullable __autoreleasing *)error
+{
+	return [self deleteRange:range withOptions:_writeOptions inColumnFamily:_columnFamily error:error];
+}
+
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError * _Nullable __autoreleasing *)error
+{
+	return [self deleteRange:range withOptions:_writeOptions inColumnFamily:columnFamily error:error];
+}
+
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+		withOptions:(RocksDBWriteOptions *)options
+			  error:(NSError * _Nullable __autoreleasing *)error
+{
+	return [self deleteRange:range withOptions:options inColumnFamily:_columnFamily error:error];
+}
+
+- (BOOL)deleteRange:(RocksDBKeyRange *)range
+		withOptions:(RocksDBWriteOptions *)options
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  error:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Slice startSlice = SliceFromData(range.start);
+	rocksdb::Slice endSlice = SliceFromData(range.end);
+
+	rocksdb::Status status = _db->DeleteRange(options.options, columnFamily.columnFamily, startSlice, endSlice);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
+}
+
 #pragma mark - Batch Writes
 
 - (RocksDBWriteBatch *)writeBatch
