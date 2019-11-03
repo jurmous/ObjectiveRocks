@@ -23,7 +23,9 @@ typedef NS_ENUM(unsigned char, RocksDBLogLevel)
 	RocksDBLogLevelInfo,
 	RocksDBLogLevelWarn,
 	RocksDBLogLevelError,
-	RocksDBLogLevelFatal
+	RocksDBLogLevelFatal,
+	RocksDBLogLevelHeader,
+	RocksDBLogLevelNumInfoLogLevels,
 };
 
 /**
