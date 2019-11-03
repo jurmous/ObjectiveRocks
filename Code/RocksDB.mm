@@ -941,6 +941,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 #pragma mark - File Deletions
 
+#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+
 - (BOOL)disableFileDeletions:(NSError * __autoreleasing *)error
 {
 	rocksdb::Status status = _db->DisableFileDeletions();
@@ -979,6 +981,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	}
 	return YES;
 }
+
+#endif
 
 #pragma mark - Background Work
 
@@ -1052,6 +1056,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return _db->Level0StopWriteTrigger(columnFamily.columnFamily);
 }
 
+#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+
 - (BOOL)promoteL0:(int)targetLevel
 			error:(NSError * _Nullable __autoreleasing *)error
 {
@@ -1080,6 +1086,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	}
 	return YES;
 }
+
+#endif
 
 #pragma mark - WAL
 
@@ -1111,6 +1119,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 #pragma mark Verification
 
+#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+
 - (BOOL)verifyChecksum:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::Status status = _db->VerifyChecksum();
@@ -1123,6 +1133,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	}
 	return YES;
 }
+
+#endif
 
 #pragma mark Stats
 
