@@ -246,15 +246,38 @@
 	return YES;
 }
 
++ (BOOL)destroyDatabaseAtPath:(NSString *)path
+				   andOptions:(RocksDBOptions *)options
+						error:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = rocksdb::DestroyDB(path.UTF8String, options.options);
+	if (!status.ok()) {
+		NSLog(@"Error database at %@: %@", path, [RocksDBError errorWithRocksStatus:status]);
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+
+	return YES;
+}
+
 #pragma mark - Column Families
 
 + (NSArray *)listColumnFamiliesInDatabaseAtPath:(NSString *)path
+									 andOptions:(RocksDBOptions *)options
+										  error:(NSError *__autoreleasing  _Nullable *)error
 {
 	std::vector<std::string> names;
 
-	rocksdb::Status status = rocksdb::DB::ListColumnFamilies(rocksdb::Options(), path.UTF8String, &names);
+	rocksdb::Status status = rocksdb::DB::ListColumnFamilies(options.options, path.UTF8String, &names);
 	if (!status.ok()) {
 		NSLog(@"Error listing column families in database at %@: %@", path, [RocksDBError errorWithRocksStatus:status]);
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
 	}
 
 	NSMutableArray *columnFamilies = [NSMutableArray array];
@@ -266,11 +289,16 @@
 
 - (RocksDBColumnFamilyHandle *)createColumnFamilyWithName:(NSString *)name
 											   andOptions:(RocksDBColumnFamilyOptions *)columnFamilyOptions
+													error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::ColumnFamilyHandle *handle;
 	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, name.UTF8String, &handle);
 	if (!status.ok()) {
 		NSLog(@"Error creating column family: %@", [RocksDBError errorWithRocksStatus:status]);
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
 		return nil;
 	}
 

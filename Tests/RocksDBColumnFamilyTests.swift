@@ -19,7 +19,7 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		rocks.close()
 
-		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path)
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
 
 		XCTAssertTrue(names.count == 1);
 		XCTAssertEqual(names[0], "default")
@@ -30,13 +30,13 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		options.createIfMissing = true
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
+		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		XCTAssertNotNil(columnFamily)
-		columnFamily?.close()
+		columnFamily.close()
 		rocks.close()
 
-		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path)
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
 
 		XCTAssertTrue(names.count == 2);
 		XCTAssertEqual(names[0], "default")
@@ -49,13 +49,13 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 		
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
+		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
-		rocks.dropColumnFamily(columnFamily!)
-		columnFamily?.close()
+		rocks.dropColumnFamily(columnFamily)
+		columnFamily.close()
 		rocks.close()
 
-		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path)
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
 
 		XCTAssertTrue(names.count == 1);
 		XCTAssertEqual(names[0], "default")
@@ -70,12 +70,12 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let columnFamilyOptions = RocksDBColumnFamilyOptions()
 		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
+		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
 		XCTAssertNotNil(columnFamily)
-		columnFamily?.close()
+		columnFamily.close()
 		rocks.close()
 
-		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path)
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
 
 		XCTAssertTrue(names.count == 2)
 		XCTAssertEqual(names[0], "default")
@@ -116,14 +116,14 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let columnFamilyOptions = RocksDBColumnFamilyOptions()
 		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
+		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
 
 
 		XCTAssertNotNil(columnFamily)
-		columnFamily?.close()
+		columnFamily.close()
 		rocks.close()
 
-		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path)
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
 
 		XCTAssertTrue(names.count == 2)
 		XCTAssertEqual(names[0], "default")
@@ -155,12 +155,12 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		try! rocks.setData("df_value", forKey: "df_key1")
 		try! rocks.setData("df_value", forKey: "df_key2")
 
-		let columnFamily = rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
+		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 		XCTAssertNotNil(columnFamily)
-		try! rocks.setData("cf_value", forKey: "cf_key1", forColumnFamily: columnFamily!)
-		try! rocks.setData("cf_value", forKey: "cf_key2", forColumnFamily: columnFamily!)
+		try! rocks.setData("cf_value", forKey: "cf_key1", forColumnFamily: columnFamily)
+		try! rocks.setData("cf_value", forKey: "cf_key2", forColumnFamily: columnFamily)
 
-		columnFamily?.close()
+		columnFamily.close()
 		rocks.close()
 
 		let descriptor = RocksDBColumnFamilyDescriptor()

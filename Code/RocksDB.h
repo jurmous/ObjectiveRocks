@@ -167,6 +167,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDefaultReadOptions:(RocksDBReadOptions *)readOptions
 				 writeOptions:(RocksDBWriteOptions *)writeOptions NS_SWIFT_NAME(setDefault(readOptions:writeOptions:));
 
+/**
+ Destroy the DB residing under the given path.
+
+ @param path The file path of the database.
+ @param options For database
+ @param error filled on failures
+ @return An array containing all Column Families currently present in the DB.
+ */
++ (BOOL)destroyDatabaseAtPath:(NSString *)path
+				   andOptions:(RocksDBOptions *)options
+						error:(NSError *__autoreleasing  _Nullable *)error;
+
 @end
 
 #pragma mark - Name & Env
@@ -196,11 +208,15 @@ NS_ASSUME_NONNULL_BEGIN
  Lists all existing Column Families in the DB residing under the given path.
 
  @param path The file path of the database.
+ @param options For column family retrieval
+ @param error filled on failures
  @return An array containing all Column Families currently present in the DB.
 
  @see RocksDBColumnFamily
  */
-+ (NSArray<NSString *> *)listColumnFamiliesInDatabaseAtPath:(NSString *)path;
++ (NSArray<NSString *> *)listColumnFamiliesInDatabaseAtPath:(NSString *)path
+												 andOptions:(RocksDBOptions *)options
+													  error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Creates a new Column Family with the given name and options.
@@ -208,13 +224,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param name The name of the new Column Family.
  @param options A block with a `RocksDBColumnFamilyOptions` instance for configuring the
  new Column Family.
+ @param error filled on failures
  @return The newly-created Column Family with the given name and options.
 
  @see RocksDBColumnFamilyHandle
  @see RocksDBColumnFamilyOptions
  */
 - (nullable RocksDBColumnFamilyHandle *)createColumnFamilyWithName:(NSString *)name
-														andOptions:(RocksDBColumnFamilyOptions *)options;
+														andOptions:(RocksDBColumnFamilyOptions *)options
+															 error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Drops a Column family.
