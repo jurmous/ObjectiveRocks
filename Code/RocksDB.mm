@@ -282,7 +282,7 @@
 
 	NSMutableArray *columnFamilies = [NSMutableArray array];
 	for(auto it = std::begin(names); it != std::end(names); ++it) {
-		[columnFamilies addObject:[[NSString alloc] initWithCString:it->c_str() encoding:NSUTF8StringEncoding]];
+		[columnFamilies addObject:[[NSString alloc] initWithCString:it->c_str() encoding:NSNonLossyASCIIStringEncoding]];
 	}
 	return columnFamilies;
 }
@@ -292,7 +292,7 @@
 													error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::ColumnFamilyHandle *handle;
-	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, name.UTF8String, &handle);
+	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, [name cStringUsingEncoding: NSNonLossyASCIIStringEncoding], &handle);
 	if (!status.ok()) {
 		NSLog(@"Error creating column family: %@", [RocksDBError errorWithRocksStatus:status]);
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
@@ -604,8 +604,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 	NSMutableArray<NSData *> * results = [NSMutableArray array];
 	for (auto &value : values) {
-		NSString * v = [NSString stringWithUTF8String:value.c_str()];
-		[results addObject:[v dataUsingEncoding:NSUTF8StringEncoding]];
+		NSString * v = [NSString stringWithCString:value.c_str() encoding:NSNonLossyASCIIStringEncoding];
+		[results addObject:[v dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
 	}
 	return results;
 }
@@ -632,8 +632,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 	NSMutableArray<NSData *> * results = [NSMutableArray array];
 	for (auto &value : values) {
-		NSString * v = [NSString stringWithUTF8String:value.c_str()];
-		[results addObject:[v dataUsingEncoding:NSUTF8StringEncoding]];
+		NSString * v = [NSString stringWithCString:value.c_str() encoding:NSNonLossyASCIIStringEncoding];
+		[results addObject:[v dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
 	}
 	return results;
 }
@@ -670,7 +670,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					 &stringValue,
 					 &found);
 
-	*value = [NSString stringWithUTF8String:stringValue.c_str()];
+	*value = [NSString stringWithCString:stringValue.c_str() encoding:NSNonLossyASCIIStringEncoding];
 	return found;
 }
 

@@ -64,8 +64,8 @@
 		self->_dbPath = [NSString stringWithCString:metadata.db_path.c_str() encoding:NSUTF8StringEncoding];
 		self->_smallestSeqno = metadata.smallest_seqno;
 		self->_largestSeqno = metadata.largest_seqno;
-		self->_smallestKey = [NSString stringWithCString:metadata.smallestkey.c_str() encoding:NSUTF8StringEncoding];
-		self->_largestKey = [NSString stringWithCString:metadata.largestkey.c_str() encoding:NSUTF8StringEncoding];
+		self->_smallestKey = [NSString stringWithCString:metadata.smallestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
+		self->_largestKey = [NSString stringWithCString:metadata.largestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
 		self->_beingCompacted = metadata.being_compacted;
 	}
 	return self;
