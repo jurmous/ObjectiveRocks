@@ -45,8 +45,8 @@
 + (instancetype)envWithLowPriorityThreadCount:(int)lowPrio andHighPriorityThreadCount:(int)highPrio
 {
 	RocksDBEnv *instance = [RocksDBEnv new];
-	[instance setLowPriorityPoolThreadsCount:lowPrio];
-	[instance setHighPriorityPoolThreadsCount:highPrio];
+	[instance setBackgroundThreads:lowPrio priority:RocksDBEnvPriorityLow];
+	[instance setBackgroundThreads:highPrio priority:RocksDBEnvPriorityHigh];
 	return instance;
 }
 
@@ -71,25 +71,57 @@
 - (void)dealloc
 {
 	@synchronized(self) {
-		if (_env != nullptr) {
-			delete _env;
-			_env = nullptr;
-		}
+		_env = nullptr;
 	}
 }
 
 #pragma mark - Threads
 
-- (void)setHighPriorityPoolThreadsCount:(int)numThreads
+- (void)setBackgroundThreads:(int)numThreads priority:(RocksDBEnvPriority)priority
 {
 	if (numThreads <= 0) numThreads = 1;
-	_env->SetBackgroundThreads(numThreads, rocksdb::Env::HIGH);
+	_env->SetBackgroundThreads(numThreads, [self getPriority:priority]);
 }
 
-- (void)setLowPriorityPoolThreadsCount:(int)numThreads
+- (int)getBackgroundThreads:(RocksDBEnvPriority)priority
 {
-	if (numThreads <= 0) numThreads = 1;
-	_env->SetBackgroundThreads(numThreads, rocksdb::Env::LOW);
+	return _env->GetBackgroundThreads([self getPriority:priority]);
+}
+
+- (rocksdb::Env::Priority)getPriority:(RocksDBEnvPriority)priority
+{
+	switch(priority){
+		case RocksDBEnvPriorityBottom:
+			return rocksdb::Env::BOTTOM;
+		case RocksDBEnvPriorityLow:
+			return rocksdb::Env::LOW;
+		case RocksDBEnvPriorityHigh:
+			return rocksdb::Env::HIGH;
+		case RocksDBEnvPriorityTotal:
+			return rocksdb::Env::TOTAL;
+		case RocksDBEnvPriorityUser:
+			return rocksdb::Env::USER;
+	}
+}
+
+- (void)incBackgroundThreadsIfNeeded:(int)number priority:(RocksDBEnvPriority)priority
+{
+	_env->IncBackgroundThreadsIfNeeded(number, [self getPriority:priority]);
+}
+
+- (int)getThreadPoolQueueLen:(RocksDBEnvPriority)priority
+{
+	return _env->GetThreadPoolQueueLen();
+}
+
+- (void)lowerThreadPoolIOPriority:(RocksDBEnvPriority)priority
+{
+	_env->LowerThreadPoolIOPriority([self getPriority:priority]);
+}
+
+- (void)lowerThreadPoolCPUPriority:(RocksDBEnvPriority)priority
+{
+	_env->LowerThreadPoolCPUPriority([self getPriority:priority]);
 }
 
 #if ROCKSDB_USING_THREAD_STATUS

@@ -15,6 +15,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ Constants for the built-in prefix extractors.
+ */
+typedef NS_ENUM(NSInteger, RocksDBEnvPriority)
+{
+	RocksDBEnvPriorityBottom,
+	RocksDBEnvPriorityLow,
+	RocksDBEnvPriorityHigh,
+	RocksDBEnvPriorityTotal,
+	RocksDBEnvPriorityUser
+};
+
+/**
  All file operations (and other operating system calls) issued by the RocksDB implementation are routed through an
  `RocksDBEnv` object. Currently `RocksDBEnv` only exposes the high & low priority thread pool parameters.
  */
@@ -29,11 +41,40 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)envWithLowPriorityThreadCount:(int)lowPrio andHighPriorityThreadCount:(int)highPrio;
 
-/**  @brief Sets the count of thread for the high priority queue. */
-- (void)setHighPriorityPoolThreadsCount:(int)numThreads;
+/**  @brief Sets the count of thread for the given priority queue. */
+- (void)setBackgroundThreads:(int)numThreads priority:(RocksDBEnvPriority)priority;
 
-/**  @brief Sets the count of thread for the low priority queue. */
-- (void)setLowPriorityPoolThreadsCount:(int)numThreads;
+/**  @brief Sets the count of thread for the given priority queue. */
+- (int)getBackgroundThreads:(RocksDBEnvPriority)priority;
+
+/**
+ Enlarge number of background worker threads of a specific thread pool
+ for this environment if it is smaller than specified. 'LOW' is the default
+ pool.
+ @param number the number of threads.
+ @param priority for specific thread pool
+ */
+- (void)incBackgroundThreadsIfNeeded:(int)number priority:(RocksDBEnvPriority)priority;
+
+/**
+ Returns the length of the queue associated with the specified
+ thread pool.
+ @param priority the priority id of a specified thread pool.
+ @return the thread pool queue length.
+ */
+- (int) getThreadPoolQueueLen:(RocksDBEnvPriority)priority;
+
+/**
+ Lower IO priority for threads from the specified pool.
+ @param priority the priority id of a specified thread pool.
+ */
+- (void) lowerThreadPoolIOPriority:(RocksDBEnvPriority)priority;
+
+/**
+ Lower CPU priority for threads from the specified pool.
+ @param priority the priority id of a specified thread pool.
+ */
+- (void) lowerThreadPoolCPUPriority:(RocksDBEnvPriority)priority;
 
 #if ROCKSDB_USING_THREAD_STATUS
 /**
