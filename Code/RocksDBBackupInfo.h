@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) uint32_t numberFiles;
 
+/**
+ @brief the associated application metadata, or null
+ */
+@property (nonatomic, assign, readonly) NSString * _Nullable appMetadata;
+
 @end
 
 NS_ASSUME_NONNULL_END

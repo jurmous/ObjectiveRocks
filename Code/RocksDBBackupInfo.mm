@@ -13,8 +13,9 @@
 @property (nonatomic, assign) int64_t timestamp;
 @property (nonatomic, assign) uint64_t size;
 @property (nonatomic, assign) uint32_t numberFiles;
+@property (nonatomic, assign)  NSString * _Nullable appMetadata;
 @end
 
 @implementation RocksDBBackupInfo
-@synthesize backupId, timestamp, size, numberFiles;
+@synthesize backupId, timestamp, size, numberFiles, appMetadata;
 @end

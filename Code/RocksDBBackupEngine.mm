@@ -10,6 +10,9 @@
 #import "RocksDBError.h"
 #import "RocksDBBackupInfo.h"
 
+#import "RocksDBEnv.h"
+#import "RocksDBEnv+Private.h"
+
 #include <rocksdb/db.h>
 #include <rocksdb/utilities/backupable_db.h>
 
@@ -24,6 +27,7 @@
 @property (nonatomic, assign) int64_t timestamp;
 @property (nonatomic, assign) uint64_t size;
 @property (nonatomic, assign) uint32_t numberFiles;
+@property (nonatomic, assign) NSString * _Nullable appMetadata;
 @end
 
 #pragma mark - Impl
@@ -41,10 +45,21 @@
 
 - (instancetype)initWithPath:(NSString *)path
 {
+	return [self initWithPath:path rocksEnv:rocksdb::Env::Default()];
+}
+
+- (instancetype)initWithPath:(NSString *)path env:(RocksDBEnv *)env
+{
+	return [self initWithPath:path rocksEnv:env.env];
+}
+
+
+- (instancetype)initWithPath:(NSString *)path rocksEnv:(rocksdb::Env *)env
+{
 	self = [super init];
 	if (self) {
 		_path = [path copy];
-		rocksdb::Status status = rocksdb::BackupEngine::Open(rocksdb::Env::Default(),
+		rocksdb::Status status = rocksdb::BackupEngine::Open(env,
 															 rocksdb::BackupableDBOptions(_path.UTF8String),
 															 &_backupEngine);
 		if (!status.ok()) {
@@ -74,7 +89,12 @@
 
 - (BOOL)createBackupForDatabase:(RocksDB *)database error:(NSError * __autoreleasing *)error
 {
-	rocksdb::Status status = _backupEngine->CreateNewBackup(database.db);
+	return [self createBackupForDatabase:database metadata:@"" flushBeforeBackup:false error:error];
+}
+
+- (BOOL)createBackupForDatabase:(RocksDB *)database metadata:(NSString *)metadata flushBeforeBackup:(BOOL)flush error:(NSError * __autoreleasing *)error
+{
+	rocksdb::Status status = _backupEngine->CreateNewBackupWithMetadata(database.db, metadata.UTF8String, flush);
 	if (!status.ok()) {
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
@@ -137,6 +157,19 @@
 	return YES;
 }
 
+- (NSArray *)getCorruptedBackups
+{
+	std::vector<rocksdb::BackupID> corrupt_backup_ids;
+	_backupEngine->GetCorruptedBackups(&corrupt_backup_ids);
+
+	NSMutableArray *corruptIDs = [NSMutableArray array];
+	for (auto it = std::begin(corrupt_backup_ids); it != std::end(corrupt_backup_ids); ++it) {
+		[corruptIDs addObject:[NSNumber numberWithUnsignedInt:*it]];
+	}
+
+	return corruptIDs;
+}
+
 - (NSArray *)backupInfo
 {
 	std::vector<rocksdb::BackupInfo> backup_info;
@@ -149,10 +182,60 @@
 		info.timestamp = (*it).timestamp;
 		info.size = (*it).size;
 		info.numberFiles = (*it).number_files;
+		info.appMetadata = [NSString stringWithCString:(*it).app_metadata.c_str() encoding:NSUTF8StringEncoding];
 		[backupInfo addObject:info];
 	}
 
 	return backupInfo;
+}
+
+- (BOOL)garbageCollect:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Status status = _backupEngine->GarbageCollect();
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+			return NO;
+		}
+	}
+	return YES;
+}
+
+- (BOOL)restoreDbFromBackup:(int)backupId
+					  dbDir:(NSString *)dbDir
+					 walDir:(NSString *)walDir
+			   keepLogFiles:(BOOL)keepLogFiles
+					  error:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Status status = _backupEngine->RestoreDBFromBackup(backupId, dbDir.UTF8String, walDir.UTF8String, rocksdb::RestoreOptions(keepLogFiles));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+			return NO;
+		}
+	}
+	return YES;
+}
+
+- (BOOL)restoreDbFromLatestBackup:(NSString *)dbDir
+						   walDir:(NSString *)walDir
+						keepLogFiles:(BOOL)keepLogFiles
+								error:(NSError * _Nullable __autoreleasing *)error
+{
+	rocksdb::Status status = _backupEngine->RestoreDBFromLatestBackup(dbDir.UTF8String, walDir.UTF8String, rocksdb::RestoreOptions(keepLogFiles));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+			return NO;
+		}
+	}
+	return YES;
 }
 
 @end
