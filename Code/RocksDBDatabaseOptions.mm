@@ -9,6 +9,7 @@
 #import "RocksDBDatabaseOptions.h"
 
 #import "RocksDBEnv.h"
+#import "RocksDBEnv+Private.h"
 #import <rocksdb/options.h>
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
@@ -73,6 +74,16 @@
 - (void)setErrorIfExists:(BOOL)errorIfExists
 {
 	_options.error_if_exists = errorIfExists;
+}
+
+- (RocksDBEnv *)env
+{
+	return [[RocksDBEnv alloc] initWithEnv:_options.env];
+}
+
+- (void)setEnv:(RocksDBEnv *)env
+{
+	_options.env = env.env;
 }
 
 - (BOOL)paranoidChecks

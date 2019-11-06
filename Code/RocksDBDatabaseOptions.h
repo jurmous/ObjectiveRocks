@@ -45,6 +45,13 @@ typedef NS_ENUM(unsigned char, RocksDBLogLevel)
  The default is false. */
 @property (nonatomic, assign) BOOL errorIfExists;
 
+/**
+ Use the specified object to interact with the environment,
+ e.g. to read/write files, schedule background work, etc.
+ Default: [Env.getDefault].
+ */
+@property (nonatomic, assign) RocksDBEnv *env;
+
 /** @brief If true, RocksDB will aggressively check consistency of the data.
  Also, if any of the  writes to the database fails (Put, Delete, Merge,
  Write), the database will switch to read-only mode and fail all other
