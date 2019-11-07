@@ -662,15 +662,17 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 		readOptions:(RocksDBReadOptions *)readOptions
 			  value:(NSString * _Nullable *)value
 {
-	bool found = NO;
+	bool valueFound = NO;
 	std::string stringValue;
-	_db->KeyMayExist(readOptions.options,
+	bool found = _db->KeyMayExist(readOptions.options,
 					 columnFamily.columnFamily,
 					 SliceFromData(aKey),
 					 &stringValue,
-					 &found);
+					 &valueFound);
 
-	*value = [NSString stringWithCString:stringValue.c_str() encoding:NSNonLossyASCIIStringEncoding];
+	if (valueFound) {
+		*value = [NSString stringWithCString:stringValue.c_str() encoding:NSNonLossyASCIIStringEncoding];
+	}
 	return found;
 }
 
