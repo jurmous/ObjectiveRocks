@@ -31,6 +31,18 @@ NS_ASSUME_NONNULL_BEGIN
 /** @brief The standard deviation value. */
 @property (nonatomic, assign, readonly) double standardDeviation;
 
+/** @brief The max value. */
+@property (nonatomic, assign, readonly) double max;
+
+/** @brief The total count of values. */
+@property (nonatomic, assign, readonly) uint64_t count;
+
+/** @brief The summed value. */
+@property (nonatomic, assign, readonly) uint64_t sum;
+
+/** @brief The minimum value. */
+@property (nonatomic, assign, readonly) double min;
+
 @end
 
 NS_ASSUME_NONNULL_END
