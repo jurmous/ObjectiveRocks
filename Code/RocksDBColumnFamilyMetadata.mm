@@ -67,6 +67,9 @@
 		self->_smallestKey = [NSString stringWithCString:metadata.smallestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
 		self->_largestKey = [NSString stringWithCString:metadata.largestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
 		self->_beingCompacted = metadata.being_compacted;
+		self->_numReadsSampled = metadata.num_reads_sampled;
+		self->_numEntries = metadata.num_entries;
+		self->_numDeletions = metadata.num_deletions;
 	}
 	return self;
 }

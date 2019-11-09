@@ -108,6 +108,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) bool beingCompacted;
 
+/**
+ @brief Get the number of times the file has been read
+ */
+@property (nonatomic, readonly) uint64_t numReadsSampled;
+
+/**
+@brief Get the number of entries
+*/
+@property (nonatomic, readonly) uint64_t numEntries;
+
+/**
+@brief Get the number of deletions
+*/
+@property (nonatomic, readonly) uint64_t numDeletions;
+
 @end
 
 NS_ASSUME_NONNULL_END
