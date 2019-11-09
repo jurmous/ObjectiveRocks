@@ -26,6 +26,10 @@
 @property (nonatomic, assign) double percentile99;
 @property (nonatomic, assign) double average;
 @property (nonatomic, assign) double standardDeviation;
+@property (nonatomic, assign) double max;
+@property (nonatomic, assign) uint64_t count;
+@property (nonatomic, assign) uint64_t sum;
+@property (nonatomic, assign) double min;
 @end
 
 #pragma mark - Impl
@@ -75,6 +79,10 @@
 	histogram.percentile95 = data->percentile99;
 	histogram.average = data->average;
 	histogram.standardDeviation = data->standard_deviation;
+	histogram.max = data->max;
+	histogram.count = data->count;
+	histogram.sum = data->sum;
+	histogram.min = data->min;
 
 	delete data;
 
