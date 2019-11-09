@@ -8,6 +8,7 @@
 
 #import "RocksDBWriteBatchIterator.h"
 #import "RocksDBSlice.h"
+#import "RocksDBError.h"
 
 #import <rocksdb/utilities/write_batch_with_index.h>
 
@@ -81,6 +82,13 @@
 	}
 }
 
+- (void)seekForPrev:(NSData *)aKey
+{
+	if (aKey != nil) {
+		_iterator->SeekForPrev(SliceFromData(aKey));
+	}
+}
+
 - (void)next
 {
 	_iterator->Next();
@@ -99,6 +107,20 @@
 	writeEntry.key = DataFromSlice(nativeEntry.key);
 	writeEntry.value = DataFromSlice(nativeEntry.value);
 	return writeEntry;
+}
+
+- (BOOL)status:(NSError * __autoreleasing *)error
+{
+    rocksdb::Status status = _iterator->status();
+
+    if (!status.ok()) {
+        NSError *temp = [RocksDBError errorWithRocksStatus:status];
+        if (error && *error == nil) {
+            *error = temp;
+        }
+		return NO;
+    }
+	return YES;
 }
 
 #pragma mark - Enumeration

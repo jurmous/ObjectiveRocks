@@ -63,6 +63,15 @@ typedef NS_ENUM(NSUInteger, RocksDBWriteBatchEntryType)
 - (void)seekToKey:(NSData *)aKey;
 
 /**
+ Positions the iterator at the last key in the source at or before the given key.
+ The iterator `isValid` after this call if the source contains an entry that comes at
+ or past the given key.
+
+ @param aKey The key to position the iterator at.
+ */
+- (void)seekForPrev:(NSData *)aKey;
+
+/**
  Moves to the next entry in the source. After this call, `isValid` is
  true if the iterator was not positioned at the last entry in the source.
  */
@@ -82,6 +91,15 @@ typedef NS_ENUM(NSUInteger, RocksDBWriteBatchEntryType)
  @see RocksDBWriteBatchEntry`
  */
 - (RocksDBWriteBatchEntry *)entry;
+
+/**
+ If an error has occurred, throw it.  Else just continue
+ If non-blocking IO is requested and this operation cannot be
+ satisfied without doing some IO, then this throws Error with Status::Incomplete.
+
+ @param error RocksDBError  if error happens in underlying native library.
+ */
+- (BOOL)status:(NSError * __autoreleasing *)error;
 
 /**
  Executes a given block for each entry in the iterator.
