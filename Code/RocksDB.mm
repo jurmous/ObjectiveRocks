@@ -29,7 +29,7 @@
 #import "RocksDBSnapshot+Private.h"
 
 #import "RocksDBError.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 
 #include <rocksdb/db.h>
 #include <rocksdb/slice.h>

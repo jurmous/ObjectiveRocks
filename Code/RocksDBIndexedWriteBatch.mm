@@ -15,7 +15,7 @@
 #import "RocksDBColumnFamilyHandle+Private.h"
 
 #import "RocksDBError.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 
 #import <rocksdb/db.h>
 #import <rocksdb/options.h>

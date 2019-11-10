@@ -8,6 +8,7 @@
 
 #import "RocksDBWriteBatchIterator.h"
 #import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 #import "RocksDBError.h"
 
 #import <rocksdb/utilities/write_batch_with_index.h>

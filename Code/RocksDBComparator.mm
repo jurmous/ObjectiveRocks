@@ -7,7 +7,7 @@
 //
 
 #import "RocksDBComparator.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 #import "RocksDBCallbackComparator.h"
 
 #import <rocksdb/comparator.h>

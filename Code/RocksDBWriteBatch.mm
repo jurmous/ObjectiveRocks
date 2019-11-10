@@ -10,7 +10,7 @@
 #import "RocksDBWriteBatch+Private.h"
 #import "RocksDBColumnFamilyHandle.h"
 #import "RocksDBColumnFamilyHandle+Private.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 
 #import <rocksdb/write_batch_base.h>
 #import <rocksdb/write_batch.h>

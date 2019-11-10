@@ -7,6 +7,7 @@
 //
 
 #import "RocksDBIterator.h"
+#import "RocksDBSlice.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,8 +25,8 @@ typedef NS_ENUM(NSUInteger, RocksDBWriteBatchEntryType)
 @interface RocksDBWriteBatchEntry : NSObject
 
 @property (nonatomic, readonly) RocksDBWriteBatchEntryType type;
-@property (nonatomic, readonly) NSData *key;
-@property (nonatomic, readonly) NSData *value;
+@property (nonatomic, readonly) RocksDBSlice *key;
+@property (nonatomic, readonly) RocksDBSlice *value;
 
 @end
 

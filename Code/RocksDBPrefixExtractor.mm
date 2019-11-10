@@ -7,7 +7,7 @@
 //
 
 #import "RocksDBPrefixExtractor.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 #import "RocksDBCallbackSliceTransform.h"
 
 #import <rocksdb/slice_transform.h>

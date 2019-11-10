@@ -7,7 +7,7 @@
 //
 
 #import "RocksDBMergeOperator.h"
-#import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 #import "RocksDBCallbackAssociativeMergeOperator.h"
 #import "RocksDBCallbackMergeOperator.h"
 

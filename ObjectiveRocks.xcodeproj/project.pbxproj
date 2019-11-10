@@ -93,7 +93,7 @@
 		624203F81BED650E0043DD6F /* RocksDBCallbackAssociativeMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B91A34FF0600624DA2 /* RocksDBCallbackAssociativeMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203F91BED650F0043DD6F /* RocksDBCallbackMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6214FD081A3F698300B92E5C /* RocksDBCallbackMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203FA1BED650F0043DD6F /* RocksDBCallbackSliceTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		624203FB1BED650F0043DD6F /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		624203FB1BED650F0043DD6F /* RocksDBSlice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624203FC1BED65250043DD6F /* RocksDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6299F80E1A17B28200123F56 /* RocksDB.mm */; };
 		624203FE1BED65250043DD6F /* RocksDBError.mm in Sources */ = {isa = PBXBuildFile; fileRef = 628B0CE91A1C104D0099C39B /* RocksDBError.mm */; };
 		624204001BED65250043DD6F /* RocksDBColumnFamilyDescriptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62074F2C1A520EC2002B1885 /* RocksDBColumnFamilyDescriptor.mm */; };
@@ -188,7 +188,7 @@
 		624F5EE21BEE456200497FEF /* RocksDBCallbackAssociativeMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B91A34FF0600624DA2 /* RocksDBCallbackAssociativeMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EE31BEE456200497FEF /* RocksDBCallbackMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6214FD081A3F698300B92E5C /* RocksDBCallbackMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		624F5EE41BEE456200497FEF /* RocksDBCallbackSliceTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		624F5EE51BEE456200497FEF /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		624F5EE51BEE456200497FEF /* RocksDBSlice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		625EF4971D0C3A960058ACDA /* RocksDBRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 625EF4951D0C3A960058ACDA /* RocksDBRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625EF4981D0C3A960058ACDA /* RocksDBRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 625EF4951D0C3A960058ACDA /* RocksDBRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		625EF4991D0C3A960058ACDA /* RocksDBRange.mm in Sources */ = {isa = PBXBuildFile; fileRef = 625EF4961D0C3A960058ACDA /* RocksDBRange.mm */; };
@@ -1401,7 +1401,7 @@
 		851B859C23449134009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B91A34FF0600624DA2 /* RocksDBCallbackAssociativeMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859D23449134009721CC /* RocksDBCallbackMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6214FD081A3F698300B92E5C /* RocksDBCallbackMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B859E23449134009721CC /* RocksDBCallbackSliceTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B859F23449134009721CC /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		851B859F23449134009721CC /* RocksDBSlice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B85A023449134009721CC /* clock_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8DE1F02F78C008CC574 /* clock_cache.h */; };
 		851B85A123449134009721CC /* lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8E01F02F78C008CC574 /* lru_cache.h */; };
 		851B85A223449134009721CC /* sharded_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8E31F02F78C008CC574 /* sharded_cache.h */; };
@@ -1733,7 +1733,7 @@
 		851B86F523449295009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B91A34FF0600624DA2 /* RocksDBCallbackAssociativeMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F623449295009721CC /* RocksDBCallbackMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 6214FD081A3F698300B92E5C /* RocksDBCallbackMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F723449295009721CC /* RocksDBCallbackSliceTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B86F823449295009721CC /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		851B86F823449295009721CC /* RocksDBSlice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F923449295009721CC /* clock_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8DE1F02F78C008CC574 /* clock_cache.h */; };
 		851B86FA23449295009721CC /* lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8E01F02F78C008CC574 /* lru_cache.h */; };
 		851B86FB23449295009721CC /* sharded_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 623DD8E31F02F78C008CC574 /* sharded_cache.h */; };
@@ -2253,6 +2253,14 @@
 		851B890923449295009721CC /* RocksDBMergeOperator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62EEC4B61A34FEE100624DA2 /* RocksDBMergeOperator.mm */; };
 		851B890A23449295009721CC /* RocksDBStatistics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A8B0641A58DD7D0069B4C8 /* RocksDBStatistics.mm */; };
 		851B890B23449295009721CC /* RocksDBStatisticsHistogram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A8B0681A58E4B60069B4C8 /* RocksDBStatisticsHistogram.mm */; };
+		854F68F12376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		854F68F22376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		854F68F32376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		854F68F42376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		854F68F62376D8930043431A /* RocksDBSlice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 854F68F52376D8930043431A /* RocksDBSlice.mm */; };
+		854F68F72376D8930043431A /* RocksDBSlice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 854F68F52376D8930043431A /* RocksDBSlice.mm */; };
+		854F68F82376D8930043431A /* RocksDBSlice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 854F68F52376D8930043431A /* RocksDBSlice.mm */; };
+		854F68F92376D8930043431A /* RocksDBSlice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 854F68F52376D8930043431A /* RocksDBSlice.mm */; };
 		8551063C23604CBF0076A830 /* RocksDBEnv+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */; };
 		8551063D23604CBF0076A830 /* RocksDBEnv+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */; };
 		8551063E23604CBF0076A830 /* RocksDBEnv+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */; };
@@ -2398,7 +2406,7 @@
 		6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBCallbackSliceTransform.h; sourceTree = "<group>"; };
 		62376BBD1A20EDF000C85DFB /* RocksDBCallbackComparator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RocksDBCallbackComparator.cpp; sourceTree = "<group>"; };
 		62376BBE1A20EDF000C85DFB /* RocksDBCallbackComparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBCallbackComparator.h; sourceTree = "<group>"; };
-		623D3C201A37C4FF00389207 /* RocksDBSlice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocksDBSlice.h; sourceTree = "<group>"; };
+		623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBSlice+Private.h"; sourceTree = "<group>"; };
 		623DD4A31F02EE42008CC574 /* likely.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = likely.h; sourceTree = "<group>"; };
 		623DD4A41F02EE42008CC574 /* port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = port.h; sourceTree = "<group>"; };
 		623DD4A51F02EE42008CC574 /* port_example.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = port_example.h; sourceTree = "<group>"; };
@@ -2932,6 +2940,8 @@
 		62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBOptions+Private.h"; sourceTree = "<group>"; };
 		851B84622343EA66009721CC /* libobjectiveRocks-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjectiveRocks-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		851B891223449295009721CC /* libobjectiveRocks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjectiveRocks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		854F68F02376D8750043431A /* RocksDBSlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBSlice.h; sourceTree = "<group>"; };
+		854F68F52376D8930043431A /* RocksDBSlice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBSlice.mm; sourceTree = "<group>"; };
 		8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBEnv+Private.h"; sourceTree = "<group>"; };
 		8575C67A2339475A009BAC2B /* error_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = error_handler.h; sourceTree = "<group>"; };
 		8575C67B2339475A009BAC2B /* error_handler.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = error_handler.cc; sourceTree = "<group>"; };
@@ -3143,7 +3153,7 @@
 				6214FD071A3F698300B92E5C /* RocksDBCallbackMergeOperator.cpp */,
 				6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */,
 				6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */,
-				623D3C201A37C4FF00389207 /* RocksDBSlice.h */,
+				623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -3974,6 +3984,8 @@
 				625EF4961D0C3A960058ACDA /* RocksDBRange.mm */,
 				628B0CE81A1C104D0099C39B /* RocksDBError.h */,
 				628B0CE91A1C104D0099C39B /* RocksDBError.mm */,
+				854F68F02376D8750043431A /* RocksDBSlice.h */,
+				854F68F52376D8930043431A /* RocksDBSlice.mm */,
 				620629671A510D24001DEDC4 /* Column Family */,
 				620494831A32808800A0E950 /* Iterator */,
 				62685CBA1A2E8257009401B1 /* Write Batch */,
@@ -4067,6 +4079,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854F68F12376D8750043431A /* RocksDBSlice.h in Headers */,
 				624203CA1BED64F70043DD6F /* ObjectiveRocks.h in Headers */,
 				629768D520B7617F00DEBF89 /* threadpool.h in Headers */,
 				8575C6C523394CB2009BAC2B /* compaction_picker_fifo.h in Headers */,
@@ -4404,7 +4417,7 @@
 				6297683920B7610300DEBF89 /* internal_stats.h in Headers */,
 				624203FA1BED650F0043DD6F /* RocksDBCallbackSliceTransform.h in Headers */,
 				62976BBE20B7626300DEBF89 /* build_version.h in Headers */,
-				624203FB1BED650F0043DD6F /* RocksDBSlice.h in Headers */,
+				624203FB1BED650F0043DD6F /* RocksDBSlice+Private.h in Headers */,
 				62976BB620B7626300DEBF89 /* murmurhash.h in Headers */,
 				6297693B20B7618000DEBF89 /* rocks_lua_util.h in Headers */,
 			);
@@ -4414,6 +4427,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854F68F22376D8750043431A /* RocksDBSlice.h in Headers */,
 				62976AE920B7623600DEBF89 /* plain_table_builder.h in Headers */,
 				8575C6BA2339499F009BAC2B /* write_unprepared_txn.h in Headers */,
 				62976BFB20B7626300DEBF89 /* sst_file_manager_impl.h in Headers */,
@@ -4738,7 +4752,7 @@
 				62976BBD20B7626300DEBF89 /* auto_roll_logger.h in Headers */,
 				62976DF820B762AC00DEBF89 /* transaction_lock_mgr.h in Headers */,
 				6297693E20B7618000DEBF89 /* memory_util.h in Headers */,
-				624F5EE51BEE456200497FEF /* RocksDBSlice.h in Headers */,
+				624F5EE51BEE456200497FEF /* RocksDBSlice+Private.h in Headers */,
 				629768E420B7617F00DEBF89 /* filter_policy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4747,6 +4761,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854F68F32376D8750043431A /* RocksDBSlice.h in Headers */,
 				851B856C23449134009721CC /* ObjectiveRocks.h in Headers */,
 				851B856D23449134009721CC /* RocksDB.h in Headers */,
 				85EC27D8235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
@@ -4797,7 +4812,7 @@
 				851B859D23449134009721CC /* RocksDBCallbackMergeOperator.h in Headers */,
 				851B859E23449134009721CC /* RocksDBCallbackSliceTransform.h in Headers */,
 				85EC27E2235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
-				851B859F23449134009721CC /* RocksDBSlice.h in Headers */,
+				851B859F23449134009721CC /* RocksDBSlice+Private.h in Headers */,
 				851B85A023449134009721CC /* clock_cache.h in Headers */,
 				851B85A123449134009721CC /* lru_cache.h in Headers */,
 				851B85A223449134009721CC /* sharded_cache.h in Headers */,
@@ -5096,6 +5111,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854F68F42376D8750043431A /* RocksDBSlice.h in Headers */,
 				851B86C523449295009721CC /* ObjectiveRocks.h in Headers */,
 				851B86C623449295009721CC /* RocksDB.h in Headers */,
 				851B86C723449295009721CC /* RocksDBRange.h in Headers */,
@@ -5139,7 +5155,7 @@
 				851B86F523449295009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */,
 				851B86F623449295009721CC /* RocksDBCallbackMergeOperator.h in Headers */,
 				851B86F723449295009721CC /* RocksDBCallbackSliceTransform.h in Headers */,
-				851B86F823449295009721CC /* RocksDBSlice.h in Headers */,
+				851B86F823449295009721CC /* RocksDBSlice+Private.h in Headers */,
 				851B86F923449295009721CC /* clock_cache.h in Headers */,
 				851B86FA23449295009721CC /* lru_cache.h in Headers */,
 				851B86FB23449295009721CC /* sharded_cache.h in Headers */,
@@ -5556,9 +5572,11 @@
 				TargetAttributes = {
 					624203BF1BED64410043DD6F = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 1120;
 					};
 					624F5D971BEE416D00497FEF = {
 						CreatedOnToolsVersion = 7.1;
+						LastSwiftMigration = 1120;
 					};
 					6299F8131A17B28200123F56 = {
 						CreatedOnToolsVersion = 6.1;
@@ -5569,9 +5587,11 @@
 					};
 					851B84612343EA66009721CC = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 					};
 					851B86C323449295009721CC = {
+						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -5833,6 +5853,7 @@
 				6297699620B761AB00DEBF89 /* hash_linklist_rep.cc in Sources */,
 				62976AC820B7623600DEBF89 /* block_based_filter_block.cc in Sources */,
 				6297699C20B761AB00DEBF89 /* skiplistrep.cc in Sources */,
+				854F68F62376D8930043431A /* RocksDBSlice.mm in Sources */,
 				6297680920B7610300DEBF89 /* experimental.cc in Sources */,
 				6297683720B7610300DEBF89 /* version_set.cc in Sources */,
 				8575C6D123395064009BAC2B /* in_memory_stats_history.cc in Sources */,
@@ -6148,6 +6169,7 @@
 				62976ABF20B7623600DEBF89 /* persistent_cache_helper.cc in Sources */,
 				62976C2920B7626300DEBF89 /* build_version.cc in Sources */,
 				8575C6C023394C7F009BAC2B /* range_tombstone_fragmenter.cc in Sources */,
+				854F68F72376D8930043431A /* RocksDBSlice.mm in Sources */,
 				629769DB20B761B500DEBF89 /* thread_status_updater.cc in Sources */,
 				6297681A20B7610300DEBF89 /* db_iter.cc in Sources */,
 				623DD8F31F02F78C008CC574 /* sharded_cache.cc in Sources */,
@@ -6339,6 +6361,7 @@
 				851B852023449115009721CC /* compression_context_cache.cc in Sources */,
 				851B852123449115009721CC /* concurrent_arena.cc in Sources */,
 				851B852223449115009721CC /* concurrent_task_limiter_impl.cc in Sources */,
+				854F68F82376D8930043431A /* RocksDBSlice.mm in Sources */,
 				851B852323449115009721CC /* crc32c.cc in Sources */,
 				851B852423449115009721CC /* delete_scheduler.cc in Sources */,
 				851B852523449115009721CC /* dynamic_bloom.cc in Sources */,
@@ -6519,6 +6542,7 @@
 				851B885A23449295009721CC /* env.cc in Sources */,
 				851B885B23449295009721CC /* io_posix.cc in Sources */,
 				851B885C23449295009721CC /* alloc_tracker.cc in Sources */,
+				854F68F92376D8930043431A /* RocksDBSlice.mm in Sources */,
 				851B885D23449295009721CC /* hash_linklist_rep.cc in Sources */,
 				851B885E23449295009721CC /* hash_skiplist_rep.cc in Sources */,
 				851B885F23449295009721CC /* skiplistrep.cc in Sources */,
@@ -6712,6 +6736,7 @@
 		624203C61BED64410043DD6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -6746,6 +6771,8 @@
 				PRODUCT_NAME = ObjectiveRocks;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -6754,6 +6781,7 @@
 		624203C71BED64410043DD6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6789,6 +6817,7 @@
 				PRODUCT_NAME = ObjectiveRocks;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -6797,6 +6826,7 @@
 		624F5D9E1BEE416D00497FEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -6831,6 +6861,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.iabudiab.ObjectiveRocks;
 				PRODUCT_NAME = ObjectiveRocks;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -6840,6 +6872,7 @@
 		624F5D9F1BEE416D00497FEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
@@ -6875,6 +6908,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.iabudiab.ObjectiveRocks;
 				PRODUCT_NAME = ObjectiveRocks;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -6982,7 +7016,6 @@
 		6299F8211A17B28200123F56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -7010,7 +7043,6 @@
 		6299F8221A17B28200123F56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -7033,7 +7065,6 @@
 		62A8B0551A58C40A0069B4C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -7058,7 +7089,6 @@
 		62A8B0561A58C40A0069B4C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -7084,6 +7114,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -7104,6 +7135,7 @@
 					"$(SRCROOT)/rocksdb/include",
 					"$(SRCROOT)/rocksdb",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -7112,6 +7144,8 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -7121,6 +7155,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -7142,6 +7177,7 @@
 					"$(SRCROOT)/rocksdb/include",
 					"$(SRCROOT)/rocksdb",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_FAST_MATH = YES;
@@ -7149,6 +7185,7 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -7158,6 +7195,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -7180,6 +7218,7 @@
 					"$(SRCROOT)/rocksdb/include",
 					"$(SRCROOT)/rocksdb",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -7187,6 +7226,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -7197,6 +7238,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -7220,12 +7262,14 @@
 					"$(SRCROOT)/rocksdb/include",
 					"$(SRCROOT)/rocksdb",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
 			};
 			name = Release;
