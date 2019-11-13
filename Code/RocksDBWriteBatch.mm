@@ -8,6 +8,7 @@
 
 #import "RocksDBWriteBatch.h"
 #import "RocksDBWriteBatch+Private.h"
+#import "RocksDBWriteBatchBase+Private.h"
 #import "RocksDBColumnFamilyHandle.h"
 #import "RocksDBColumnFamilyHandle+Private.h"
 #import "RocksDBSlice+Private.h"
@@ -15,15 +16,33 @@
 #import <rocksdb/write_batch_base.h>
 #import <rocksdb/write_batch.h>
 
-@interface RocksDBWriteBatch ()
-{
-	RocksDBColumnFamilyHandle *_columnFamily;
-}
-@property (nonatomic, assign) rocksdb::WriteBatchBase *writeBatchBase;
+@interface RocksDBSavePoint ()
+@property (nonatomic, assign) size_t size;
+@property (nonatomic, assign) int count;
+@property (nonatomic, assign) uint32_t contentFlags;
 @end
 
-@implementation RocksDBWriteBatch
-@synthesize writeBatchBase = _writeBatchBase;
+@interface RocksDBWriteBatch ()
+@property (nonatomic, assign) rocksdb::WriteBatch *writeBatch;
+@end
+
+@implementation RocksDBSavePoint
+
+- (instancetype)initWithSize:(size_t)size count:(int)count contentFlags:(uint32_t)contentFlags
+{
+	self = [super init];
+	if (self) {
+		self.size = size;
+		self.count = count;
+		self.contentFlags = contentFlags;
+	}
+	return self;
+}
+
+@end
+
+@implementation RocksDBWriteBatch : RocksDBWriteBatchBase
+@synthesize writeBatch = _writeBatch;
 
 #pragma mark - Lifecycle
 
@@ -33,13 +52,12 @@
 							 columnFamily:columnFamily];
 }
 
-- (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatchBase *)writeBatchBase
+- (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatch *)writeBatch
 							columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
-	self = [super init];
+	self = [super initWithNativeWriteBatchBase:writeBatch columnFamily:columnFamily];
 	if (self) {
-		_writeBatchBase = writeBatchBase;
-		_columnFamily = columnFamily;
+		_writeBatch = writeBatch;
 	}
 	return self;
 }
@@ -47,85 +65,71 @@
 - (void)dealloc
 {
 	@synchronized(self) {
-		if (_writeBatchBase != nullptr) {
-			delete _writeBatchBase;
-			_writeBatchBase = nullptr;
+		if (_writeBatch != nullptr) {
+			delete _writeBatch;
+			_writeBatch = nullptr;
 		}
 	}
 }
 
-#pragma mark - Put
-
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey
+- (BOOL)hasPut
 {
-	[self setData:anObject forKey:aKey inColumnFamily:_columnFamily];
+	return _writeBatch->HasPut();
 }
 
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)hasDelete
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Put(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
-	}
+	return _writeBatch->HasDelete();
 }
 
-#pragma mark - Merge
-
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey
+- (BOOL)hasSingleDelete
 {
-	[self mergeData:anObject forKey:aKey inColumnFamily:_columnFamily];
+	return _writeBatch->HasSingleDelete();
 }
 
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)hasDeleteRange
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Merge(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
-	}
+	return _writeBatch->HasDeleteRange();
 }
 
-#pragma mark - Delete
-
-- (void)deleteDataForKey:(NSData *)aKey
+- (BOOL)hasMerge
 {
-	[self deleteDataForKey:aKey inColumnFamily:_columnFamily];
+	return _writeBatch->HasMerge();
 }
 
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)hasBeginPrepare
 {
-	if (aKey != nil) {
-		_writeBatchBase->Delete(columnFamily.columnFamily, SliceFromData(aKey));
-	}
+	return _writeBatch->HasBeginPrepare();
 }
 
-#pragma mark - 
-
-- (void)putLogData:(NSData *)logData;
+- (BOOL)hasEndPrepare
 {
-	if (logData != nil) {
-		_writeBatchBase->PutLogData(SliceFromData(logData));
-	}
+	return _writeBatch->HasEndPrepare();
 }
 
-- (void)clear
+- (BOOL)hasCommit
 {
-	_writeBatchBase->Clear();
+	return _writeBatch->HasCommit();
 }
 
-#pragma mark - Meta
-
-- (int)count
+- (BOOL)hasRollback
 {
-	return _writeBatchBase->GetWriteBatch()->Count();
+	return _writeBatch->HasRollback();
 }
 
-- (NSData *)data
+- (void)markWalTerminationPoint
 {
-	std::string rep = _writeBatchBase->GetWriteBatch()->Data();
-	return DataFromSlice(rocksdb::Slice(rep));
+	_writeBatch->MarkWalTerminationPoint();
 }
 
-- (size_t)dataSize
+- (RocksDBSavePoint *)getWalTerminationPoint
 {
-	return _writeBatchBase->GetWriteBatch()->GetDataSize();
+	rocksdb::SavePoint savePoint = _writeBatch->GetWalTerminationPoint();
+
+	return [[RocksDBSavePoint alloc] initWithSize:savePoint.size
+											count:savePoint.count
+									 contentFlags:savePoint.content_flags];
+
 }
 
 @end

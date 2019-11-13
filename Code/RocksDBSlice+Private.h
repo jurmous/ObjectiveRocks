@@ -23,6 +23,8 @@ NS_INLINE NSData * DataFromSlice(rocksdb::Slice slice)
 
 @interface RocksDBSlice (Private)
 
+@property (nonatomic, assign) const rocksdb::Slice *slice;
+
 /**
  Initialize a new RocksDBSlize with a rocksdb::Slice reference
  */

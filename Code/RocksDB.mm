@@ -24,6 +24,7 @@
 
 #import "RocksDBIterator+Private.h"
 #import "RocksDBWriteBatch+Private.h"
+#import "RocksDBWriteBatchBase+Private.h"
 
 #import "RocksDBSnapshot.h"
 #import "RocksDBSnapshot+Private.h"
@@ -724,8 +725,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 }
 
 - (BOOL)deleteRange:(RocksDBKeyRange *)range
-		 forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-				   error:(NSError * _Nullable __autoreleasing *)error
+	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			  error:(NSError * _Nullable __autoreleasing *)error
 {
 	return [self deleteRange:range withOptions:_writeOptions inColumnFamily:columnFamily error:error];
 }
@@ -777,7 +778,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
 
 	batchBlock(writeBatch, writeOptions);
-	rocksdb::WriteBatch *batch = writeBatch.writeBatchBase->GetWriteBatch();
+	rocksdb::WriteBatch *batch = writeBatch.writeBatch->GetWriteBatch();
 	rocksdb::Status status = _db->Write(writeOptions.options, batch);
 
 	if (!status.ok()) {
@@ -790,7 +791,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return YES;
 }
 
-- (BOOL)applyWriteBatch:(RocksDBWriteBatch *)writeBatch
+- (BOOL)applyWriteBatch:(RocksDBWriteBatchBase *)writeBatch
 		   writeOptions:(RocksDBWriteOptions *)writeOptions
 				  error:(NSError * __autoreleasing *)error
 {
@@ -816,6 +817,13 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 													readOptions:_readOptions];
 }
 
+- (RocksDBWriteBatch *)indexedWriteBatchInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	return [[RocksDBIndexedWriteBatch alloc] initWithDBInstance:_db
+												   columnFamily:columnFamily.columnFamily
+													readOptions:_readOptions];
+}
+
 - (BOOL)performIndexedWriteBatch:(void (^)(RocksDBIndexedWriteBatch *batch, RocksDBWriteOptions *options))batchBlock
 						   error:(NSError * __autoreleasing *)error
 {
@@ -825,7 +833,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
 
 	batchBlock(writeBatch, writeOptions);
-	rocksdb::WriteBatch *batch = writeBatch.writeBatchBase->GetWriteBatch();
+	rocksdb::WriteBatch *batch = writeBatch.writeBatch;
 	rocksdb::Status status = _db->Write(writeOptions.options, batch);
 
 	if (!status.ok()) {

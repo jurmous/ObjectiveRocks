@@ -1700,7 +1700,6 @@
 		851B86CB23449295009721CC /* RocksDBIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6051B85632500E2577F /* RocksDBIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86CC23449295009721CC /* RocksDBPrefixExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6236E2551A4DD25000A81ED6 /* RocksDBPrefixExtractor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86CD23449295009721CC /* RocksDBWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 623FE74E1A2D2ED500E68421 /* RocksDBWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		851B86CF23449295009721CC /* RocksDBWriteBatchIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62F8C6011B853ABA00E2577F /* RocksDBWriteBatchIterator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86D023449295009721CC /* RocksDBComparator.h in Headers */ = {isa = PBXBuildFile; fileRef = 623224AA1A2116A400FB6625 /* RocksDBComparator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86D123449295009721CC /* RocksDBOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 62AEF9B91A1D5DA900E63E89 /* RocksDBOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		851B86D223449295009721CC /* RocksDBDatabaseOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 620629641A510056001DEDC4 /* RocksDBDatabaseOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2331,6 +2330,18 @@
 		85971BB82351E79100A6DB0B /* RocksDBCallbackMergeOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6214FD071A3F698300B92E5C /* RocksDBCallbackMergeOperator.cpp */; };
 		85971BB92351E79400A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
 		85971BBA2351E79500A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
+		85DE7904237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85DE7905237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85DE7906237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85DE7907237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85DE7909237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */; };
+		85DE790A237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */; };
+		85DE790B237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */; };
+		85DE790C237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */; };
+		85DE790E237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		85DE790F237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		85DE7910237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		85DE7911237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		85EC27D6235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EC27D7235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85EC27D8235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2972,6 +2983,9 @@
 		8575C6C823395035009BAC2B /* concurrent_task_limiter_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concurrent_task_limiter_impl.h; sourceTree = "<group>"; };
 		8575C6CD23395064009BAC2B /* in_memory_stats_history.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = in_memory_stats_history.h; sourceTree = "<group>"; };
 		8575C6CE23395064009BAC2B /* in_memory_stats_history.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = in_memory_stats_history.cc; sourceTree = "<group>"; };
+		85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBWriteBatchBase.h; sourceTree = "<group>"; };
+		85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBWriteBatchBase.mm; sourceTree = "<group>"; };
+		85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBWriteBatchBase+Private.h"; sourceTree = "<group>"; };
 		85EC27D5235C57E500FC2636 /* RocksDBColumnFamilyHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBColumnFamilyHandle.h; sourceTree = "<group>"; };
 		85EC27DA235C57F400FC2636 /* RocksDBColumnFamilyHandle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBColumnFamilyHandle.mm; sourceTree = "<group>"; };
 		85EC27DF235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBColumnFamilyHandle+Private.h"; sourceTree = "<group>"; };
@@ -3104,6 +3118,7 @@
 				6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */,
 				6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */,
 				6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */,
+				85DE790D237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h */,
 				628CEBB91D0CF4630096AA64 /* RocksDBIndexedWriteBatch+Private.h */,
 				62F9D8A11B86A74900C65860 /* RocksDBWriteBatchIterator+Private.h */,
 				6221B79E1A629A4F00D28BF5 /* RocksDBSnapshot+Private.h */,
@@ -3674,6 +3689,8 @@
 		62685CBA1A2E8257009401B1 /* Write Batch */ = {
 			isa = PBXGroup;
 			children = (
+				85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */,
+				85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */,
 				623FE74E1A2D2ED500E68421 /* RocksDBWriteBatch.h */,
 				623FE74F1A2D2ED500E68421 /* RocksDBWriteBatch.mm */,
 				62F8C5FD1B85386A00E2577F /* RocksDBIndexedWriteBatch.h */,
@@ -4081,6 +4098,7 @@
 			files = (
 				854F68F12376D8750043431A /* RocksDBSlice.h in Headers */,
 				624203CA1BED64F70043DD6F /* ObjectiveRocks.h in Headers */,
+				85DE7904237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				629768D520B7617F00DEBF89 /* threadpool.h in Headers */,
 				8575C6C523394CB2009BAC2B /* compaction_picker_fifo.h in Headers */,
 				62976AB220B7623600DEBF89 /* full_filter_block.h in Headers */,
@@ -4117,6 +4135,7 @@
 				85EC27D6235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				62976BBC20B7626300DEBF89 /* auto_roll_logger.h in Headers */,
 				6297690920B7618000DEBF89 /* version.h in Headers */,
+				85DE790E237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */,
 				624203D01BED64F70043DD6F /* RocksDBColumnFamilyDescriptor.h in Headers */,
 				623DD4CC1F02EE43008CC574 /* stack_trace.h in Headers */,
 				62976A8620B7623600DEBF89 /* block_based_filter_block.h in Headers */,
@@ -4428,6 +4447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854F68F22376D8750043431A /* RocksDBSlice.h in Headers */,
+				85DE7905237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				62976AE920B7623600DEBF89 /* plain_table_builder.h in Headers */,
 				8575C6BA2339499F009BAC2B /* write_unprepared_txn.h in Headers */,
 				62976BFB20B7626300DEBF89 /* sst_file_manager_impl.h in Headers */,
@@ -4452,6 +4472,7 @@
 				62976D6620B762AC00DEBF89 /* remove_emptyvalue_compactionfilter.h in Headers */,
 				629767F420B7610300DEBF89 /* compaction.h in Headers */,
 				85EC27D7235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
+				85DE790F237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */,
 				629769CD20B761B500DEBF89 /* file_read_sample.h in Headers */,
 				629768EA20B7617F00DEBF89 /* write_batch.h in Headers */,
 				62976D8420B762AC00DEBF89 /* blob_db_iterator.h in Headers */,
@@ -4763,6 +4784,7 @@
 			files = (
 				854F68F32376D8750043431A /* RocksDBSlice.h in Headers */,
 				851B856C23449134009721CC /* ObjectiveRocks.h in Headers */,
+				85DE7906237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				851B856D23449134009721CC /* RocksDB.h in Headers */,
 				85EC27D8235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
 				851B856E23449134009721CC /* RocksDBRange.h in Headers */,
@@ -4799,6 +4821,7 @@
 				851B859023449134009721CC /* RocksDBBackupInfo.h in Headers */,
 				851B856F23449134009721CC /* RocksDBError.h in Headers */,
 				851B859123449134009721CC /* RocksDB+Private.h in Headers */,
+				85DE7910237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */,
 				851B859223449134009721CC /* RocksDBOptions+Private.h in Headers */,
 				851B859323449134009721CC /* RocksDBCompactRangeOptions+Private.h in Headers */,
 				851B859523449134009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */,
@@ -5113,6 +5136,7 @@
 			files = (
 				854F68F42376D8750043431A /* RocksDBSlice.h in Headers */,
 				851B86C523449295009721CC /* ObjectiveRocks.h in Headers */,
+				85DE7907237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				851B86C623449295009721CC /* RocksDB.h in Headers */,
 				851B86C723449295009721CC /* RocksDBRange.h in Headers */,
 				85EC27D9235C57E500FC2636 /* RocksDBColumnFamilyHandle.h in Headers */,
@@ -5121,7 +5145,6 @@
 				851B86CB23449295009721CC /* RocksDBIterator.h in Headers */,
 				851B86CC23449295009721CC /* RocksDBPrefixExtractor.h in Headers */,
 				851B86CD23449295009721CC /* RocksDBWriteBatch.h in Headers */,
-				851B86CF23449295009721CC /* RocksDBWriteBatchIterator.h in Headers */,
 				851B86D023449295009721CC /* RocksDBComparator.h in Headers */,
 				851B86D123449295009721CC /* RocksDBOptions.h in Headers */,
 				851B86D223449295009721CC /* RocksDBDatabaseOptions.h in Headers */,
@@ -5142,6 +5165,7 @@
 				851B86E523449295009721CC /* RocksDBStatistics.h in Headers */,
 				851B86E623449295009721CC /* RocksDBStatisticsHistogram.h in Headers */,
 				85EC27E3235C60DC00FC2636 /* RocksDBColumnFamilyHandle+Private.h in Headers */,
+				85DE7911237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */,
 				851B86E923449295009721CC /* RocksDBError.h in Headers */,
 				851B86EA23449295009721CC /* RocksDB+Private.h in Headers */,
 				851B86EB23449295009721CC /* RocksDBOptions+Private.h in Headers */,
@@ -5899,6 +5923,7 @@
 				8575C6B32339499F009BAC2B /* write_unprepared_txn.cc in Sources */,
 				6242041C1BED65250043DD6F /* RocksDBBackupEngine.mm in Sources */,
 				62976BA820B7626300DEBF89 /* filename.cc in Sources */,
+				85DE7909237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */,
 				629767ED20B7610300DEBF89 /* internal_stats.cc in Sources */,
 				62976A1320B761BC00DEBF89 /* options.cc in Sources */,
 				62976ABE20B7623600DEBF89 /* persistent_cache_helper.cc in Sources */,
@@ -6117,6 +6142,7 @@
 				6297678420B7610300DEBF89 /* compaction_iterator.cc in Sources */,
 				62976AB720B7623600DEBF89 /* plain_table_builder.cc in Sources */,
 				629769CB20B761B500DEBF89 /* perf_level.cc in Sources */,
+				85DE790A237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */,
 				624F5DE01BEE437C00497FEF /* RocksDBFilterPolicy.mm in Sources */,
 				62976DD420B762AC00DEBF89 /* db_ttl_impl.cc in Sources */,
 				62976BBB20B7626300DEBF89 /* hash.cc in Sources */,
@@ -6435,6 +6461,7 @@
 				851B856823449115009721CC /* write_unprepared_txn.cc in Sources */,
 				851B856923449115009721CC /* db_ttl_impl.cc in Sources */,
 				851B856A23449115009721CC /* write_batch_with_index.cc in Sources */,
+				85DE790B237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */,
 				851B856B23449115009721CC /* write_batch_with_index_internal.cc in Sources */,
 				851B846D2344910C009721CC /* RocksDB.mm in Sources */,
 				851B846E2344910C009721CC /* RocksDBRange.mm in Sources */,
@@ -6677,6 +6704,7 @@
 				851B88DD23449295009721CC /* pessimistic_transaction.cc in Sources */,
 				851B88DE23449295009721CC /* pessimistic_transaction_db.cc in Sources */,
 				851B88DF23449295009721CC /* snapshot_checker.cc in Sources */,
+				85DE790C237C934D00EB03E2 /* RocksDBWriteBatchBase.mm in Sources */,
 				851B88E023449295009721CC /* transaction_base.cc in Sources */,
 				851B88E123449295009721CC /* transaction_db_mutex_impl.cc in Sources */,
 				851B88E223449295009721CC /* transaction_lock_mgr.cc in Sources */,
@@ -7066,6 +7094,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -7090,6 +7119,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"OS_MACOSX=1",

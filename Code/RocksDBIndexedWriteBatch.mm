@@ -11,6 +11,7 @@
 #import "RocksDB+Private.h"
 #import "RocksDBOptions+Private.h"
 #import "RocksDBWriteBatch+Private.h"
+#import "RocksDBWriteBatchBase+Private.h"
 #import "RocksDBWriteBatchIterator+Private.h"
 #import "RocksDBColumnFamilyHandle+Private.h"
 
@@ -27,9 +28,12 @@
 	RocksDBReadOptions *_readOptions;
 	rocksdb::WriteBatchWithIndex *_writeBatchWithIndex;
 }
+@property (nonatomic, assign) rocksdb::WriteBatchWithIndex *writeBatchWithIndex;
 @end
 
 @implementation RocksDBIndexedWriteBatch
+
+@synthesize writeBatchWithIndex = _writeBatchWithIndex;
 
 #pragma mark - Lifecycle 
 
@@ -37,8 +41,8 @@
 					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					   readOptions:(RocksDBReadOptions *)readOptions
 {
-	self = [super initWithNativeWriteBatch:new rocksdb::WriteBatchWithIndex()
-							  columnFamily:columnFamily];
+	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex()
+								  columnFamily:columnFamily];
 	if (self) {
 		_db = db;
 		_readOptions = [readOptions copy];
@@ -105,6 +109,12 @@
 - (RocksDBWriteBatchIterator *)iterator
 {
 	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator(self.columnFamily.columnFamily);
+	return [[RocksDBWriteBatchIterator alloc] initWithWriteBatchIterator:nativeIterator];
+}
+
+- (RocksDBWriteBatchIterator *)iteratorInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+{
+	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator(columnFamily.columnFamily);
 	return [[RocksDBWriteBatchIterator alloc] initWithWriteBatchIterator:nativeIterator];
 }
 

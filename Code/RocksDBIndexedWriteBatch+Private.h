@@ -10,6 +10,7 @@ namespace rocksdb {
 	class DB;
 	class ColumnFamilyHandle;
 	class WriteBatchBase;
+	class WriteBatchWithIndex;
 }
 
 /**
@@ -17,6 +18,9 @@ namespace rocksdb {
  maintain a pure Objective-C API for Swift compatibility.
  */
 @interface RocksDBIndexedWriteBatch (Private)
+
+/** @brief The rocksdb::WriteBatchWithIndex associated with this instance. */
+@property (nonatomic, readonly) rocksdb::WriteBatchWithIndex *writeBatchWithIndex;
 
 /**
  Initializes a new instance of a simple `RocksDBIndexedWriteBatch` with the given DB instance,

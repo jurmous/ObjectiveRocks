@@ -2,16 +2,20 @@
 //  RocksDBWriteBatch.h
 //  ObjectiveRocks
 //
-//  Created by Iska on 02/12/14.
-//  Copyright (c) 2014 BrainCookie. All rights reserved.
-//
 
 #import <Foundation/Foundation.h>
 #import "RocksDBColumnFamilyHandle.h"
+#import "RocksDBWriteBatchBase.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class RocksDBColumnFamily;
+
+@interface RocksDBSavePoint : NSObject
+@property (nonatomic, readonly) size_t size;
+@property (nonatomic, readonly) int count;
+@property (nonatomic, readonly) uint32_t contentFlags;
+@end
 
 /**
  The `RocksDBWriteBatch` allows to place multiple updates in the same "batch" and apply them together
@@ -22,77 +26,37 @@ NS_ASSUME_NONNULL_BEGIN
  @warning If not specified otherwise, Write Batch operations are applied to the Column Family
  used when initiazing the Batch instance.
  */
-@interface RocksDBWriteBatch : NSObject
+@interface RocksDBWriteBatch : RocksDBWriteBatchBase
+
+/** Returns true if Put will be called during Iterate. */
+- (BOOL)hasPut;
+/** Returns true if Delete will be called during Iterate. */
+- (BOOL)hasDelete;
+/** Returns true if SingleDelete will be called during Iterate. */
+- (BOOL)hasSingleDelete;
+/** Returns true if DeleteRange will be called during Iterate. */
+- (BOOL)hasDeleteRange;
+/** Returns true if Merge will be called during Iterate. */
+- (BOOL)hasMerge;
+/** Returns true if MarkBeginPrepare will be called during Iterate. */
+- (BOOL)hasBeginPrepare;
+/** Returns true if MarkEndPrepare will be called during Iterate. */
+- (BOOL)hasEndPrepare;
+/** true if MarkCommit will be called during Iterate. */
+- (BOOL)hasCommit;
+/** true if MarkRollback will be called during Iterate.  */
+- (BOOL)hasRollback;
+
+#pragma mark - Wal termination point
+
+/** Gets the WAL termination point. */
+- (RocksDBSavePoint *)getWalTerminationPoint;
 
 /**
- Stores the given key-object pair into the Write Batch.
-
- @param anObject The object for key.
- @param aKey The key for object.
+ Marks this point in the WriteBatch as the last record to
+ be inserted into the WAL, provided the WAL is enabled.
  */
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey;
-
-/**
- Stores the given key-object pair for the given Column Family into the Write Batch.
-
- @param anObject The object for key.
- @param aKey The key for object.
- @param columnFamily The column family where data should be written.
- */
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
-
-/**
- Merges the given key-object pair into the Write Batch.
-
- @param anObject The object for key.
- @param aKey The key for object.
- */
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey;
-
-/**
- Merges the given key-object pair for the given Column Family into the Write Batch.
-
- @param anObject The object for key.
- @param aKey The key for object.
- @param columnFamily The column family where data should be written.
- */
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
-
-/**
- Deletes the object for the given key from this Write Batch.
-
- @param aKey The key to delete.
- */
-- (void)deleteDataForKey:(NSData *)aKey;
-
-/**
- Deletes the object for the given key in the given Column Family from this Write Batch.
-
- @param aKey The key for object.
- @param columnFamily The column family from which the data should be deleted.
- */
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
-
-/**
- Append a blob of arbitrary size to the records in this batch. Blobs, puts, deletes, and merges 
- will be encountered in the same order in thich they were inserted. The blob will NOT consume 
- sequence number(s) and will NOT increase the count of the batch.
-
- Example application: add timestamps to the transaction log for use in replication.
- */
-- (void)putLogData:(NSData *)logData;
-
-/** @brief Clear all updates buffered in this batch. */
-- (void)clear;
-
-/** @brief Returns the number of updates in the batch. */
-- (int)count;
-
-/** @brief Retrieve the serialized version of this batch. */
-- (NSData *)data;
-
-/** @brief Retrieve data size of the batch. */
-- (size_t)dataSize;
+- (void)markWalTerminationPoint;
 
 @end
 

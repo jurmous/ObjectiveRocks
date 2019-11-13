@@ -77,6 +77,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (RocksDBWriteBatchIterator *)iterator;
 
+/**
+Creates and returns an iterator over this indexed write batch inside column family
+
+@discussion Keys will be iterated in the order given by the write batch's
+comparator. For multiple updates on the same key, each update will be
+returned as a separate entry, in the order of update time.
+
+@param columnFamily to iterate over
+
+@return An iterator over this indexed write batch.
+
+@see RocksDBWriteBatchIterator
+*/
+- (RocksDBWriteBatchIterator *)iteratorInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+
 @end
 
 NS_ASSUME_NONNULL_END
