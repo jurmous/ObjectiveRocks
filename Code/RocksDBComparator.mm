@@ -16,7 +16,7 @@
 @interface RocksDBComparator ()
 {
 	NSString *_name;
-	int (^_comparatorBlock)(NSData *key1, NSData *key2);
+	int (^_comparatorBlock)(RocksDBSlice *key1, RocksDBSlice *key2);
 	const rocksdb::Comparator *_comparator;
 }
 @property (nonatomic, strong) NSString *name;
@@ -39,16 +39,17 @@
 			return [[self alloc] initWithNativeComparator:rocksdb::ReverseBytewiseComparator()];
 
 		case RocksDBComparatorStringCompareAscending:
-			return [[self alloc] initWithName:@"objectiverocks.string.compare.asc" andBlock:^int(NSData *key1, NSData *key2) {
-				NSString *str1 = [[NSString alloc] initWithData:key1 encoding:NSUTF8StringEncoding];
-				NSString *str2 = [[NSString alloc] initWithData:key2 encoding:NSUTF8StringEncoding];
+			return [[self alloc] initWithName:@"objectiverocks.string.compare.asc" andBlock:^int(RocksDBSlice *key1, RocksDBSlice *key2) {
+				NSString *str1 = [[NSString alloc] initWithData:key1.toData encoding:NSUTF8StringEncoding];
+				NSString *str2 = [[NSString alloc] initWithData:key2.toData encoding:NSUTF8StringEncoding];
 				return [str1 compare:str2];
 			}];
 
 		case RocksDBComparatorStringCompareDescending:
-			return [[self alloc] initWithName:@"objectiverocks.string.compare.desc" andBlock:^int(NSData *key1, NSData *key2) {
-				NSString *str1 = [[NSString alloc] initWithData:key1 encoding:NSUTF8StringEncoding];
-				NSString *str2 = [[NSString alloc] initWithData:key2 encoding:NSUTF8StringEncoding];
+			return [[self alloc] initWithName:@"objectiverocks.string.compare.desc" andBlock:^int(RocksDBSlice *key1, RocksDBSlice *key2) {
+
+				NSString *str1 = [[NSString alloc] initWithData:key1.toData encoding:NSUTF8StringEncoding];
+				NSString *str2 = [[NSString alloc] initWithData:key2.toData encoding:NSUTF8StringEncoding];
 				return -1 * [str1 compare:str2];
 			}];
 	}
@@ -57,7 +58,7 @@
 #pragma mark - Lifecycle
 
 - (instancetype)initWithName:(NSString *)name
-					andBlock:(int (^)(NSData *key1, NSData *key2))block
+					andBlock:(int (^)(RocksDBSlice *key1, RocksDBSlice *key2))block
 {
 	self = [super init];
 	if (self) {
@@ -82,8 +83,8 @@
 
 - (int)compare:(const rocksdb::Slice &)slice1 with:(const rocksdb::Slice &)slice2
 {
-	NSData *key1 = DataFromSlice(slice1);
-	NSData *key2 = DataFromSlice(slice2);
+	RocksDBSlice *key1 = [[RocksDBSlice alloc] initWithSlice:const_cast<rocksdb::Slice*>(&slice1)];
+	RocksDBSlice *key2 = [[RocksDBSlice alloc] initWithSlice:const_cast<rocksdb::Slice*>(&slice2)];
 	return _comparatorBlock ? _comparatorBlock(key1, key2) : 0;
 }
 

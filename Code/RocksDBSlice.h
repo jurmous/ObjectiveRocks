@@ -87,4 +87,9 @@
  */
 - (size_t)size;
 
+/**
+ Return NSData based on slice
+ */
+- (NSData *)toData;
+
 @end

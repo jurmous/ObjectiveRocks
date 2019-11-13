@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RocksDBSlice.h"
+#import "RocksDBSlice+Private.h"
 
 @interface RocksDBSlice ()
 {
@@ -104,6 +105,11 @@
 - (size_t)size
 {
 	return _slice->size();
+}
+
+- (NSData *)toData
+{
+	return DataFromSlice(*_slice);
 }
 
 @end

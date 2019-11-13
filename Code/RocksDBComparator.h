@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RocksDBSlice.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSUInteger, RocksDBComparatorType)
  @return a newly-initialized instance of a keys comparator.
  */
 - (instancetype)initWithName:(NSString *)name
-					andBlock:(int (^)(NSData *key1, NSData *key2))block;
+					andBlock:(int (^)(RocksDBSlice *key1, RocksDBSlice *key2))block;
 
 @end
 
