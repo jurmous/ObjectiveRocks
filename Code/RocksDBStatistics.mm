@@ -2,11 +2,9 @@
 //  RocksDBStatistics.m
 //  ObjectiveRocks
 //
-//  Created by Iska on 04/01/15.
-//  Copyright (c) 2015 BrainCookie. All rights reserved.
-//
 
 #import "RocksDBStatistics.h"
+#import "RocksDBError.h"
 
 #import <rocksdb/statistics.h>
 
@@ -59,9 +57,52 @@
 
 #pragma mark - Accessor
 
+- (RocksDBStatsLevel)statsLevel
+{
+	switch (_statistics->get_stats_level()) {
+		case rocksdb::kExceptHistogramOrTimers:
+			return RocksDBStatsLevelExceptHistogramOrTimers;
+		case rocksdb::kExceptTimers:
+			return RocksDBStatsLevelExceptTimers;
+		case rocksdb::kExceptDetailedTimers:
+			return RocksDBStatsLevelExceptDetailedTimers;
+		case rocksdb::kExceptTimeForMutex:
+			return RocksDBStatsLevelExceptTimeForMutex;
+		case rocksdb::kAll:
+			return RocksDBStatsLevelAll;
+	}
+}
+
+- (void)setStatsLevel:(RocksDBStatsLevel)statsLevel
+{
+	switch (statsLevel) {
+		case RocksDBStatsLevelExceptHistogramOrTimers:
+			_statistics->set_stats_level(rocksdb::kExceptHistogramOrTimers);
+		case RocksDBStatsLevelExceptTimers:
+			_statistics->set_stats_level(rocksdb::kExceptTimers);
+		case RocksDBStatsLevelExceptDetailedTimers:
+			_statistics->set_stats_level(rocksdb::kExceptDetailedTimers);
+		case RocksDBStatsLevelExceptTimeForMutex:
+			_statistics->set_stats_level(rocksdb::kExceptTimeForMutex);
+		case RocksDBStatsLevelAll:
+			_statistics->set_stats_level(rocksdb::kAll);
+	}
+}
+
 - (uint64_t)countForTicker:(RocksDBTicker)ticker
 {
 	return _statistics->getTickerCount(ticker);
+}
+
+- (uint64_t)countForTickerAndReset:(RocksDBTicker)ticker
+{
+	return _statistics->getAndResetTickerCount(ticker);
+}
+
+- (NSString *)histogramStringForType:(RocksDBHistogram)type
+{
+	std::string histogramString = _statistics->getHistogramString(type);
+	return [NSString stringWithCString:histogramString.c_str() encoding:NSUTF8StringEncoding];
 }
 
 - (RocksDBStatisticsHistogram *)histogramDataForType:(RocksDBHistogram)ticker
@@ -87,6 +128,20 @@
 	delete data;
 
 	return histogram;
+}
+
+- (BOOL)reset:(NSError *__autoreleasing  _Nullable *)error
+{
+	rocksdb::Status status = _statistics->Reset();
+	if (!status.ok()) {
+		NSLog(@"Error resetting Statistics");
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
 }
 
 #pragma mark - Description

@@ -11,6 +11,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(uint8_t, RocksDBStatsLevel)
+{
+	/** @brief Disable timer stats, and skip histogram stats */
+	RocksDBStatsLevelExceptHistogramOrTimers,
+	/** @brief Skip timer stats */
+	RocksDBStatsLevelExceptTimers,
+	/** @brief Collect all stats except time inside mutex lock AND time spent on compression. */
+	RocksDBStatsLevelExceptDetailedTimers,
+	/** @brief Collect all stats except the counters requiring to get time inside the mutex lock. */
+	RocksDBStatsLevelExceptTimeForMutex,
+	/**
+	 @brief Collect all stats, including measuring duration of mutex operations.
+	 If getting time is expensive on the platform to run, it can reduce scalability to more threads,
+	 especially for writes.
+	 */
+	RocksDBStatsLevelAll,
+};
+
 /** @brief An enum for the Ticker Types. */
 typedef NS_ENUM(uint32_t, RocksDBTicker)
 {
@@ -82,6 +100,14 @@ typedef NS_ENUM(uint32_t, RocksDBTicker)
 
 	/** @brief # of times bloom filter has avoided file reads. */
 	RocksDBTickerBloomFilterUseful,
+
+	/** @brief # of times bloom FullFilter has not avoided the reads. */
+	RocksDBTickerBloomFilterFullPositive,
+
+	/** @brief # of times bloom FullFilter has not avoided the reads and data actually exist.*/
+	RocksDBTickerBloomFilterFullTruePositive,
+
+	RocksDBTickerBloomFilterMicros,
 
 	/** @brief # persistent cache hit. */
 	RocksDBTickerPersistentCacheHit,
@@ -426,7 +452,40 @@ typedef NS_ENUM(uint32_t, RocksDBTicker)
 	RocksDBTickerBlobDBFifoNumKeysEvicted,
 
 	/** @brief # of bytes in the blob files evicted because of BlobDB is full. **/
-	RocksDBTickerBlobDBFifoBytesEvicted
+	RocksDBTickerBlobDBFifoBytesEvicted,
+
+	/** @brief These counters indicate a performance issue in WritePrepared transactions.
+	 We should not seem them ticking them much.
+	 # of times prepare_mutex_ is acquired in the fast path. **/
+	RocksDBTickerTxnPrepareMutexOverhead,
+
+	/** @brief # of times we checked a batch for duplicate keys. */
+	RocksDBTickerTxnOldCommitMapMutexOverhead,
+
+	/** @brief */
+	RocksDBTickerTxnDuplicateKeyOverhead,
+
+	/** @brief # of times snapshot_mutex_ is acquired in the fast path. */
+	RocksDBTickerTxnSnapshotMutexOverhead,
+
+	/** @brief Number of keys actually found in MultiGet calls (vs number requested by caller)
+	 NUMBER_MULTIGET_KEYS_READ gives the number requested by caller*/
+	RocksDBTickerNumberMultigetKeysFound,
+
+	/** @brief number of iterators created */
+	RocksDBTickerNoIteratorCreated,
+
+	/** @brief number of iterators deleted */
+	RocksDBTickerNoIteratorDeleted,
+
+	RocksDBTickerBlockCacheCompressionDictMiss,
+	RocksDBTickerBlockCacheCompressionDictHit,
+	RocksDBTickerBlockCacheCompressionDictAdd,
+	RocksDBTickerBlockCacheCompressionDictBytesInsert,
+	RocksDBTickerBlockCacheCompressionDictBytesEvict,
+
+	/** @brief Max enum value */
+	RocksDBTickerEnumMax
 };
 
 /** @brief An enum for the Histogram Types. */
@@ -578,6 +637,8 @@ typedef NS_ENUM(uint32_t, RocksDBHistogram)
  */
 @interface RocksDBStatistics : NSObject
 
+@property (nonatomic, readwrite) RocksDBStatsLevel statsLevel;
+
 /**
  Returns the value for the given ticker.
 
@@ -585,6 +646,14 @@ typedef NS_ENUM(uint32_t, RocksDBHistogram)
  @return The value for the given ticker type.
 */
 - (uint64_t)countForTicker:(RocksDBTicker)ticker;
+
+/**
+ Returns the value for the given ticker and resets ticker count.
+
+ @param ticker The ticker type to get.
+ @return The value for the given ticker type.
+*/
+- (uint64_t)countForTickerAndReset:(RocksDBTicker)ticker;
 
 /**
  Returns the histogram for the given histogram type.
@@ -596,8 +665,21 @@ typedef NS_ENUM(uint32_t, RocksDBHistogram)
  */
 - (RocksDBStatisticsHistogram *)histogramDataForType:(RocksDBHistogram)type;
 
+/**
+ Returns the histogram as a String for the given histogram type.
+
+ @param type The type of the histogram to get.
+ @return The value for the given histogram type.
+ */
+- (NSString *)histogramStringForType:(RocksDBHistogram)type;
+
 /** @brief String representation of the statistic object. */
 - (NSString *)description;
+
+/**
+ Resets all ticker and histogram stats.
+ */
+- (BOOL)reset:(NSError *__autoreleasing  _Nullable *)error;
 
 @end
 
