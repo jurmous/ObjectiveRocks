@@ -14,7 +14,7 @@ class RocksDBComparatorTests : RocksDBTests {
 	func testSwift_Comparator_Native_Bytewise_Ascending() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .bytewiseAscending)
+		options.comparator = RocksDBComparator(type: .bytewiseAscending)
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
@@ -64,7 +64,7 @@ class RocksDBComparatorTests : RocksDBTests {
 	func testSwift_Comparator_Native_Bytewise_Descending() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+		options.comparator = RocksDBComparator(type: .bytewiseDescending)
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
@@ -118,7 +118,7 @@ class RocksDBComparatorTests : RocksDBTests {
 	func testSwift_Comparator_StringCompare_Ascending() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+		options.comparator = RocksDBComparator(type: .stringCompareAscending)
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
@@ -145,7 +145,7 @@ class RocksDBComparatorTests : RocksDBTests {
 	func testSwift_Comparator_StringCompare_Descending() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .stringCompareDescending)
+		options.comparator = RocksDBComparator(type: .stringCompareDescending)
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 

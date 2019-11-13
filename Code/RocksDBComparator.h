@@ -42,7 +42,7 @@ typedef NS_ENUM(NSUInteger, RocksDBComparatorType)
  @param type The comparator type.
  @return a newly-initialized instance of a keys comparator.
  */
-+ (instancetype)comaparatorWithType:(RocksDBComparatorType)type;
++ (instancetype)comparatorWithType:(RocksDBComparatorType)type;
 
 /**
  Intializes a new Comparator instance with the given name and comparison block.

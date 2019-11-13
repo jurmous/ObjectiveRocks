@@ -29,7 +29,7 @@
 
 #pragma mark - Comparator Factory
 
-+ (instancetype)comaparatorWithType:(RocksDBComparatorType)type
++ (instancetype)comparatorWithType:(RocksDBComparatorType)type
 {
 	switch (type) {
 		case RocksDBComparatorBytewiseAscending:

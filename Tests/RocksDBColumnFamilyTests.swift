@@ -64,11 +64,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	func testSwift_ColumnFamilies_Open() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+		options.comparator = RocksDBComparator(type: .stringCompareAscending)
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let columnFamilyOptions = RocksDBColumnFamilyOptions()
-		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+		columnFamilyOptions.comparator = RocksDBComparator(type: .bytewiseDescending)
 
 		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
 		XCTAssertNotNil(columnFamily)
@@ -84,10 +84,10 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let descriptor = RocksDBColumnFamilyDescriptor()
 
 		descriptor.addDefaultColumnFamily { (options) -> Void in
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+			options.comparator = RocksDBComparator(type: .stringCompareAscending)
 		}
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: { (options) -> Void in
-			options.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+			options.comparator = RocksDBComparator(type: .bytewiseDescending)
 		})
 
 		let options2 = RocksDBOptions()
@@ -109,12 +109,12 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	func testSwift_ColumnFamilies_Open_ComparatorMismatch() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+		options.comparator = RocksDBComparator(type: .stringCompareAscending)
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
 		let columnFamilyOptions = RocksDBColumnFamilyOptions()
-		columnFamilyOptions.comparator = RocksDBComparator.comaparator(with: .bytewiseDescending)
+		columnFamilyOptions.comparator = RocksDBComparator(type: .bytewiseDescending)
 
 		let columnFamily = try! rocks.createColumnFamily(withName: "new_cf", andOptions: columnFamilyOptions)
 
@@ -132,10 +132,10 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		let descriptor = RocksDBColumnFamilyDescriptor()
 
 		descriptor.addDefaultColumnFamily { (options) -> Void in
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+			options.comparator = RocksDBComparator(type: .stringCompareAscending)
 		}
 		descriptor.addColumnFamily(withName: "new_cf", andOptions: { (options) -> Void in
-			options.comparator = RocksDBComparator.comaparator(with: .stringCompareAscending)
+			options.comparator = RocksDBComparator(type: .stringCompareAscending)
 		})
 
 		let options2 = RocksDBOptions()
