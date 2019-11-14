@@ -67,6 +67,7 @@ extern const unsigned char ObjectiveRocksVersionString[];
 
 // Write Batch
 #import "RocksDBIndexedWriteBatch.h"
+#import "RocksDBIndexedWriteBatch+getFromBatchAndDB.h"
 #import "RocksDBWriteBatchIterator.h"
 
 // Env

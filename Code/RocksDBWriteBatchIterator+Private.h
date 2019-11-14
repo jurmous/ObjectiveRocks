@@ -17,6 +17,7 @@ namespace rocksdb {
  maintain a pure Objective-C API for Swift compatibility.
  */
 @interface RocksDBWriteBatchIterator (Private)
+@property (nonatomic, readonly) rocksdb::WBWIIterator *iterator;
 
 /**
  Initializes a new instance of `RocksDBWriteBatchIterator` with the given options and

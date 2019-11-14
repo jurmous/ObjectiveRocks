@@ -17,6 +17,7 @@ namespace rocksdb {
  maintain a pure Objective-C API for Swift compatibility.
  */
 @interface RocksDBIterator (Private)
+@property (nonatomic, readonly) rocksdb::Iterator *iterator;
 
 /**
  Initializes a new instance of `RocksDBIterator` with the given options and

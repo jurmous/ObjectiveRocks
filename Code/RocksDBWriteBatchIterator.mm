@@ -29,9 +29,12 @@
 {
 	rocksdb::WBWIIterator *_iterator;
 }
+@property (nonatomic, readonly) rocksdb::WBWIIterator *iterator;
 @end
 
 @implementation RocksDBWriteBatchIterator
+
+@synthesize iterator = _iterator;
 
 #pragma mark - Lifecycle
 

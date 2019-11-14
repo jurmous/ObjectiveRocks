@@ -1726,7 +1726,6 @@
 		851B86EE23449295009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7921A62976F00D28BF5 /* RocksDBColumnFamilyMetaData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86EF23449295009721CC /* RocksDBIterator+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B7961A6298AD00D28BF5 /* RocksDBIterator+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F023449295009721CC /* RocksDBWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79A1A6298F800D28BF5 /* RocksDBWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		851B86F123449295009721CC /* RocksDBIndexedWriteBatch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 628CEBB91D0CF4630096AA64 /* RocksDBIndexedWriteBatch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F323449295009721CC /* RocksDBSnapshot+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 6221B79E1A629A4F00D28BF5 /* RocksDBSnapshot+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F423449295009721CC /* RocksDBCallbackComparator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62376BBE1A20EDF000C85DFB /* RocksDBCallbackComparator.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		851B86F523449295009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */ = {isa = PBXBuildFile; fileRef = 62EEC4B91A34FF0600624DA2 /* RocksDBCallbackAssociativeMergeOperator.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -2252,6 +2251,8 @@
 		851B890923449295009721CC /* RocksDBMergeOperator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62EEC4B61A34FEE100624DA2 /* RocksDBMergeOperator.mm */; };
 		851B890A23449295009721CC /* RocksDBStatistics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A8B0641A58DD7D0069B4C8 /* RocksDBStatistics.mm */; };
 		851B890B23449295009721CC /* RocksDBStatisticsHistogram.mm in Sources */ = {isa = PBXBuildFile; fileRef = 62A8B0681A58E4B60069B4C8 /* RocksDBStatisticsHistogram.mm */; };
+		85429DC1237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 85429DC0237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85429DC3237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 85429DC0237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		854F68F12376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		854F68F22376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		854F68F32376D8750043431A /* RocksDBSlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 854F68F02376D8750043431A /* RocksDBSlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2951,6 +2952,7 @@
 		62F9D8A51B86AE8900C65860 /* RocksDBOptions+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RocksDBOptions+Private.h"; sourceTree = "<group>"; };
 		851B84622343EA66009721CC /* libobjectiveRocks-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjectiveRocks-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		851B891223449295009721CC /* libobjectiveRocks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjectiveRocks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85429DC0237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBIndexedWriteBatch+getFromBatchAndDB.h"; sourceTree = "<group>"; };
 		854F68F02376D8750043431A /* RocksDBSlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBSlice.h; sourceTree = "<group>"; };
 		854F68F52376D8930043431A /* RocksDBSlice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBSlice.mm; sourceTree = "<group>"; };
 		8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBEnv+Private.h"; sourceTree = "<group>"; };
@@ -3694,6 +3696,7 @@
 				623FE74E1A2D2ED500E68421 /* RocksDBWriteBatch.h */,
 				623FE74F1A2D2ED500E68421 /* RocksDBWriteBatch.mm */,
 				62F8C5FD1B85386A00E2577F /* RocksDBIndexedWriteBatch.h */,
+				85429DC0237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h */,
 				62F8C5FE1B85386A00E2577F /* RocksDBIndexedWriteBatch.mm */,
 				62F8C6011B853ABA00E2577F /* RocksDBWriteBatchIterator.h */,
 				62F8C6021B853ABA00E2577F /* RocksDBWriteBatchIterator.mm */,
@@ -4097,6 +4100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854F68F12376D8750043431A /* RocksDBSlice.h in Headers */,
+				85429DC1237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h in Headers */,
 				624203CA1BED64F70043DD6F /* ObjectiveRocks.h in Headers */,
 				85DE7904237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				629768D520B7617F00DEBF89 /* threadpool.h in Headers */,
@@ -4783,6 +4787,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854F68F32376D8750043431A /* RocksDBSlice.h in Headers */,
+				85429DC3237DF74000877A9B /* RocksDBIndexedWriteBatch+getFromBatchAndDB.h in Headers */,
 				851B856C23449134009721CC /* ObjectiveRocks.h in Headers */,
 				85DE7906237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				851B856D23449134009721CC /* RocksDB.h in Headers */,
@@ -5173,7 +5178,6 @@
 				851B86EE23449295009721CC /* RocksDBColumnFamilyMetaData+Private.h in Headers */,
 				851B86EF23449295009721CC /* RocksDBIterator+Private.h in Headers */,
 				851B86F023449295009721CC /* RocksDBWriteBatch+Private.h in Headers */,
-				851B86F123449295009721CC /* RocksDBIndexedWriteBatch+Private.h in Headers */,
 				851B86F323449295009721CC /* RocksDBSnapshot+Private.h in Headers */,
 				851B86F423449295009721CC /* RocksDBCallbackComparator.h in Headers */,
 				851B86F523449295009721CC /* RocksDBCallbackAssociativeMergeOperator.h in Headers */,

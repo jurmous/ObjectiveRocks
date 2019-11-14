@@ -18,9 +18,12 @@
 {
 	rocksdb::Iterator *_iterator;
 }
+@property (nonatomic, readwrite) rocksdb::Iterator *iterator;
 @end
 
 @implementation RocksDBIterator
+
+@synthesize iterator = _iterator;
 
 #pragma mark - Lifecycle
 
