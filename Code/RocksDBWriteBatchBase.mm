@@ -196,4 +196,10 @@
 	_writeBatchBase->SetMaxBytes(maxBytes);
 }
 
+- (RocksDBWriteBatch *)getWriteBatch
+{
+	rocksdb::WriteBatch *batch = self.writeBatchBase->GetWriteBatch();
+	return [[RocksDBWriteBatch alloc] initWithNativeWriteBatchBase:batch columnFamily:self.columnFamily];
+}
+
 @end

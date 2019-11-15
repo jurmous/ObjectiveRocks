@@ -28,6 +28,8 @@ extern const unsigned char ObjectiveRocksVersionString[];
 
 // Write Batch
 #import "RocksDBWriteBatch.h"
+#import "RocksDBWriteBatchBase.h"
+#import "RocksDBWriteBatchBase+getWriteBatch.h"
 
 // Comparator
 #import "RocksDBComparator.h"
