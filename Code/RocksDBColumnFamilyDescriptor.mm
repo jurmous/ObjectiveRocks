@@ -50,18 +50,13 @@ NSString * const RocksDBDefaultColumnFamilyName = @"default";
 
 #pragma mark - Add Column Families
 
-- (void)addDefaultColumnFamilyWithOptions:(void (^)(RocksDBColumnFamilyOptions *options))options
+- (void)addDefaultColumnFamilyWithOptions:(RocksDBColumnFamilyOptions *)options
 {
 	[self addColumnFamilyWithName:RocksDBDefaultColumnFamilyName andOptions:options];
 }
 
-- (void)addColumnFamilyWithName:(NSString *)name andOptions:(void (^)(RocksDBColumnFamilyOptions *options))optionsBlock
+- (void)addColumnFamilyWithName:(NSString *)name andOptions:(RocksDBColumnFamilyOptions *)options
 {
-	RocksDBColumnFamilyOptions *options = [RocksDBColumnFamilyOptions new];
-	if (optionsBlock) {
-		optionsBlock(options);
-	}
-
 	rocksdb::ColumnFamilyDescriptor descriptor = rocksdb::ColumnFamilyDescriptor(name.UTF8String, options.options);
 	_columnFamilies->push_back(descriptor);
 }

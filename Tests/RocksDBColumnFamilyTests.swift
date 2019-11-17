@@ -81,14 +81,15 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		XCTAssertEqual(names[0], "default")
 		XCTAssertEqual(names[1], "new_cf")
 
-		let descriptor = RocksDBColumnFamilyDescriptor()
+		let cfOption1 = RocksDBColumnFamilyOptions()
+		cfOption1.comparator = RocksDBComparator(type: .stringCompareAscending)
 
-		descriptor.addDefaultColumnFamily { (options) -> Void in
-			options.comparator = RocksDBComparator(type: .stringCompareAscending)
-		}
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: { (options) -> Void in
-			options.comparator = RocksDBComparator(type: .bytewiseDescending)
-		})
+		let cfOption2 = RocksDBColumnFamilyOptions()
+		cfOption2.comparator = RocksDBComparator(type: .bytewiseDescending)
+
+		let descriptor = RocksDBColumnFamilyDescriptor()
+		descriptor.addDefaultColumnFamily(with: cfOption1)
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: cfOption2)
 
 		let options2 = RocksDBOptions()
 		options2.createIfMissing = true
@@ -129,14 +130,14 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		XCTAssertEqual(names[0], "default")
 		XCTAssertEqual(names[1], "new_cf")
 
-		let descriptor = RocksDBColumnFamilyDescriptor()
+		let cfOptions1 = RocksDBColumnFamilyOptions()
+		cfOptions1.comparator = RocksDBComparator(type: .stringCompareAscending)
+		let cfOptions2 = RocksDBColumnFamilyOptions()
+		cfOptions2.comparator = RocksDBComparator(type: .stringCompareAscending)
 
-		descriptor.addDefaultColumnFamily { (options) -> Void in
-			options.comparator = RocksDBComparator(type: .stringCompareAscending)
-		}
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: { (options) -> Void in
-			options.comparator = RocksDBComparator(type: .stringCompareAscending)
-		})
+		let descriptor = RocksDBColumnFamilyDescriptor()
+		descriptor.addDefaultColumnFamily(with: cfOptions1)
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: cfOptions2)
 
 		let options2 = RocksDBOptions()
 		options2.createIfMissing = true
@@ -165,8 +166,8 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		let descriptor = RocksDBColumnFamilyDescriptor()
 
-		descriptor.addDefaultColumnFamily(options: nil)
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
+		descriptor.addDefaultColumnFamily(with: RocksDBColumnFamilyOptions())
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		let options2 = RocksDBOptions()
 		options2.createIfMissing = true
@@ -204,8 +205,8 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	func testSwift_ColumnFamilies_WriteBatch() {
 		let descriptor = RocksDBColumnFamilyDescriptor()
 
-		descriptor.addDefaultColumnFamily(options: nil)
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
+		descriptor.addDefaultColumnFamily(with: RocksDBColumnFamilyOptions())
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		let options = RocksDBOptions()
 		options.createIfMissing = true
@@ -218,7 +219,7 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 
 		try! rocks.setData("xyz_value", forKey: "xyz", forColumnFamily: newColumnFamily)
 
-		let batch = rocks.writeBatch(inColumnFamily: newColumnFamily)
+		let batch = RocksDBWriteBatch()
 		try! batch.setData("cf_value1", forKey:"cf_key1", inColumnFamily:newColumnFamily)
 		try! batch.setData("df_value", forKey:"df_key")
 		try! batch.setData("cf_value2", forKey:"cf_key2", inColumnFamily:newColumnFamily)
@@ -245,8 +246,8 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 	func testSwift_ColumnFamilies_Iterator() {
 		let descriptor = RocksDBColumnFamilyDescriptor()
 
-		descriptor.addDefaultColumnFamily(options: nil)
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
+		descriptor.addDefaultColumnFamily(with: RocksDBColumnFamilyOptions())
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		let options = RocksDBOptions()
 		options.createIfMissing = true

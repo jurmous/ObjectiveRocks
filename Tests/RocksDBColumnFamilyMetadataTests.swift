@@ -13,8 +13,8 @@ class RocksDBColumnFamilyMetadataTests : RocksDBTests {
 
 	func testSwift_ColumnFamilies_Metadata() {
 		let descriptor = RocksDBColumnFamilyDescriptor()
-		descriptor.addDefaultColumnFamily(options: nil)
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
+		descriptor.addDefaultColumnFamily(with: RocksDBColumnFamilyOptions())
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		let options = RocksDBOptions()
 		options.createIfMissing = true

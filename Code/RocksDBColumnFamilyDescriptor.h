@@ -23,21 +23,21 @@ extern NSString * const RocksDBDefaultColumnFamilyName;
 /**
  Adds the default Column Family to this descriptor instance with the given options.
 
- @param options A block for specifying the options for the default Column Family.
+ @param options The options for the default Column Family.
 
  @see RocksDBColumnFamilyOptions
  */
-- (void)addDefaultColumnFamilyWithOptions:(nullable void (^)(RocksDBColumnFamilyOptions *options))options;
+- (void)addDefaultColumnFamilyWithOptions:(RocksDBColumnFamilyOptions *)options;
 
 /**
  Adds a Column Family to this descriptor instance with the given name and options.
 
  @param name The name of the Column Family.
- @param options A block for specifying the options for the Column Family.
+ @param options The options for the Column Family.
 
  @see RocksDBColumnFamilyOptions
  */
-- (void)addColumnFamilyWithName:(NSString *)name andOptions:(nullable void (^)(RocksDBColumnFamilyOptions *options))options;
+- (void)addColumnFamilyWithName:(NSString *)name andOptions:(RocksDBColumnFamilyOptions *)options;
 
 @end
 

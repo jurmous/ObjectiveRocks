@@ -28,8 +28,8 @@ class RocksDBPropertiesTests : RocksDBTests {
 
 	func testSwift_Properties_ColumnFamily() {
 		let descriptor = RocksDBColumnFamilyDescriptor()
-		descriptor.addDefaultColumnFamily(options: nil)
-		descriptor.addColumnFamily(withName: "new_cf", andOptions: nil)
+		descriptor.addDefaultColumnFamily(with: RocksDBColumnFamilyOptions())
+		descriptor.addColumnFamily(withName: "new_cf", andOptions: RocksDBColumnFamilyOptions())
 
 		let options = RocksDBOptions()
 		options.createIfMissing = true
