@@ -2,13 +2,9 @@
 //  RocksDBIndexedWriteBatch+Private.h
 //  ObjectiveRocks
 //
-//  Created by Iska on 12/06/16.
-//  Copyright © 2016 BrainCookie. All rights reserved.
-//
 
 namespace rocksdb {
 	class DB;
-	class ColumnFamilyHandle;
 	class WriteBatchBase;
 	class WriteBatchWithIndex;
 }
@@ -27,12 +23,10 @@ namespace rocksdb {
  rocksdb::ColumnFamilyHandle instance and encoding options.
 
  @param db The rocksdb::DB instance.
- @param columnFamily The rocks::ColumnFamilyHandle instance.
  @param readOptions The read options.
  @return a newly-initialized instance of `RocksDBIndexedWriteBatch`.
  */
 - (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(rocksdb::ColumnFamilyHandle *)columnFamily
 					   readOptions:(RocksDBReadOptions *)readOptions;
 
 @end

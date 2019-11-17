@@ -168,14 +168,14 @@ for this key since the previous call to SingleDelete() for this key.
  Returns true if succeeds to rollback
  @param error filled on problems encountered during rollback
  */
-- (void)rollbackToSavePoint:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)rollbackToSavePoint:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Pop last stored save point
  Returns true if succeeds to rollback
  @param error filled on problems encountered during pop
  */
-- (void)popSavePoint:(NSError * _Nullable __autoreleasing *)error;
+- (BOOL)popSavePoint:(NSError * _Nullable __autoreleasing *)error;
 
 @end
 

@@ -46,16 +46,14 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (instancetype)init
 {
-	return [self initWithNativeWriteBatch:new rocksdb::WriteBatch()
-							 columnFamily:columnFamily];
+	return [self initWithNativeWriteBatch:new rocksdb::WriteBatch()];
 }
 
 - (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatch *)writeBatch
-							columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 {
-	self = [super initWithNativeWriteBatchBase:writeBatch columnFamily:columnFamily];
+	self = [self initWithNativeWriteBatchBase:writeBatch];
 	if (self) {
 		_writeBatch = writeBatch;
 	}
@@ -66,7 +64,7 @@
 {
 	@synchronized(self) {
 		if (_writeBatch != nullptr) {
-			delete _writeBatch;
+			// No need to delete since it is deleted by super
 			_writeBatch = nullptr;
 		}
 	}

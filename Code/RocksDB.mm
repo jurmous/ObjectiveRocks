@@ -761,12 +761,12 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 - (RocksDBWriteBatch *)writeBatch
 {
-	return [[RocksDBWriteBatch alloc] initWithColumnFamily:_columnFamily];
+	return [[RocksDBWriteBatch alloc] init];
 }
 
 - (RocksDBWriteBatch *)writeBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily
 {
-	return [[RocksDBWriteBatch alloc] initWithColumnFamily:columnFamily];
+	return [[RocksDBWriteBatch alloc] init];
 }
 
 - (BOOL)performWriteBatch:(void (^)(RocksDBWriteBatch *batch, RocksDBWriteOptions *options))batchBlock
@@ -813,14 +813,6 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 - (RocksDBIndexedWriteBatch *)indexedWriteBatch
 {
 	return [[RocksDBIndexedWriteBatch alloc] initWithDBInstance:_db
-												   columnFamily:_columnFamily.columnFamily
-													readOptions:_readOptions];
-}
-
-- (RocksDBWriteBatch *)indexedWriteBatchInColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-{
-	return [[RocksDBIndexedWriteBatch alloc] initWithDBInstance:_db
-												   columnFamily:columnFamily.columnFamily
 													readOptions:_readOptions];
 }
 

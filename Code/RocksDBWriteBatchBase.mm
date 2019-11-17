@@ -16,9 +16,6 @@
 #import <rocksdb/write_batch.h>
 
 @interface RocksDBWriteBatchBase ()
-{
-	RocksDBColumnFamilyHandle *_columnFamily;
-}
 @property (nonatomic, assign) rocksdb::WriteBatchBase *writeBatchBase;
 @end
 
@@ -27,13 +24,11 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatchBase *)writeBatchBase
-							columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (instancetype)initWithNativeWriteBatchBase:(rocksdb::WriteBatchBase *)writeBatchBase
 {
 	self = [super init];
 	if (self) {
 		_writeBatchBase = writeBatchBase;
-		_columnFamily = columnFamily;
 	}
 	return self;
 }
@@ -52,7 +47,9 @@
 
 - (void)setData:(NSData *)anObject forKey:(NSData *)aKey
 {
-	[self setData:anObject forKey:aKey inColumnFamily:_columnFamily];
+	if (aKey != nil && anObject != nil) {
+		_writeBatchBase->Put(SliceFromData(aKey), SliceFromData(anObject));
+	}
 }
 
 - (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
@@ -66,7 +63,9 @@
 
 - (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey
 {
-	[self mergeData:anObject forKey:aKey inColumnFamily:_columnFamily];
+	if (aKey != nil && anObject != nil) {
+		_writeBatchBase->Merge(SliceFromData(aKey), SliceFromData(anObject));
+	}
 }
 
 - (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
@@ -80,7 +79,9 @@
 
 - (void)deleteDataForKey:(NSData *)aKey
 {
-	[self deleteDataForKey:aKey inColumnFamily:_columnFamily];
+	if (aKey != nil) {
+		_writeBatchBase->Delete(SliceFromData(aKey));
+	}
 }
 
 - (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
@@ -92,7 +93,9 @@
 
 - (void)singleDelete:(NSData *)key
 {
-	[self singleDelete:key inColumnFamily:_columnFamily];
+	if (key != nil) {
+		_writeBatchBase->SingleDelete(SliceFromData(key));
+	}
 }
 
 - (void)singleDelete:(NSData *)key inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
@@ -105,7 +108,18 @@
 - (BOOL)deleteRange:(RocksDBKeyRange *)range
 			  error:(NSError * _Nullable __autoreleasing *)error
 {
-	return [self deleteRange:range inColumnFamily:_columnFamily error:error];
+	rocksdb::Slice startSlice = SliceFromData(range.start);
+	rocksdb::Slice endSlice = SliceFromData(range.end);
+
+	rocksdb::Status status = _writeBatchBase->DeleteRange(startSlice, endSlice);
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
+	}
+	return YES;
 }
 
 - (BOOL)deleteRange:(RocksDBKeyRange *)range
@@ -199,7 +213,7 @@
 - (RocksDBWriteBatch *)getWriteBatch
 {
 	rocksdb::WriteBatch *batch = self.writeBatchBase->GetWriteBatch();
-	return [[RocksDBWriteBatch alloc] initWithNativeWriteBatchBase:batch columnFamily:self.columnFamily];
+	return [[RocksDBWriteBatch alloc] initWithNativeWriteBatchBase:batch];
 }
 
 @end

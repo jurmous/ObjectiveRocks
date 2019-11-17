@@ -910,18 +910,6 @@ for “scattered” logic.
 - (RocksDBIndexedWriteBatch *)indexedWriteBatch;
 
 /**
-Returns an indexed write batch instance, which can be used to perform a set of updates to the database atomically in given column family.
-
-@param columnFamily to apply batch to
-
-@discussion This batch instance can be applied at a later point to the DB, making it more flexible
-for “scattered” logic.
-
-@see RocksDBWriteBatch
-*/
-- (RocksDBWriteBatch *)indexedWriteBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily;
-
-/**
  Performs an indexed write batch on this DB.
 
  @discussion All the operations stored to the batch instance are written atomically to DB when the

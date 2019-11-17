@@ -23,49 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RocksDBIndexedWriteBatch : RocksDBWriteBatch
 
 /**
- Returns the value for the given key in this Write Batch.
-
- @discussion This method will only read the key from this batch.
-
- @remark If the batch does not have enough data to resolve Merge operations,
- MergeInProgress status may be returned.
-
- @param aKey The key for object.
- @param columnFamily The column family from which the data should be read.
- @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @return The object for the given key.
-
- @see RocksDBColumnFamily
+ Creates a WriteBatchWithIndex where no bytes
+ are reserved up-front, bytewise comparison is
+ used for fallback key comparisons, and duplicate key
+ assignment is determined by the constructor argument
+ @param overwriteKey if true, overwrite the key in the index when
+ inserting a duplicate key, in this way an iterator will never
+ show two entries with the same key.
  */
-- (nullable NSData *)dataForKey:(NSData *)aKey
-				 inColumnFamily:(RocksDBColumnFamily *)columnFamily
-						  error:(NSError * _Nullable *)error;
+- (instancetype)init:(BOOL)overwriteKey;
 
-/**
- Returns the object for the given key.
-
- @discussion This function will query both this batch and the DB and then merge
- the results using the DB's merge operator (if the batch contains any
- merge requests).
-
- Setting the `RocksDBSnapshot` on the `RocksDBReadOptions` will affect what is read 
- from the DB but will not change which keys are read from the batch (the keys in
- this batch do not yet belong to any snapshot and will be fetched
- regardless).
-
- @param aKey The key for object.
- @param columnFamily The column family from which the data should be read.
- @param readOptions A block with a `RocksDBReadOptions` instance for configuring this read operation.
- @param error If an error occurs, upon return contains an `NSError` object that describes åthe problem.
- @return The object for the given key.
-
- @see RocksDBColumnFamily
- @see RocksDBReadOptions
- */
-- (nullable NSData *)dataForKeyIncludingDatabase:(NSData *)aKey
-								  inColumnFamily:(RocksDBColumnFamily *)columnFamily
-									 readOptions:(nullable void (^)(RocksDBReadOptions *readOptions))readOptions
-										   error:(NSError * _Nullable *)error;
 /**
  Creates and returns an iterator over this indexed write batch.
 

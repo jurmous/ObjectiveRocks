@@ -26,8 +26,6 @@
 
 @interface RocksDBIndexedWriteBatch ()
 {
-	rocksdb::DB *_db;
-	RocksDBReadOptions *_readOptions;
 	rocksdb::WriteBatchWithIndex *_writeBatchWithIndex;
 }
 @property (nonatomic, readonly) rocksdb::WriteBatchWithIndex *writeBatchWithIndex;
@@ -37,80 +35,32 @@
 
 @synthesize writeBatchWithIndex = _writeBatchWithIndex;
 
-#pragma mark - Lifecycle 
+#pragma mark - Lifecycle
 
-- (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-					   readOptions:(RocksDBReadOptions *)readOptions
+- (instancetype)init:(BOOL)overwriteKey
 {
-	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex()
-								  columnFamily:columnFamily];
+	self = [super init];
 	if (self) {
-		_db = db;
-		_readOptions = [readOptions copy];
-		_writeBatchWithIndex = static_cast<rocksdb::WriteBatchWithIndex *>(self.writeBatchBase);
+		_writeBatchWithIndex = new rocksdb::WriteBatchWithIndex(rocksdb::BytewiseComparator(), 0, overwriteKey);
 	}
 	return self;
 }
 
-#pragma mark - Queries
-
-- (NSData *)dataForKey:(NSData *)aKey
-		inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-				 error:(NSError * __autoreleasing *)error
+- (instancetype)initWithDBInstance:(rocksdb::DB *)db
+					   readOptions:(RocksDBReadOptions *)readOptions
 {
-	rocksdb::ColumnFamilyHandle *columnFamilyHandle = columnFamily != nil ? columnFamily.columnFamily : nullptr;
-
-	std::string value;
-	rocksdb::Status status = _writeBatchWithIndex->GetFromBatch(columnFamilyHandle,
-																_db->GetDBOptions(),
-																SliceFromData(aKey),
-																&value);
-	if (!status.ok()) {
-		NSError *temp = [RocksDBError errorWithRocksStatus:status];
-		if (error && *error == nil) {
-			*error = temp;
-		}
-		return nil;
+	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex()];
+	if (self) {
+		_writeBatchWithIndex = static_cast<rocksdb::WriteBatchWithIndex *>(self.writeBatchBase);
 	}
-
-	return DataFromSlice(rocksdb::Slice(value));
-}
-
-- (NSData *)dataForKeyIncludingDatabase:(NSData *)aKey
-						 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-							readOptions:(void (^)(RocksDBReadOptions *readOptions))readOptionsBlock
-								  error:(NSError * __autoreleasing *)error
-{
-	RocksDBReadOptions *readOptions = [_readOptions copy];
-	if (readOptionsBlock) {
-		readOptionsBlock(readOptions);
-	}
-
-	rocksdb::ColumnFamilyHandle *columnFamilyHandle = columnFamily != nil ? columnFamily.columnFamily : nullptr;
-
-	std::string value;
-	rocksdb::Status status = _writeBatchWithIndex->GetFromBatchAndDB(_db,
-																	 readOptions.options,
-																	 columnFamilyHandle,
-																	 SliceFromData(aKey),
-																	 &value);
-	if (!status.ok()) {
-		NSError *temp = [RocksDBError errorWithRocksStatus:status];
-		if (error && *error == nil) {
-			*error = temp;
-		}
-		return nil;
-	}
-
-	return DataFromSlice(rocksdb::Slice(value));
+	return self;
 }
 
 #pragma mark - Iterator
 
 - (RocksDBWriteBatchIterator *)iterator
 {
-	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator(self.columnFamily.columnFamily);
+	rocksdb::WBWIIterator *nativeIterator = _writeBatchWithIndex->NewIterator();
 	return [[RocksDBWriteBatchIterator alloc] initWithWriteBatchIterator:nativeIterator];
 }
 
