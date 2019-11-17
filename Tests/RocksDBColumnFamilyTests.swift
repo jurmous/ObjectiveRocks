@@ -219,11 +219,11 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		try! rocks.setData("xyz_value", forKey: "xyz", forColumnFamily: newColumnFamily)
 
 		let batch = rocks.writeBatch(inColumnFamily: newColumnFamily)
-		batch.setData("cf_value1", forKey:"cf_key1", inColumnFamily:newColumnFamily)
-		batch.setData("df_value", forKey:"df_key")
-		batch.setData("cf_value2", forKey:"cf_key2", inColumnFamily:newColumnFamily)
-		batch.deleteData(forKey: "xyz")
-		batch.deleteData(forKey: "xyz", inColumnFamily:newColumnFamily)
+		try! batch.setData("cf_value1", forKey:"cf_key1", inColumnFamily:newColumnFamily)
+		try! batch.setData("df_value", forKey:"df_key")
+		try! batch.setData("cf_value2", forKey:"cf_key2", inColumnFamily:newColumnFamily)
+		try! batch.deleteData(forKey: "xyz")
+		try! batch.deleteData(forKey: "xyz", inColumnFamily:newColumnFamily)
 
 		try! rocks.applyWriteBatch(batch, writeOptions:RocksDBWriteOptions())
 

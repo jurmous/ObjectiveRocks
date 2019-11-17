@@ -27,8 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param anObject The object for key.
  @param aKey The key for object.
+ @param error filled on problems encountered during set
  */
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey;
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+		  error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Stores the given key-object pair for the given Column Family into the Write Batch.
@@ -36,16 +39,23 @@ NS_ASSUME_NONNULL_BEGIN
  @param anObject The object for key.
  @param aKey The key for object.
  @param columnFamily The column family where data should be written.
+ @param error filled on problems encountered during set
  */
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+ inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		  error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Merges the given key-object pair into the Write Batch.
 
  @param anObject The object for key.
  @param aKey The key for object.
+ @param error filled on problems encountered during merge
  */
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey;
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+			error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Merges the given key-object pair for the given Column Family into the Write Batch.
@@ -53,50 +63,64 @@ NS_ASSUME_NONNULL_BEGIN
  @param anObject The object for key.
  @param aKey The key for object.
  @param columnFamily The column family where data should be written.
+ @param error filled on problems encountered during merge
  */
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+   inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Deletes the object for the given key from this Write Batch.
 
  @param aKey The key to delete.
+ @param error filled on problems encountered during delete
  */
-- (void)deleteDataForKey:(NSData *)aKey;
+- (BOOL)deleteDataForKey:(NSData *)aKey
+				   error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Deletes the object for the given key in the given Column Family from this Write Batch.
 
  @param aKey The key for object.
  @param columnFamily The column family from which the data should be deleted.
+ @param error filled on problems encountered during delete
  */
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
-Remove the database entry for key. Requires that the key exists
-and was not overwritten. It is not an error if the key did not exist
-in the database.
-If a key is overwritten (by calling {@link #put(byte[], byte[])} multiple
-times), then the result of calling SingleDelete() on this key is undefined.
-SingleDelete() only behaves correctly if there has been only one Put()
-for this key since the previous call to SingleDelete() for this key.
+ Remove the database entry for key. Requires that the key exists
+ and was not overwritten. It is not an error if the key did not exist
+ in the database.
+ If a key is overwritten (by calling {@link #put(byte[], byte[])} multiple
+ times), then the result of calling SingleDelete() on this key is undefined.
+ SingleDelete() only behaves correctly if there has been only one Put()
+ for this key since the previous call to SingleDelete() for this key.
 
-@param key The key for object.
+ @param key The key for object.
+ @param error filled on problems encountered during delete
 */
-- (void)singleDelete:(NSData *)key;
+- (BOOL)singleDelete:(NSData *)key
+			   error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
-Remove the database entry for key. Requires that the key exists
-and was not overwritten. It is not an error if the key did not exist
-in the database.
-If a key is overwritten (by calling {@link #put(byte[], byte[])} multiple
-times), then the result of calling SingleDelete() on this key is undefined.
-SingleDelete() only behaves correctly if there has been only one Put()
-for this key since the previous call to SingleDelete() for this key.
+ Remove the database entry for key. Requires that the key exists
+ and was not overwritten. It is not an error if the key did not exist
+ in the database.
+ If a key is overwritten (by calling {@link #put(byte[], byte[])} multiple
+ times), then the result of calling SingleDelete() on this key is undefined.
+ SingleDelete() only behaves correctly if there has been only one Put()
+ for this key since the previous call to SingleDelete() for this key.
 
-@param key The key for object.
-@param columnFamily The column family from which the data should be deleted.
+ @param key The key for object.
+ @param columnFamily The column family from which the data should be deleted.
+ @param error filled on problems encountered during delete
 */
-- (void)singleDelete:(NSData *)key inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+- (BOOL)singleDelete:(NSData *)key
+	  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			   error:(NSError * _Nullable __autoreleasing *)error;
 
 /**
  Removes the database entries in the range , i.e.,
@@ -141,7 +165,8 @@ for this key since the previous call to SingleDelete() for this key.
 
  Example application: add timestamps to the transaction log for use in replication.
  */
-- (void)putLogData:(NSData *)logData;
+- (BOOL)putLogData:(NSData *)logData
+			 error:(NSError * _Nullable __autoreleasing *)error;
 
 /** @brief Clear all updates buffered in this batch. */
 - (void)clear;

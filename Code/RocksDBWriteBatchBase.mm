@@ -45,64 +45,149 @@
 
 #pragma mark - Put
 
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+		  error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Put(SliceFromData(aKey), SliceFromData(anObject));
+	rocksdb::Status status = _writeBatchBase->Put(SliceFromData(aKey), SliceFromData(anObject));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
-- (void)setData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)setData:(NSData *)anObject
+		 forKey:(NSData *)aKey
+ inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+		  error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Put(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
+	rocksdb::Status status = _writeBatchBase->Put(columnFamily.columnFamily,
+												  SliceFromData(aKey),
+												  SliceFromData(anObject));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
 #pragma mark - Merge
 
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+			error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Merge(SliceFromData(aKey), SliceFromData(anObject));
+	rocksdb::Status status = _writeBatchBase->Merge(SliceFromData(aKey),
+													SliceFromData(anObject));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
-- (void)mergeData:(NSData *)anObject forKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)mergeData:(NSData *)anObject
+		   forKey:(NSData *)aKey
+   inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil && anObject != nil) {
-		_writeBatchBase->Merge(columnFamily.columnFamily, SliceFromData(aKey), SliceFromData(anObject));
+	rocksdb::Status status = _writeBatchBase->Merge(columnFamily.columnFamily,
+													SliceFromData(aKey),
+													SliceFromData(anObject));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
 #pragma mark - Delete
 
-- (void)deleteDataForKey:(NSData *)aKey
+- (BOOL)deleteDataForKey:(NSData *)aKey
+				   error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil) {
-		_writeBatchBase->Delete(SliceFromData(aKey));
+	rocksdb::Status status = _writeBatchBase->Delete(SliceFromData(aKey));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
-- (void)deleteDataForKey:(NSData *)aKey inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)deleteDataForKey:(NSData *)aKey
+		  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (aKey != nil) {
-		_writeBatchBase->Delete(columnFamily.columnFamily, SliceFromData(aKey));
+	rocksdb::Status status = _writeBatchBase->Delete(columnFamily.columnFamily, SliceFromData(aKey));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
-- (void)singleDelete:(NSData *)key
+- (BOOL)singleDelete:(NSData *)key
+			   error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (key != nil) {
-		_writeBatchBase->SingleDelete(SliceFromData(key));
+	rocksdb::Status status = _writeBatchBase->SingleDelete(SliceFromData(key));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
-- (void)singleDelete:(NSData *)key inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)singleDelete:(NSData *)key
+	  inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+			   error:(NSError * _Nullable __autoreleasing *)error
 {
-	if (key != nil) {
-		_writeBatchBase->SingleDelete(columnFamily.columnFamily, SliceFromData(key));
+	rocksdb::Status status = _writeBatchBase->SingleDelete(columnFamily.columnFamily, SliceFromData(key));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
 - (BOOL)deleteRange:(RocksDBKeyRange *)range
@@ -142,11 +227,20 @@
 
 #pragma mark -
 
-- (void)putLogData:(NSData *)logData;
+- (BOOL)putLogData:(NSData *)logData
+			 error:(NSError * _Nullable __autoreleasing *)error;
 {
-	if (logData != nil) {
-		_writeBatchBase->PutLogData(SliceFromData(logData));
+	rocksdb::Status status = _writeBatchBase->PutLogData(SliceFromData(logData));
+
+	if (!status.ok()) {
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+
+	return YES;
 }
 
 - (void)clear
