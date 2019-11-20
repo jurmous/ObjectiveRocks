@@ -39,17 +39,7 @@
 
 - (instancetype)init:(BOOL)overwriteKey
 {
-	self = [super init];
-	if (self) {
-		_writeBatchWithIndex = new rocksdb::WriteBatchWithIndex(rocksdb::BytewiseComparator(), 0, overwriteKey);
-	}
-	return self;
-}
-
-- (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					   readOptions:(RocksDBReadOptions *)readOptions
-{
-	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex()];
+	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex(rocksdb::BytewiseComparator(), 0, overwriteKey)];
 	if (self) {
 		_writeBatchWithIndex = static_cast<rocksdb::WriteBatchWithIndex *>(self.writeBatchBase);
 	}

@@ -759,38 +759,6 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 #pragma mark - Batch Writes
 
-- (RocksDBWriteBatch *)writeBatch
-{
-	return [[RocksDBWriteBatch alloc] init];
-}
-
-- (RocksDBWriteBatch *)writeBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily
-{
-	return [[RocksDBWriteBatch alloc] init];
-}
-
-- (BOOL)performWriteBatch:(void (^)(RocksDBWriteBatch *batch, RocksDBWriteOptions *options))batchBlock
-					error:(NSError * __autoreleasing *)error
-{
-	if (batchBlock == nil) return NO;
-
-	RocksDBWriteBatch *writeBatch = [self writeBatch];
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-
-	batchBlock(writeBatch, writeOptions);
-	rocksdb::WriteBatch *batch = writeBatch.writeBatch->GetWriteBatch();
-	rocksdb::Status status = _db->Write(writeOptions.options, batch);
-
-	if (!status.ok()) {
-		NSError *temp = [RocksDBError errorWithRocksStatus:status];
-		if (error && *error == nil) {
-			*error = temp;
-		}
-		return NO;
-	}
-	return YES;
-}
-
 - (BOOL)applyWriteBatch:(RocksDBWriteBatchBase *)writeBatch
 		   writeOptions:(RocksDBWriteOptions *)writeOptions
 				  error:(NSError * __autoreleasing *)error
@@ -807,38 +775,6 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	}
 	return YES;
 }
-
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
-
-- (RocksDBIndexedWriteBatch *)indexedWriteBatch
-{
-	return [[RocksDBIndexedWriteBatch alloc] initWithDBInstance:_db
-													readOptions:_readOptions];
-}
-
-- (BOOL)performIndexedWriteBatch:(void (^)(RocksDBIndexedWriteBatch *batch, RocksDBWriteOptions *options))batchBlock
-						   error:(NSError * __autoreleasing *)error
-{
-	if (batchBlock == nil) return NO;
-
-	RocksDBIndexedWriteBatch *writeBatch = [self indexedWriteBatch];
-	RocksDBWriteOptions *writeOptions = [_writeOptions copy];
-
-	batchBlock(writeBatch, writeOptions);
-	rocksdb::WriteBatch *batch = writeBatch.writeBatch;
-	rocksdb::Status status = _db->Write(writeOptions.options, batch);
-
-	if (!status.ok()) {
-		NSError *temp = [RocksDBError errorWithRocksStatus:status];
-		if (error && *error == nil) {
-			*error = temp;
-		}
-		return NO;
-	}
-	return YES;
-}
-
-#endif
 
 #pragma mark - Iteration
 

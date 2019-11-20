@@ -10,74 +10,13 @@ import XCTest
 import ObjectiveRocks
 
 class RocksDBWriteBatchTests : RocksDBTests {
-
-	func testSwift_WriteBatch_Perform() {
-		let options = RocksDBOptions()
-		options.createIfMissing = true
-
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
-
-		try! rocks.performWriteBatch { (batch, options) -> Void in
-			try! batch.setData("value 1", forKey: "key 1")
-			try! batch.setData("value 2", forKey: "key 2")
-			try! batch.setData("value 3", forKey: "key 3")
-		}
-
-		XCTAssertEqual(try! rocks.data(forKey: "key 1"), "value 1".data);
-		XCTAssertEqual(try! rocks.data(forKey: "key 2"), "value 2".data);
-		XCTAssertEqual(try! rocks.data(forKey: "key 3"), "value 3".data);
-		XCTAssertNil(try? rocks.data(forKey: "Key 4"))
-	}
-
-	func testSwift_WriteBatch_Perform_DeleteOps() {
-		let options = RocksDBOptions()
-		options.createIfMissing = true
-
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
-
-		try! rocks.setData("value 1", forKey: "key 1")
-
-		try! rocks.performWriteBatch ({ (batch, options) -> Void in
-			try! batch.deleteData(forKey: "key 1")
-			try! batch.setData("value 2", forKey: "key 2")
-			try! batch.setData("value 3", forKey: "key 3")
-		})
-
-		XCTAssertNil(try? rocks.data(forKey: "Key 1"))
-		XCTAssertEqual(try! rocks.data(forKey: "key 2"), "value 2");
-		XCTAssertEqual(try! rocks.data(forKey: "key 3"), "value 3");
-		XCTAssertNil(try? rocks.data(forKey: "Key 4"))
-	}
-
-	func testSwift_WriteBatch_Perform_ClearOps() {
-		let options = RocksDBOptions()
-		options.createIfMissing = true
-
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
-
-		try! rocks.setData("value 1", forKey: "key 1")
-
-		try! rocks.performWriteBatch ({ (batch, options) -> Void in
-			try! batch.deleteData(forKey: "key 1")
-			try! batch.setData("value 2", forKey: "key 2")
-			try! batch.setData("value 3", forKey: "key 3")
-			try! batch.clear()
-			try! batch.setData("value 4", forKey: "key 4")
-		})
-
-		XCTAssertEqual(try! rocks.data(forKey: "key 1"), "value 1".data);
-		XCTAssertNil(try? rocks.data(forKey: "Key 2"))
-		XCTAssertNil(try? rocks.data(forKey: "Key 3"))
-		XCTAssertEqual(try! rocks.data(forKey: "key 4"), "value 4".data);
-	}
-
 	func testSwift_WriteBatch_Apply() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
 
 		rocks = RocksDB.database(atPath: self.path, andOptions: options)
 
-		let batch = rocks.writeBatch()
+		let batch = RocksDBWriteBatch()
 
 		try! batch.setData("value 1", forKey: "key 1")
 		try! batch.setData("value 2", forKey: "key 2")
@@ -101,7 +40,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
-		let batch = rocks.writeBatch()
+		let batch = RocksDBWriteBatch()
 
 		try! batch.deleteData(forKey: "key 1")
 		try! batch.setData("value 2", forKey: "key 2")
@@ -135,7 +74,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
-		let batch = rocks.writeBatch()
+		let batch = RocksDBWriteBatch()
 
 		try! batch.deleteData(forKey: "key 1")
 		try! batch.setData("value 2", forKey: "key 2")
@@ -155,12 +94,12 @@ class RocksDBWriteBatchTests : RocksDBTests {
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
-		let batch = rocks.writeBatch()
+		let batch = RocksDBWriteBatch()
 
 		try! batch.deleteData(forKey: "key 1")
 		try! batch.setData("value 2", forKey: "key 2")
 		try! batch.setData("value 3", forKey: "key 3")
-		try! batch.clear()
+		batch.clear()
 		try! batch.setData("value 4", forKey: "key 4")
 
 		let writeOptions = RocksDBWriteOptions()
@@ -180,7 +119,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
-		let batch = rocks.writeBatch()
+		let batch = RocksDBWriteBatch()
 
 		try! batch.deleteData(forKey: "key 1")
 

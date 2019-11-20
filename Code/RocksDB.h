@@ -842,43 +842,6 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 ///--------------------------------
 
 /**
- Returns a write batch instance, which can be used to perform a set of updates to the database atomically.
-
- @discussion This batch instance can be applied at a later point to the DB, making it more flexible
- for “scattered” logic.
-
- @see RocksDBWriteBatch
- */
-- (RocksDBWriteBatch *)writeBatch;
-
-/**
-Returns a write batch instance, which can be used to perform a set of updates to the database atomically in given column family.
-
-@param columnFamily to apply batch to
-
-@discussion This batch instance can be applied at a later point to the DB, making it more flexible
-for “scattered” logic.
-
-@see RocksDBWriteBatch
-*/
-- (RocksDBWriteBatch *)writeBatchInColumnFamily:(RocksDBColumnFamilyHandle*)columnFamily;
-
-/**
- Performs a write batch on this DB.
-
- @discussion All the operations stored to the batch instance are written atomically to DB when the
- block is executed.
-
- @param batch A block with `RocksDBWriteBatch` instance and `RocksDBWriteOptions` to configure the batch.
- @param error If an error occurs, upon return contains an `NSError` object that describes the problem.
- @return `YES` if the operation succeeded, `NO` otherwise
-
- @see RocksDBWriteBatch
- */
-- (BOOL)performWriteBatch:(void (^)(RocksDBWriteBatch *batch, RocksDBWriteOptions *options))batch
-					error:(NSError * _Nullable *)error;
-
-/**
  Applies a write batch instance on this DB.
 
  @discussion In contrast to the block-based approach, this method allows for building the batch separately
@@ -895,35 +858,6 @@ for “scattered” logic.
 - (BOOL)applyWriteBatch:(RocksDBWriteBatchBase *)writeBatch
 		   writeOptions:(RocksDBWriteOptions *)writeOptions
 				  error:(NSError * _Nullable *)error;
-
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
-
-/**
- Returns an instance of an indexed write batch, which can be used to perform a set of
- updates to the database atomically.
-
- @discussion The indexed write batch builds a searchable index, that can be read and
- iterated before applying it to the database.
-
- @see RocksDBIndexedWriteBatch
- */
-- (RocksDBIndexedWriteBatch *)indexedWriteBatch;
-
-/**
- Performs an indexed write batch on this DB.
-
- @discussion All the operations stored to the batch instance are written atomically to DB when the
- block is executed.
-
- @param batch A block with `RocksDBIndexedWriteBatch` instance and `RocksDBWriteOptions` to configure the batch.
- @return `YES` if the operation succeeded, `NO` otherwise
-
- @see RocksDBIndexedWriteBatch
- */
-- (BOOL)performIndexedWriteBatch:(void (^)(RocksDBIndexedWriteBatch *batch, RocksDBWriteOptions *options))batch
-						   error:(NSError * _Nullable *)error;
-
-#endif
 
 @end
 
