@@ -48,7 +48,12 @@
 
 - (instancetype)init
 {
-	return [self initWithNativeWriteBatch:new rocksdb::WriteBatch()];
+	rocksdb::WriteBatch *writeBatch = new rocksdb::WriteBatch();
+	self = [self initWithNativeWriteBatch:writeBatch];
+	if (self) {
+		_writeBatch = writeBatch;
+	}
+	return self;
 }
 
 - (instancetype)initWithNativeWriteBatch:(rocksdb::WriteBatch *)writeBatch

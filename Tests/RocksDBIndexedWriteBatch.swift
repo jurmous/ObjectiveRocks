@@ -117,4 +117,23 @@ class RocksDBIndexedWriteBatchTests : RocksDBTests {
 			it.previous()
 		}
 	}
+
+	func testSwift_IndexedWriteBatch_restorePoints() {
+		let wbwi = RocksDBIndexedWriteBatch()
+
+		try! wbwi.setData("v1".data, forKey: "k1".data)
+		try! wbwi.setData("v2".data, forKey: "k2".data)
+
+		wbwi.setSavePoint()
+
+		try! wbwi.setData("123456789".data, forKey: "k1".data)
+		try! wbwi.deleteData(forKey: "k2".data)
+
+		try! wbwi.rollbackToSavePoint()
+
+		let options = RocksDBDatabaseOptions()
+
+		XCTAssertEqual("v1".data, wbwi.getFromBatch(options, key: "k1".data, error: nil))
+		XCTAssertEqual("v2".data, wbwi.getFromBatch(options, key: "k2".data, error: nil))
+	}
 }

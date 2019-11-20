@@ -37,13 +37,29 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)init:(BOOL)overwriteKey
+- (instancetype)init
 {
-	self = [super initWithNativeWriteBatchBase:new rocksdb::WriteBatchWithIndex(rocksdb::BytewiseComparator(), 0, overwriteKey)];
+	rocksdb::WriteBatchWithIndex * wbwi = new rocksdb::WriteBatchWithIndex();
+	self = [super initWithNativeWriteBatchBase:wbwi];
 	if (self) {
-		_writeBatchWithIndex = static_cast<rocksdb::WriteBatchWithIndex *>(self.writeBatchBase);
+		_writeBatchWithIndex = wbwi;
 	}
 	return self;
+}
+
+- (instancetype)init:(BOOL)overwriteKey
+{
+	rocksdb::WriteBatchWithIndex * wbwi = new rocksdb::WriteBatchWithIndex(rocksdb::BytewiseComparator(), 0, overwriteKey);
+	self = [super initWithNativeWriteBatchBase:wbwi];
+	if (self) {
+		_writeBatchWithIndex = wbwi;
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	_writeBatchWithIndex = nullptr;
 }
 
 #pragma mark - Iterator
