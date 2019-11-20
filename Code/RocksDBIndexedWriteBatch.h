@@ -105,9 +105,9 @@ returned as a separate entry, in the order of update time.
  @throws RocksDBException if the batch does not have enough data to resolve
  Merge operations, MergeInProgress status may be returned.
 */
-- (NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
-					 key:(NSData *)key
-				   error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
+							  key:(NSData *)key
+							error:(NSError * __autoreleasing *)error;
 
 /**
  Similar to [RocksDB.get] but will only
@@ -124,10 +124,10 @@ returned as a separate entry, in the order of update time.
  @throws RocksDBException if the batch does not have enough data to resolve
  Merge operations, MergeInProgress status may be returned.
 */
-- (NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
-		fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-					 key:(NSData *)key
-				   error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
+				 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+							  key:(NSData *)key
+							error:(NSError * __autoreleasing *)error;
 
 @end
 

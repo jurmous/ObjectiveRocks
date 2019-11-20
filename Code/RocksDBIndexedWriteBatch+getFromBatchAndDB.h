@@ -36,10 +36,10 @@
 
  @throws RocksDBException if the value for the key cannot be read
 */
-- (NSData *)getFromBatchAndDB:(RocksDB *)db
-					  options:(RocksDBReadOptions *)options
-						  key:(NSData *)key
-						error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatchAndDB:(RocksDB *)db
+							   options:(RocksDBReadOptions *)options
+								   key:(NSData *)key
+								 error:(NSError * __autoreleasing *)error;
 
 /**
  Similar to [RocksDB.get] but will also
@@ -63,10 +63,10 @@
  @return a byte array storing the value associated with the input key if
  any. null if it does not find the specified key.
 */
-- (NSData *)getFromBatchAndDB:(RocksDB *)db
-					  options:(RocksDBReadOptions *)options
-			 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-						  key:(NSData *)key
-						error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatchAndDB:(RocksDB *)db
+							   options:(RocksDBReadOptions *)options
+					  fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+								   key:(NSData *)key
+								 error:(NSError * __autoreleasing *)error;
 
 @end
