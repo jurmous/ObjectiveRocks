@@ -65,8 +65,7 @@ class RocksDBTests : XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		let bundle = Bundle(for: type(of: self))
-		path = (bundle.bundlePath as NSString).appendingPathComponent("ObjectiveRocks")
+		path = "ObjectiveRocks"
 		backupPath = path + "Backup"
 		restorePath = path + "Restore"
 		checkpointPath1 = path + "Snapshot1"
