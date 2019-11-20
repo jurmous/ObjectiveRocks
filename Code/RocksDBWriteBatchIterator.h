@@ -23,10 +23,13 @@ typedef NS_ENUM(NSUInteger, RocksDBWriteBatchEntryType)
 };
 
 @interface RocksDBWriteBatchEntry : NSObject
-
 @property (nonatomic, readonly) RocksDBWriteBatchEntryType type;
 @property (nonatomic, readonly) RocksDBSlice *key;
 @property (nonatomic, readonly) RocksDBSlice *value;
+
+- (instancetype) initWithType:(RocksDBWriteBatchEntryType)type
+						  key:(RocksDBSlice *)key
+						value:(RocksDBSlice *)value;
 
 @end
 

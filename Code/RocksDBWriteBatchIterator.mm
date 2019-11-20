@@ -2,9 +2,6 @@
 //  RocksDBWriteBatchIterator.m
 //  ObjectiveRocks
 //
-//  Created by Iska on 20/08/15.
-//  Copyright (c) 2015 BrainCookie. All rights reserved.
-//
 
 #import "RocksDBWriteBatchIterator.h"
 #import "RocksDBSlice.h"
@@ -13,16 +10,27 @@
 
 #import <rocksdb/utilities/write_batch_with_index.h>
 
-@interface RocksDBWriteBatchEntry (Private)
+@interface RocksDBWriteBatchEntry ()
 @property (nonatomic, assign) RocksDBWriteBatchEntryType type;
-@property (nonatomic, strong) id key;
-@property (nonatomic, strong) id value;
+@property (nonatomic, strong) RocksDBSlice *key;
+@property (nonatomic, strong) RocksDBSlice *value;
 @end
 
 @implementation RocksDBWriteBatchEntry
-@synthesize type;
-@synthesize key;
-@synthesize value;
+@synthesize key, value, type;
+
+- (instancetype) initWithType:(RocksDBWriteBatchEntryType)type
+						  key:(RocksDBSlice *)key
+					    value:(RocksDBSlice *)value
+{
+	self = [super init];
+	if (self) {
+		self.type = type;
+		self.key = key;
+		self.value = value;
+	}
+	return self;
+}
 @end
 
 @interface RocksDBWriteBatchIterator ()
@@ -105,12 +113,37 @@
 
 - (RocksDBWriteBatchEntry *)entry
 {
-	rocksdb::WriteEntry nativeEntry = _iterator->Entry();
-	RocksDBWriteBatchEntry *writeEntry = [RocksDBWriteBatchEntry new];
-	writeEntry.type = (RocksDBWriteBatchEntryType)nativeEntry.type;
-	writeEntry.key = DataFromSlice(nativeEntry.key);
-	writeEntry.value = DataFromSlice(nativeEntry.value);
-	return writeEntry;
+	rocksdb::WriteEntry entry = _iterator->Entry();
+	RocksDBWriteBatchEntryType type;
+	switch (entry.type) {
+		case rocksdb::kPutRecord:
+			type = RocksDBWriteBatchEntryTypePutRecord;
+			break;
+		case rocksdb::kMergeRecord:
+			type = RocksDBWriteBatchEntryTypeMergeRecord;
+			break;
+		case rocksdb::kDeleteRecord:
+			type = RocksDBWriteBatchEntryTypeDeleteRecord;
+			break;
+		case rocksdb::kSingleDeleteRecord:
+			type = RocksDBWriteBatchEntryTypeSingleDeleteRecord;
+			break;
+		case rocksdb::kDeleteRangeRecord:
+			type = RocksDBWriteBatchEntryTypeDeleteRangeRecord;
+			break;
+		case rocksdb::kLogDataRecord:
+			type = RocksDBWriteBatchEntryTypeLogDataRecord;
+			break;
+		case rocksdb::kXIDRecord:
+			type = RocksDBWriteBatchEntryTypeXIDRecord;
+			break;
+	}
+
+	return [[RocksDBWriteBatchEntry alloc]
+			initWithType:type
+			key:[[RocksDBSlice alloc] initWithSlice:&entry.key]
+			value:[[RocksDBSlice alloc] initWithSlice:&entry.value]
+	];
 }
 
 - (BOOL)status:(NSError * __autoreleasing *)error

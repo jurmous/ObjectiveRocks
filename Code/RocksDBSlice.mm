@@ -17,11 +17,20 @@
 @implementation RocksDBSlice : NSObject
 @synthesize slice = _slice;
 
+- (instancetype)init
+{
+	self = [super init];
+	if (self) {
+		_slice = new rocksdb::Slice();
+	}
+	return self;
+}
+
 - (instancetype)initWithSlice:(rocksdb::Slice *)slice
 {
 	self = [super init];
 	if (self) {
-		_slice = slice;
+		_slice = new rocksdb::Slice(*slice);
 	}
 	return self;
 }
@@ -110,6 +119,12 @@
 - (NSData *)toData
 {
 	return DataFromSlice(*_slice);
+}
+
+- (void)dealloc
+{
+	delete _slice;
+	_slice = nullptr;
 }
 
 @end
