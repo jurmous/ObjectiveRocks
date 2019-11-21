@@ -3130,6 +3130,7 @@
 				62F9D8A11B86A74900C65860 /* RocksDBWriteBatchIterator+Private.h */,
 				6221B79E1A629A4F00D28BF5 /* RocksDBSnapshot+Private.h */,
 				8551063B23604CBF0076A830 /* RocksDBEnv+Private.h */,
+				623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -3175,7 +3176,6 @@
 				6214FD071A3F698300B92E5C /* RocksDBCallbackMergeOperator.cpp */,
 				6236E2591A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.h */,
 				6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */,
-				623D3C201A37C4FF00389207 /* RocksDBSlice+Private.h */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
