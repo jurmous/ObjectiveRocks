@@ -52,6 +52,16 @@
 	_options.fill_cache = fillCache;
 }
 
+- (BOOL)prefixSameAsStart
+{
+	return _options.prefix_same_as_start;
+}
+
+- (void)setPrefixSameAsStart:(BOOL)prefixSameAsStart
+{
+	_options.prefix_same_as_start = prefixSameAsStart;
+}
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone

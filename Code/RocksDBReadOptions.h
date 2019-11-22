@@ -26,6 +26,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) BOOL fillCache;
 
+/**
+ Enforce that the iterator only iterates over the same prefix as the seek.
+ This option is effective only for prefix seeks, i.e. prefix_extractor is
+ non-null for the column family and [.totalOrderSeek] is false.
+ Unlike iterate_upper_bound, [.setPrefixSameAsStart] only
+ works within a prefix but in both directions.
+ */
+@property (nonatomic, assign) BOOL prefixSameAsStart;
+
 @end
 
 NS_ASSUME_NONNULL_END
