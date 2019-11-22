@@ -44,17 +44,22 @@
 #pragma mark - Lifecycle 
 
 - (instancetype)initWithPath:(NSString *)path
+					   error:(NSError *__autoreleasing  _Nullable *)error
 {
-	return [self initWithPath:path rocksEnv:rocksdb::Env::Default()];
+	return [self initWithPath:path rocksEnv:rocksdb::Env::Default() error:error];
 }
 
-- (instancetype)initWithPath:(NSString *)path env:(RocksDBEnv *)env
+- (instancetype)initWithPath:(NSString *)path
+						 env:(RocksDBEnv *)env
+					   error:(NSError *__autoreleasing  _Nullable *)error
 {
-	return [self initWithPath:path rocksEnv:env.env];
+	return [self initWithPath:path rocksEnv:env.env error:error];
 }
 
 
-- (instancetype)initWithPath:(NSString *)path rocksEnv:(rocksdb::Env *)env
+- (instancetype)initWithPath:(NSString *)path
+					rocksEnv:(rocksdb::Env *)env
+					   error:(NSError *__autoreleasing  _Nullable *)error
 {
 	self = [super init];
 	if (self) {
@@ -63,7 +68,10 @@
 															 rocksdb::BackupableDBOptions(_path.UTF8String),
 															 &_backupEngine);
 		if (!status.ok()) {
-			NSLog(@"Error opening database backup: %@", [RocksDBError errorWithRocksStatus:status]);
+			NSError *temp = [RocksDBError errorWithRocksStatus:status];
+			if (error && *error == nil) {
+				*error = temp;
+			}
 			return nil;
 		}
 	}

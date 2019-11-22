@@ -16,7 +16,7 @@ class RocksDBComparatorTests : RocksDBTests {
 		options.createIfMissing = true
 		options.comparator = RocksDBComparator(type: .bytewiseAscending)
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abc1", forKey: "abc1")
 		try! rocks.setData("abc2", forKey: "abc2")
@@ -66,7 +66,7 @@ class RocksDBComparatorTests : RocksDBTests {
 		options.createIfMissing = true
 		options.comparator = RocksDBComparator(type: .bytewiseDescending)
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abc1", forKey: "abc1")
 		try! rocks.setData("abc2", forKey: "abc2")
@@ -120,7 +120,7 @@ class RocksDBComparatorTests : RocksDBTests {
 		options.createIfMissing = true
 		options.comparator = RocksDBComparator(type: .stringCompareAscending)
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		var expected = [String]()
 
@@ -147,7 +147,7 @@ class RocksDBComparatorTests : RocksDBTests {
 		options.createIfMissing = true
 		options.comparator = RocksDBComparator(type: .stringCompareDescending)
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		var expected = [String]()
 

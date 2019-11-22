@@ -20,7 +20,7 @@ class RocksDBColumnFamilyMetadataTests : RocksDBTests {
 		options.createIfMissing = true
 		options.createMissingColumnFamilies = true
 
-		rocks = RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options)
 
 		let defaultColumnFamily = rocks.columnFamilies()[0]
 		let newColumnFamily = rocks.columnFamilies()[1]

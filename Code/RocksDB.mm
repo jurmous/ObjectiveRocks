@@ -78,11 +78,13 @@
 
 #pragma mark - Lifecycle
 
-+ (instancetype)databaseAtPath:(NSString *)path andOptions:(RocksDBOptions *)options
++ (instancetype)databaseAtPath:(NSString *)path
+					andOptions:(RocksDBOptions *)options
+						 error:(NSError *__autoreleasing  _Nullable *)error
 {
 	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
-	if ([rocks openDatabaseReadOnly:NO] == NO) {
+	if ([rocks openDatabaseReadOnly:NO error:error] == NO) {
 		return nil;
 	}
 	return rocks;
@@ -91,10 +93,11 @@
 + (instancetype)databaseAtPath:(NSString *)path
 				columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
 					andOptions:(RocksDBOptions *)options
+						 error:(NSError *__autoreleasing  _Nullable *)error
 {
 	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
-	if ([rocks openColumnFamilies:descriptor readOnly:NO] == NO) {
+	if ([rocks openColumnFamilies:descriptor readOnly:NO error:error] == NO) {
 		return nil;
 	}
 	return rocks;
@@ -104,10 +107,11 @@
 
 + (instancetype)databaseForReadOnlyAtPath:(NSString *)path
 							   andOptions:(RocksDBOptions *)options
+									error:(NSError *__autoreleasing  _Nullable *)error
 {
 	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
-	if ([rocks openDatabaseReadOnly:YES] == NO) {
+	if ([rocks openDatabaseReadOnly:YES error:error] == NO) {
 		return nil;
 	}
 	return rocks;
@@ -116,10 +120,11 @@
 + (instancetype)databaseForReadOnlyAtPath:(NSString *)path
 						   columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
 							   andOptions:(RocksDBOptions *)options
+									error:(NSError *__autoreleasing  _Nullable *)error
 {
 	RocksDB *rocks = [[RocksDB alloc] initWithPath:path withOptions:options];
 
-	if ([rocks openColumnFamilies:descriptor readOnly:YES] == NO) {
+	if ([rocks openColumnFamilies:descriptor readOnly:YES error:error] == NO) {
 		return nil;
 	}
 	return rocks;
@@ -198,6 +203,7 @@
 #pragma mark - Open
 
 - (BOOL)openDatabaseReadOnly:(BOOL)readOnly
+					   error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::Status status;
 	if (readOnly) {
@@ -207,8 +213,11 @@
 	}
 
 	if (!status.ok()) {
-		NSLog(@"Error opening database: %@", [RocksDBError errorWithRocksStatus:status]);
 		[self close];
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
 		return NO;
 	}
 	_columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:_db->DefaultColumnFamily()];
@@ -216,7 +225,9 @@
 	return YES;
 }
 
-- (BOOL)openColumnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor readOnly:(BOOL)readOnly
+- (BOOL)openColumnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
+				  readOnly:(BOOL)readOnly
+					 error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::Status status;
 	std::vector<rocksdb::ColumnFamilyDescriptor> *columnFamilies = descriptor.columnFamilies;
@@ -238,8 +249,11 @@
 
 
 	if (!status.ok()) {
-		NSLog(@"Error opening database: %@", [RocksDBError errorWithRocksStatus:status]);
 		[self close];
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
 		return NO;
 	}
 	_columnFamily = [[RocksDBColumnFamilyHandle alloc] initWithColumnFamily:_db->DefaultColumnFamily()];
@@ -253,7 +267,6 @@
 {
 	rocksdb::Status status = rocksdb::DestroyDB(path.UTF8String, options.options);
 	if (!status.ok()) {
-		NSLog(@"Error database at %@: %@", path, [RocksDBError errorWithRocksStatus:status]);
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
 			*error = temp;
@@ -274,7 +287,6 @@
 
 	rocksdb::Status status = rocksdb::DB::ListColumnFamilies(options.options, path.UTF8String, &names);
 	if (!status.ok()) {
-		NSLog(@"Error listing column families in database at %@: %@", path, [RocksDBError errorWithRocksStatus:status]);
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
 			*error = temp;
@@ -295,7 +307,6 @@
 	rocksdb::ColumnFamilyHandle *handle;
 	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, [name cStringUsingEncoding: NSNonLossyASCIIStringEncoding], &handle);
 	if (!status.ok()) {
-		NSLog(@"Error creating column family: %@", [RocksDBError errorWithRocksStatus:status]);
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
 			*error = temp;
@@ -307,13 +318,18 @@
 	return columnFamily;
 }
 
-- (void)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+- (BOOL)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::Status status = _db->DropColumnFamily(columnFamily.columnFamily);
 	if (!status.ok()) {
-		NSLog(@"Error dropping column family: %@", [RocksDBError errorWithRocksStatus:status]);
-		throw [RocksDBError errorWithRocksStatus:status];
+		NSError *temp = [RocksDBError errorWithRocksStatus:status];
+		if (error && *error == nil) {
+			*error = temp;
+		}
+		return NO;
 	}
+	return YES;
 }
 
 - (BOOL)dropColumnFamilies:(NSArray<RocksDBColumnFamilyHandle *>*)columnFamilies error:(NSError *__autoreleasing  _Nullable *)error

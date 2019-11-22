@@ -107,10 +107,10 @@
 	return DataFromSlice(rocksdb::Slice(value));
 }
 
-- (nullable NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
-				 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-							  key:(NSData *)key
-							error:(NSError * __autoreleasing *)error
+- (nullable NSData *)getFromBatchAndColumnFamily:(RocksDBDatabaseOptions *)options
+								fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+											 key:(NSData *)key
+										   error:(NSError * __autoreleasing *)error
 {
 	std::string value;
 	rocksdb::Status status = _writeBatchWithIndex->GetFromBatch(columnFamily.columnFamily, options.options, SliceFromData(key), &value);
@@ -145,11 +145,11 @@
 	return DataFromSlice(rocksdb::Slice(value));
 }
 
-- (nullable NSData *)getFromBatchAndDB:(RocksDB *)db
-							   options:(RocksDBReadOptions *)options
-					  fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-								   key:(NSData *)key
-								 error:(NSError * __autoreleasing *)error
+- (nullable NSData *)getFromBatchAndDBAndColumnFamily:(RocksDB *)db
+											  options:(RocksDBReadOptions *)options
+									 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+												  key:(NSData *)key
+												error:(NSError * __autoreleasing *)error
 {
 	std::string value;
 	rocksdb::Status status = _writeBatchWithIndex->GetFromBatchAndDB(db.db, options.options, columnFamily.columnFamily, SliceFromData(key), &value);

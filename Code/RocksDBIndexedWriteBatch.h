@@ -124,10 +124,10 @@ returned as a separate entry, in the order of update time.
  @throws RocksDBException if the batch does not have enough data to resolve
  Merge operations, MergeInProgress status may be returned.
 */
-- (nullable NSData *)getFromBatch:(RocksDBDatabaseOptions *)options
-				 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-							  key:(NSData *)key
-							error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatchAndColumnFamily:(RocksDBDatabaseOptions *)options
+								fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+											 key:(NSData *)key
+										   error:(NSError * __autoreleasing *)error;
 
 @end
 

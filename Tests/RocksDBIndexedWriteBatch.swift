@@ -133,7 +133,7 @@ class RocksDBIndexedWriteBatchTests : RocksDBTests {
 
 		let options = RocksDBDatabaseOptions()
 
-		XCTAssertEqual("v1".data, wbwi.getFromBatch(options, key: "k1".data, error: nil))
-		XCTAssertEqual("v2".data, wbwi.getFromBatch(options, key: "k2".data, error: nil))
+		XCTAssertEqual("v1".data, try! wbwi.getFromBatch(options, key: "k1".data))
+		XCTAssertEqual("v2".data, try! wbwi.getFromBatch(options, key: "k2".data))
 	}
 }

@@ -13,7 +13,7 @@ class RocksDBReadOnlyTests : RocksDBTests {
 
 	func testDB_Open_ReadOnly_NilIfMissing() {
 		let options = RocksDBOptions();
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions:options)
+		rocks = try? RocksDB.databaseForReadOnly(atPath: path, andOptions:options)
 		XCTAssertNil(rocks);
 	}
 
@@ -21,23 +21,23 @@ class RocksDBReadOnlyTests : RocksDBTests {
 		let options = RocksDBOptions();
 		options.createIfMissing = true
 
-		rocks = RocksDB.database(atPath: path, andOptions: options);
+		rocks = try! RocksDB.database(atPath: path, andOptions: options);
 		XCTAssertNotNil(rocks);
 		rocks.close()
 
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions: options)
+		rocks = try! RocksDB.databaseForReadOnly(atPath: path, andOptions: options)
 		XCTAssertNotNil(rocks);
 	}
 
 	func testDB_ReadOnly_NotWritable() {
 		let options = RocksDBOptions();
 		options.createIfMissing = true
-		rocks = RocksDB.database(atPath: path, andOptions: options);
+		rocks = try! RocksDB.database(atPath: path, andOptions: options);
 		XCTAssertNotNil(rocks);
 		try! rocks.setData("data", forKey: "key")
 		rocks.close()
 
-		rocks = RocksDB.databaseForReadOnly(atPath: path, andOptions:RocksDBOptions())
+		rocks = try! RocksDB.databaseForReadOnly(atPath: path, andOptions:RocksDBOptions())
 
 		try! rocks.data(forKey: "key")
 

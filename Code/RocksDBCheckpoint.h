@@ -24,7 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return A newly-initialized Checkoint object instance.
  */
-- (instancetype)initWithDatabase:(RocksDB *)db;
+- (instancetype)initWithDatabase:(RocksDB *)db
+						   error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Creates a checkpoint, i.e. an openable snapshot, of the DB under the given path.

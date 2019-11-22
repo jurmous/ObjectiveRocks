@@ -16,7 +16,7 @@ class RocksDBPrefixExtractorTests : RocksDBTests {
 		options.createIfMissing = true
 		options.prefixExtractor = RocksDBPrefixExtractor(type: .fixedLength, length: 3)
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("x", forKey: "100A")
 		try! rocks.setData("x", forKey: "100B")
@@ -88,7 +88,7 @@ class RocksDBPrefixExtractorTests : RocksDBTests {
 			options.filterPolicy = RocksDBFilterPolicy.bloomFilterPolicy(withBitsPerKey: 10, useBlockBasedBuilder: true)
 		})
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("x", forKey: "1010")
 		try! rocks.setData("x", forKey: "4211")

@@ -14,12 +14,12 @@ class RocksDBBasicTests : RocksDBTests {
 	func testSwift_DB_Open_ErrorIfExists() {
 		let options = RocksDBOptions();
 		options.createIfMissing = true
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 		rocks.close()
 
 		let options2 = RocksDBOptions();
 		options2.errorIfExists = true
-		let db = RocksDB.database(atPath: self.path, andOptions: options2)
+		let db = try? RocksDB.database(atPath: self.path, andOptions: options2)
 
 		XCTAssertNil(db)
 	}
@@ -27,7 +27,7 @@ class RocksDBBasicTests : RocksDBTests {
     func testSwift_DB_IsClosed() {
 		let options = RocksDBOptions();
 		options.createIfMissing = true
-        rocks = RocksDB.database(atPath: self.path, andOptions: options)
+        rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
         XCTAssertFalse(rocks.isClosed())
         rocks.close()
         XCTAssertTrue(rocks.isClosed())
@@ -36,7 +36,7 @@ class RocksDBBasicTests : RocksDBTests {
 	func testSwift_DB_CRUD() {
 		let options = RocksDBOptions();
 		options.createIfMissing = true
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		let readOptions = RocksDBReadOptions()
 		readOptions.fillCache = true

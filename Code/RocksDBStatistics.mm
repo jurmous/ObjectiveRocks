@@ -134,7 +134,6 @@
 {
 	rocksdb::Status status = _statistics->Reset();
 	if (!status.ok()) {
-		NSLog(@"Error resetting Statistics");
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
 			*error = temp;

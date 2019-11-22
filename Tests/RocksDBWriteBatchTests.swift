@@ -14,7 +14,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		let batch = RocksDBWriteBatch()
 
@@ -36,7 +36,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -70,7 +70,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 			return result.data(using: .utf8)!
 		}
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -90,7 +90,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 	func testSwift_WriteBatch_Apply_ClearOps() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -115,7 +115,7 @@ class RocksDBWriteBatchTests : RocksDBTests {
 		let options = RocksDBOptions();
 		options.createIfMissing = true;
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 

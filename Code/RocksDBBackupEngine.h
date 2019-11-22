@@ -25,18 +25,23 @@ NS_ASSUME_NONNULL_BEGIN
  Initializes a new Backup Enginge with the given path as a destination directory.
 
  @param path The destination path for the new Backup Engine.
+ @param error filled on failures
  @return The newly-created Backup Engine with the given destination path.
  */
-- (instancetype)initWithPath:(NSString *)path;
+- (instancetype)initWithPath:(NSString *)path
+					   error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Initializes a new Backup Enginge with the given path as a destination directory.
 
  @param path The destination path for the new Backup Engine.
  @param env To create backupengine within
+ @param error filled on failures
  @return The newly-created Backup Engine with the given destination path.
  */
-- (instancetype)initWithPath:(NSString *)path env:(RocksDBEnv *)env;
+- (instancetype)initWithPath:(NSString *)path
+						 env:(RocksDBEnv *)env
+					   error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Creates a new backup of the given database instance.

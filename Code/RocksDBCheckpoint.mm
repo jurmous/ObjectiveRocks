@@ -23,12 +23,16 @@
 #pragma mark - Lifecycle
 
 - (instancetype)initWithDatabase:(RocksDB *)database
+						   error:(NSError *__autoreleasing  _Nullable *)error
 {
 	self = [super init];
 	if (self) {
 		rocksdb::Status status = rocksdb::Checkpoint::Create(database.db, &_checkpoint);
 		if (!status.ok()) {
-			NSLog(@"Error opening creating checkpoint: %@", [RocksDBError errorWithRocksStatus:status]);
+			NSError *temp = [RocksDBError errorWithRocksStatus:status];
+			if (error && *error == nil) {
+				*error = temp;
+			}
 			return nil;
 		}
 	}

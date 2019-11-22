@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param path The file path of the DB.
  @param options RocksDBOptions to tune the database
+ @param error filled if error is thrown
  @return The newly-intialized DB instance with the given path and options.
 
  @see RocksDBOptions
@@ -56,7 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
  that currently exist in the DB.
  */
 + (nullable instancetype)databaseAtPath:(NSString *)path
-							andOptions:(RocksDBOptions *)options;
+							 andOptions:(RocksDBOptions *)options
+								  error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Intializes a DB instance and opens the defined Column Families.
@@ -65,6 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param descriptor The descriptor holds the names and the options of the existing Column Families
  in the DB.
  @param options RocksDBOptions to tune the database
+ @param error filled if error is thrown
  @return The newly-intialized DB instance with the given path and database options. Furthermore, the
  DB instance also opens the defined Column Families.
 
@@ -81,7 +84,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable instancetype)databaseAtPath:(NSString *)path
 						 columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-							 andOptions:(RocksDBOptions *)options;
+							 andOptions:(RocksDBOptions *)options
+								  error:(NSError *__autoreleasing  _Nullable *)error;
 
 #if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
 
@@ -98,6 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param path The file path of the DB.
  @param options RocksDBOptions to tune the database
+ @param error filled if error is thrown
  @return The newly-intialized DB instance with the given path and options.
 
  @see RocksDBOptions
@@ -106,7 +111,8 @@ NS_ASSUME_NONNULL_BEGIN
  if `createIfMissing` option is set.
  */
 + (nullable instancetype)databaseForReadOnlyAtPath:(NSString *)path
-										andOptions:(RocksDBOptions *)options;
+										andOptions:(RocksDBOptions *)options
+											 error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Intializes a DB instance for read-only and opens the defined Column Families.
@@ -118,6 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param descriptor The descriptor holds the names and the options of the existing Column Families
  in the DB.
  @param options RocksDBOptions to tune the database
+ @param error filled if error is thrown
  @return The newly-intialized DB instance with the given path and database options. Furthermore, the
  DB instance also opens the defined Column Families.
 
@@ -137,7 +144,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable instancetype)databaseForReadOnlyAtPath:(NSString *)path
 									columnFamilies:(RocksDBColumnFamilyDescriptor *)descriptor
-										andOptions:(RocksDBOptions *)options;
+										andOptions:(RocksDBOptions *)options
+											 error:(NSError *__autoreleasing  _Nullable *)error;
 
 #endif
 
@@ -239,10 +247,12 @@ NS_ASSUME_NONNULL_BEGIN
  Throws an exception if it fails.
 
  @param columnFamily the handle to columnFamily to drop
+ @param error filled on failures
 
  @see RocksDBColumnFamilyHandle
  */
-- (void)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily;
+- (BOOL)dropColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+				   error:(NSError *__autoreleasing  _Nullable *)error;
 
 /**
  Bulk drop column families. This call only records drop records in the

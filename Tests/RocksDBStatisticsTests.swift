@@ -18,7 +18,7 @@ class RocksDBStatisticsTests : RocksDBTests {
 		options.createIfMissing = true
 		options.statistics = statistics;
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1", forKey: "key 1")
 
@@ -32,7 +32,7 @@ class RocksDBStatisticsTests : RocksDBTests {
 		options.createIfMissing = true
 		options.statistics = statistics;
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("abcd", forKey: "abcd")
 
@@ -51,7 +51,7 @@ class RocksDBStatisticsTests : RocksDBTests {
 		options.createIfMissing = true
 		options.statistics = statistics;
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		for i in 0...10000 {
 			let str = String(format: "a%d", i)

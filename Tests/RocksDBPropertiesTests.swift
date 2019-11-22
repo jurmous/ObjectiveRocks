@@ -17,7 +17,7 @@ class RocksDBPropertiesTests : RocksDBTests {
 		options.maxWriteBufferNumber = 10;
 		options.minWriteBufferNumberToMerge = 10;
 
-		rocks = RocksDB.database(atPath: self.path, andOptions: options)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
 
 		try! rocks.setData("value 1".data, forKey: "key 1".data)
 		try! rocks.setData("value 2".data, forKey: "key 2".data)
@@ -35,7 +35,7 @@ class RocksDBPropertiesTests : RocksDBTests {
 		options.createIfMissing = true
 		options.createMissingColumnFamilies = true
 
-		rocks = RocksDB.database(atPath: path, columnFamilies: descriptor, andOptions: options)
+		rocks = try! RocksDB.database(atPath: path, columnFamilies: descriptor, andOptions: options)
 
 		let columnFamilies = rocks.columnFamilies()
 

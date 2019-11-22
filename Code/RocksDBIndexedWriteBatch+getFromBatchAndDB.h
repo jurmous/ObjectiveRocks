@@ -63,10 +63,10 @@
  @return a byte array storing the value associated with the input key if
  any. null if it does not find the specified key.
 */
-- (nullable NSData *)getFromBatchAndDB:(RocksDB *)db
-							   options:(RocksDBReadOptions *)options
-					  fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-								   key:(NSData *)key
-								 error:(NSError * __autoreleasing *)error;
+- (nullable NSData *)getFromBatchAndDBAndColumnFamily:(RocksDB *)db
+											  options:(RocksDBReadOptions *)options
+									 fromColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
+												  key:(NSData *)key
+												error:(NSError * __autoreleasing *)error;
 
 @end
