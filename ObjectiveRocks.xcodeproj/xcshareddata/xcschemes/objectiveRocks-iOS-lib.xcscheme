@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "624F5D971BEE416D00497FEF"
-               BuildableName = "ObjectiveRocks.framework"
-               BlueprintName = "ObjectiveRocks-iOS"
+               BlueprintIdentifier = "851B86C323449295009721CC"
+               BuildableName = "libobjectiveRocks-iOS.a"
+               BlueprintName = "objectiveRocks-iOS"
                ReferencedContainer = "container:ObjectiveRocks.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -31,7 +31,7 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -50,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "624F5D971BEE416D00497FEF"
-            BuildableName = "ObjectiveRocks.framework"
-            BlueprintName = "ObjectiveRocks-iOS"
+            BlueprintIdentifier = "851B86C323449295009721CC"
+            BuildableName = "libobjectiveRocks-iOS.a"
+            BlueprintName = "objectiveRocks-iOS"
             ReferencedContainer = "container:ObjectiveRocks.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

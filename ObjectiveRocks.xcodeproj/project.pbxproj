@@ -1273,7 +1273,6 @@
 		851B851923449115009721CC /* auto_roll_logger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B1920B7624C00DEBF89 /* auto_roll_logger.cc */; };
 		851B851A23449115009721CC /* bloom.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4420B7625600DEBF89 /* bloom.cc */; };
 		851B851B23449115009721CC /* build_version.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B6D20B7626200DEBF89 /* build_version.cc */; };
-		851B851C23449115009721CC /* build_version.cc.in in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4B20B7625900DEBF89 /* build_version.cc.in */; };
 		851B851D23449115009721CC /* coding.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B5720B7625B00DEBF89 /* coding.cc */; };
 		851B851E23449115009721CC /* compaction_job_stats_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B3C20B7625400DEBF89 /* compaction_job_stats_impl.cc */; };
 		851B851F23449115009721CC /* comparator.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4820B7625800DEBF89 /* comparator.cc */; };
@@ -2146,7 +2145,6 @@
 		851B889823449295009721CC /* auto_roll_logger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B1920B7624C00DEBF89 /* auto_roll_logger.cc */; };
 		851B889923449295009721CC /* bloom.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4420B7625600DEBF89 /* bloom.cc */; };
 		851B889A23449295009721CC /* build_version.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B6D20B7626200DEBF89 /* build_version.cc */; };
-		851B889B23449295009721CC /* build_version.cc.in in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4B20B7625900DEBF89 /* build_version.cc.in */; };
 		851B889C23449295009721CC /* coding.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B5720B7625B00DEBF89 /* coding.cc */; };
 		851B889D23449295009721CC /* compaction_job_stats_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B3C20B7625400DEBF89 /* compaction_job_stats_impl.cc */; };
 		851B889E23449295009721CC /* comparator.cc in Sources */ = {isa = PBXBuildFile; fileRef = 62976B4820B7625800DEBF89 /* comparator.cc */; };
@@ -2333,6 +2331,8 @@
 		85971BBA2351E79500A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
 		85B27B0323893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
 		85B27B0423893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
+		85B27B0B238987D000F08788 /* build_version.cc.in in Resources */ = {isa = PBXBuildFile; fileRef = 62976B4B20B7625900DEBF89 /* build_version.cc.in */; };
+		85B27B0D238987EA00F08788 /* build_version.cc.in in Resources */ = {isa = PBXBuildFile; fileRef = 62976B4B20B7625900DEBF89 /* build_version.cc.in */; };
 		85D20E81237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E82237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E83237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -5571,9 +5571,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 851B846C2343EA66009721CC /* Build configuration list for PBXNativeTarget "objectiveRocks-macOS" */;
 			buildPhases = (
+				85B27B05238986E600F08788 /* Build build_version.cc */,
 				851B845E2343EA66009721CC /* Headers */,
 				851B845F2343EA66009721CC /* Sources */,
 				851B84602343EA66009721CC /* Frameworks */,
+				85B27B0A238987AC00F08788 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -5588,9 +5590,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 851B890F23449295009721CC /* Build configuration list for PBXNativeTarget "objectiveRocks-iOS" */;
 			buildPhases = (
+				85B27B062389871200F08788 /* Build build_version.cc */,
 				851B86C423449295009721CC /* Headers */,
 				851B881C23449295009721CC /* Sources */,
 				851B890E23449295009721CC /* Frameworks */,
+				85B27B0C238987DA00F08788 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -5692,6 +5696,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		85B27B0A238987AC00F08788 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85B27B0B238987D000F08788 /* build_version.cc.in in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85B27B0C238987DA00F08788 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85B27B0D238987EA00F08788 /* build_version.cc.in in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -5722,6 +5742,42 @@
 			);
 			outputPaths = (
 				"$(SRCROOT)/rocksdb/util/build_version.cc",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\n\nif command -v git >/dev/null 2>&1; then\nGIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\nfi\n\ncat > \"${OUTFILE}\" <<EOF\n#include \"build_version.h\"\nconst char* rocksdb_build_git_sha = \"rocksdb_build_git_sha:${GIT_SHA}\";\nconst char* rocksdb_build_git_datetime = \"rocksdb_build_git_datetime:$(date)\";\nconst char* rocksdb_build_compile_date = \"$(date)\";\nEOF\n";
+		};
+		85B27B05238986E600F08788 /* Build build_version.cc */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build build_version.cc";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\n\nif command -v git >/dev/null 2>&1; then\nGIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\nfi\n\ncat > \"${OUTFILE}\" <<EOF\n#include \"build_version.h\"\nconst char* rocksdb_build_git_sha = \"rocksdb_build_git_sha:${GIT_SHA}\";\nconst char* rocksdb_build_git_datetime = \"rocksdb_build_git_datetime:$(date)\";\nconst char* rocksdb_build_compile_date = \"$(date)\";\nEOF\n";
+		};
+		85B27B062389871200F08788 /* Build build_version.cc */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build build_version.cc";
+			outputFileListPaths = (
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -6400,7 +6456,6 @@
 				851B851923449115009721CC /* auto_roll_logger.cc in Sources */,
 				851B851A23449115009721CC /* bloom.cc in Sources */,
 				851B851B23449115009721CC /* build_version.cc in Sources */,
-				851B851C23449115009721CC /* build_version.cc.in in Sources */,
 				851B851D23449115009721CC /* coding.cc in Sources */,
 				851B851E23449115009721CC /* compaction_job_stats_impl.cc in Sources */,
 				851B851F23449115009721CC /* comparator.cc in Sources */,
@@ -6653,7 +6708,6 @@
 				851B889823449295009721CC /* auto_roll_logger.cc in Sources */,
 				851B889923449295009721CC /* bloom.cc in Sources */,
 				851B889A23449295009721CC /* build_version.cc in Sources */,
-				851B889B23449295009721CC /* build_version.cc.in in Sources */,
 				851B889C23449295009721CC /* coding.cc in Sources */,
 				851B889D23449295009721CC /* compaction_job_stats_impl.cc in Sources */,
 				851B889E23449295009721CC /* comparator.cc in Sources */,
