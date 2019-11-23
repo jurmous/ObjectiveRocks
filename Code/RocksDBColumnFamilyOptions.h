@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 /** The DB compression type. */
 typedef NS_ENUM(char, RocksDBCompactionStyle)
 {
-	RocksDBCompressionStyleLevel = 0x0,
-	RocksDBCompressionStyleUniversal = 0x1,
-	RocksDBCompressionStyleFifo = 0x2,
-	RocksDBCompressionStyleNone = 0x3
+	RocksDBCompactionStyleLevel = 0x0,
+	RocksDBCompactionStyleUniversal = 0x1,
+	RocksDBCompactionStyleFifo = 0x2,
+	RocksDBCompactionStyleNone = 0x3
 };
 
 /** The DB compression type. */

@@ -2331,6 +2331,8 @@
 		85971BB82351E79100A6DB0B /* RocksDBCallbackMergeOperator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6214FD071A3F698300B92E5C /* RocksDBCallbackMergeOperator.cpp */; };
 		85971BB92351E79400A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
 		85971BBA2351E79500A6DB0B /* RocksDBCallbackSliceTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6236E2581A4DD71600A81ED6 /* RocksDBCallbackSliceTransform.cpp */; };
+		85B27B0323893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
+		85B27B0423893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
 		85D20E81237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E82237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E83237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2989,6 +2991,7 @@
 		8575C6C823395035009BAC2B /* concurrent_task_limiter_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = concurrent_task_limiter_impl.h; sourceTree = "<group>"; };
 		8575C6CD23395064009BAC2B /* in_memory_stats_history.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = in_memory_stats_history.h; sourceTree = "<group>"; };
 		8575C6CE23395064009BAC2B /* in_memory_stats_history.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = in_memory_stats_history.cc; sourceTree = "<group>"; };
+		85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocksDBCompactRangeTests.swift; sourceTree = "<group>"; };
 		85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBWriteBatchBase+getWriteBatch.h"; sourceTree = "<group>"; };
 		85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBWriteBatchBase.h; sourceTree = "<group>"; };
 		85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBWriteBatchBase.mm; sourceTree = "<group>"; };
@@ -3100,6 +3103,7 @@
 				62E173E51A6AD40E00A00DF3 /* RocksDBBackupTests.swift */,
 				6216361A1A631F2900B132CE /* RocksDBStatisticsTests.swift */,
 				621636121A62DF9400B132CE /* RocksDBPropertiesTests.swift */,
+				85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -6229,6 +6233,7 @@
 				626159A21E3D0B6200288079 /* RocksDBWriteBatchTests.swift in Sources */,
 				626159A91E3D0B9200288079 /* RocksDBIteratorTests.swift in Sources */,
 				626159AF1E3D131200288079 /* RocksDBCheckpointTests.swift in Sources */,
+				85B27B0323893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */,
 				626159A01E3D0B6200288079 /* RocksDBBasicTests.swift in Sources */,
 				621897DA1E3D47A70019C64E /* RocksDBPrefixExtractorTests.swift in Sources */,
 				626159B11E3D135E00288079 /* RocksDBPropertiesTests.swift in Sources */,
@@ -6256,6 +6261,7 @@
 				626159AE1E3D12CE00288079 /* RocksDBSnapshotTests.swift in Sources */,
 				626159A81E3D0B6300288079 /* RocksDBIndexedWriteBatch.swift in Sources */,
 				626159AA1E3D0B9200288079 /* RocksDBIteratorTests.swift in Sources */,
+				85B27B0423893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */,
 				626159A71E3D0B6300288079 /* RocksDBWriteBatchTests.swift in Sources */,
 				626159A41E3D0B6300288079 /* RockDBTests.swift in Sources */,
 			);
