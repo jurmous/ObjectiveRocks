@@ -7,7 +7,7 @@
 
 namespace rocksdb {
 	class DB;
-	class WriteBatchBase;
+	class WriteBatch;
 }
 
 /**
