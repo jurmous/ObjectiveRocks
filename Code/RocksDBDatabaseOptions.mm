@@ -10,6 +10,7 @@
 
 #import "RocksDBEnv.h"
 #import "RocksDBEnv+Private.h"
+#import "RocksDBSnapshot.h"
 #import <rocksdb/options.h>
 
 #if !defined(ROCKSDB_LITE)

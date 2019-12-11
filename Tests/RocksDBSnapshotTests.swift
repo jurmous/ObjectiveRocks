@@ -22,19 +22,21 @@ class RocksDBSnapshotTests : RocksDBTests {
 		try! rocks.setData("value 3", forKey: "key 3")
 
 		let snapshot = rocks.snapshot()
+		let readOptions = RocksDBReadOptions()
+		readOptions.snapshot = snapshot
 
 		try! rocks.deleteData(forKey: "key 1")
 		try! rocks.setData("value 4", forKey: "key 4")
 
-		XCTAssertEqual(try! snapshot.data(forKey: "key 1"), "value 1".data)
-		XCTAssertEqual(try! snapshot.data(forKey: "key 2"), "value 2".data)
-		XCTAssertEqual(try! snapshot.data(forKey: "key 3"), "value 3".data)
-		XCTAssertNil(try? snapshot.data(forKey: "Key 4"))
+		XCTAssertEqual(try! rocks.data(forKey: "key 1", readOptions: readOptions), "value 1".data)
+		XCTAssertEqual(try! rocks.data(forKey: "key 2", readOptions: readOptions), "value 2".data)
+		XCTAssertEqual(try! rocks.data(forKey: "key 3", readOptions: readOptions), "value 3".data)
+		XCTAssertNil(try? rocks.data(forKey: "Key 4", readOptions: readOptions))
+
+		XCTAssertNil(try? rocks.data(forKey: "Key 1"))
+		XCTAssertEqual(try! rocks.data(forKey: "key 4"), "value 4".data)
 
 		snapshot.close()
-
-		XCTAssertNil(try? snapshot.data(forKey: "Key 1"))
-		XCTAssertEqual(try! snapshot.data(forKey: "key 4"), "value 4".data)
 	}
 
 	func testSwift_Snapshot_Iterator() {
@@ -48,30 +50,22 @@ class RocksDBSnapshotTests : RocksDBTests {
 		try! rocks.setData("value 3", forKey: "key 3")
 
 		let snapshot = rocks.snapshot()
+		let readOptions = RocksDBReadOptions()
+		readOptions.snapshot = snapshot
 
 		try! rocks.deleteData(forKey: "key 1")
 		try! rocks.setData("value 4", forKey: "key 4")
 
 		var actual = [String]()
-		var iterator = snapshot.iterator()
+		let iterator = rocks.iterator(with: readOptions)
 		iterator.enumerateKeys { (key, stop) -> Void in
 			actual.append(String(data: key, encoding: .utf8)!)
 		}
 
-		var expected = [ "key 1", "key 2", "key 3" ]
+		let expected = [ "key 1", "key 2", "key 3" ]
 		XCTAssertEqual(actual, expected)
 
 		snapshot.close()
-
-		actual.removeAll()
-
-		iterator = snapshot.iterator()
-		iterator.enumerateKeys { (key, stop) -> Void in
-			actual.append(String(data: key, encoding: .utf8)!)
-		}
-
-		expected = [ "key 2", "key 3", "key 4" ]
-		XCTAssertEqual(actual, expected)
 	}
 
 	func testSwift_Snapshot_SequenceNumber() {

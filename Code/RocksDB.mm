@@ -38,7 +38,6 @@
 
 #if !defined(ROCKSDB_LITE)
 #import "RocksDBColumnFamilyMetaData+Private.h"
-#import "RocksDBIndexedWriteBatch+Private.h"
 #endif
 
 #pragma mark -
@@ -572,7 +571,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 		   readOptions:(RocksDBReadOptions *)readOptions
 				 error:(NSError * __autoreleasing *)error
 {
-	return [self dataForKey:aKey inColumnFamily:_columnFamily readOptions:_readOptions error:error];
+	return [self dataForKey:aKey inColumnFamily:_columnFamily readOptions:readOptions error:error];
 }
 
 - (NSData *)dataForKey:(NSData *)aKey
@@ -864,11 +863,9 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 - (RocksDBSnapshot *)snapshotWithReadOptions:(RocksDBReadOptions *)readOptions
 {
-	rocksdb::ReadOptions options = readOptions.options;
-	options.snapshot = _db->GetSnapshot();
-	readOptions.options = options;
+	const rocksdb::Snapshot *rocksSnapshot = _db->GetSnapshot();
 
-	RocksDBSnapshot *snapshot = [[RocksDBSnapshot alloc] initWithDBInstance:_db columnFamily:_columnFamily andReadOptions:readOptions];
+	RocksDBSnapshot *snapshot = [[RocksDBSnapshot alloc] initWithSnapshot:rocksSnapshot db:_db];
 	return snapshot;
 }
 

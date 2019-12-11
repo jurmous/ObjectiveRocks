@@ -11,23 +11,28 @@
 
 #import <rocksdb/db.h>
 
-@interface RocksDBReadOptions (Private)
-@property (nonatomic, assign) rocksdb::ReadOptions options;
+@interface RocksDBSnapshot ()
+{
+	rocksdb::Snapshot *_snapshot;
+	rocksdb::DB *_db;
+}
+@property (nonatomic, assign) const rocksdb::Snapshot *snapshot;
+@property (nonatomic, assign) rocksdb::DB *db;
 @end
 
 @implementation RocksDBSnapshot
+@synthesize snapshot = _snapshot;
+@synthesize db = _db;
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-					andReadOptions:(RocksDBReadOptions *)readOptions
+- (instancetype)initWithSnapshot:(const rocksdb::Snapshot *)snapshot
+							  db:(rocksdb::DB *)db
 {
 	self = [super init];
 	if (self) {
 		self.db = db;
-		self.columnFamily = columnFamily;
-		self.readOptions = readOptions;
+		self.snapshot = snapshot;
 	}
 	return self;
 }
@@ -35,12 +40,7 @@
 - (void)close
 {
 	@synchronized(self) {
-		rocksdb::ReadOptions options = self.readOptions.options;
-		if (options.snapshot != nullptr) {
-			self.db->ReleaseSnapshot(options.snapshot);
-			options.snapshot = nullptr;
-			self.readOptions.options = options;
-		}
+		self.db->ReleaseSnapshot(self.snapshot);
 	}
 }
 
@@ -48,7 +48,7 @@
 
 - (uint64_t)sequenceNumber
 {
-	return self.readOptions.options.snapshot->GetSequenceNumber();
+	return self.snapshot->GetSequenceNumber();
 }
 
 @end

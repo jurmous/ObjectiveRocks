@@ -56,7 +56,6 @@ extern const unsigned char ObjectiveRocksVersionString[];
 
 // Snapshot
 #import "RocksDBSnapshot.h"
-#import "RocksDBSnapshotUnavailable.h"
 
 // Merge Operator
 #import "RocksDBMergeOperator.h"

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 BrainCookie. All rights reserved.
 //
 
+#import "RocksDBSnapshot.h"
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -34,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  works within a prefix but in both directions.
  */
 @property (nonatomic, assign) BOOL prefixSameAsStart;
+
+/**
+ Set snapshot to use for read operations
+ */
+@property (nonatomic, assign) RocksDBSnapshot* snapshot;
 
 @end
 

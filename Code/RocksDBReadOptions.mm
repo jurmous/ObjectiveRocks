@@ -7,7 +7,8 @@
 //
 
 #import "RocksDBReadOptions.h"
-
+#import "RocksDBSnapshot.h"
+#import "RocksDBSnapshot+Private.h"
 #import <rocksdb/options.h>
 
 @interface RocksDBReadOptions ()
@@ -69,6 +70,11 @@
 	RocksDBReadOptions *copy = [RocksDBReadOptions new];
 	copy.options = self.options;
 	return copy;
+}
+
+- (void)setSnapshot:(RocksDBSnapshot*)snapshot
+{
+	_options.snapshot = snapshot.snapshot;
 }
 
 @end

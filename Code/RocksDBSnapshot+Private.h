@@ -9,8 +9,7 @@
 #import "RocksDBSnapshot.h"
 
 namespace rocksdb {
-	class DB;
-	class ColumnFamilyHandle;
+	class Snapshot;
 }
 
 /**
@@ -19,19 +18,18 @@ namespace rocksdb {
  */
 @interface RocksDBSnapshot (Private)
 
+@property (nonatomic, assign) const rocksdb::Snapshot *snapshot;
+
 /**
  Initializes a new instance of `RocksDBWriteBatch` with the given options and
  rocksdb::DB abd rocksdb::ColumnFamilyHandle instances.
 
- @param db The rocks::DB instance.
- @param columnFamily The rocks::ColumnFamilyHandle instance.
- @param readOptions The read options.
+ @param snapshot The rocksdb::Snapshot instance.
  @return a newly-initialized instance of `RocksDBSnapshot`.
 
  @see RocksDBReadOptions
  */
-- (instancetype)initWithDBInstance:(rocksdb::DB *)db
-					  columnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-					andReadOptions:(RocksDBReadOptions *)readOptions;
+- (instancetype)initWithSnapshot:(const rocksdb::Snapshot *)snapshot
+							  db:(rocksdb::DB *)db;
 
 @end
