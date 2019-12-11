@@ -19,7 +19,7 @@
 #import "RocksDBWriteBatch.h"
 #import "RocksDBIterator.h"
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 #import "RocksDBColumnFamilyMetadata.h"
 #import "RocksDBIndexedWriteBatch.h"
 #endif
@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 							 andOptions:(RocksDBOptions *)options
 								  error:(NSError *__autoreleasing  _Nullable *)error;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 /**
  Intializes a DB instance for read-only with the given path and configured with the given options.
@@ -265,7 +265,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @brief Returns an array */
 - (NSArray<RocksDBColumnFamilyHandle *> *)columnFamilies;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 /**
  Returns the Meta Data object for the Column Family associated with this instance.
@@ -294,7 +294,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 #pragma mark - Database properties
 

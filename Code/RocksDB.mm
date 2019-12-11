@@ -36,7 +36,7 @@
 #include <rocksdb/slice.h>
 #include <rocksdb/options.h>
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 #import "RocksDBColumnFamilyMetaData+Private.h"
 #import "RocksDBIndexedWriteBatch+Private.h"
 #endif
@@ -103,7 +103,7 @@
 	return rocks;
 }
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 + (instancetype)databaseForReadOnlyAtPath:(NSString *)path
 							   andOptions:(RocksDBOptions *)options
@@ -373,7 +373,7 @@
 	return _columnFamily;
 }
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 - (RocksDBColumnFamilyMetaData *)columnFamilyMetaData
 {
@@ -403,7 +403,7 @@
 	_writeOptions = writeOptions;
 }
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 #pragma mark - Properties
 
@@ -923,7 +923,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 #pragma mark - File Deletions
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 - (BOOL)disableFileDeletions:(NSError * __autoreleasing *)error
 {
@@ -1038,7 +1038,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return _db->Level0StopWriteTrigger(columnFamily.columnFamily);
 }
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 - (BOOL)promoteL0:(int)targetLevel
 			error:(NSError * _Nullable __autoreleasing *)error
@@ -1101,7 +1101,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 #pragma mark Verification
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 - (BOOL)verifyChecksum:(NSError *__autoreleasing  _Nullable *)error
 {

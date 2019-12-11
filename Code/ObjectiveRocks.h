@@ -61,8 +61,7 @@ extern const unsigned char ObjectiveRocksVersionString[];
 // Merge Operator
 #import "RocksDBMergeOperator.h"
 
-//// OSX Only
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 // Column Family
 #import "RocksDBColumnFamilyMetadata.h"

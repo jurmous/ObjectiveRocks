@@ -10,7 +10,7 @@
 
 @class RocksDBEnv;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 @class RocksDBStatistics;
 #endif
 
@@ -72,7 +72,7 @@ typedef NS_ENUM(unsigned char, RocksDBLogLevel)
  The default is 0. */
 @property (nonatomic, assign) uint64_t  maxWriteAheadLogSize;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 /** @brief If non-nil, metrics about database operations will be collected.
  Statistics objects should not be shared between DB instances.
  The default is nil.

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RocksDBBlockBasedTableOptions.h"
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 #import "RocksDBPlainTableOptions.h"
 #import "RocksDBCuckooTableOptions.h"
 #endif
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)blockBasedTableFactoryWithOptions:(void (^)(RocksDBBlockBasedTableOptions *options))options;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 /**
  Returns a Plain Table Factory object with thge given Plain table options.
  

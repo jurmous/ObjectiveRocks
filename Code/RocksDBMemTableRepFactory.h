@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype)skipListRepFacotry;
 
-#if !(defined(ROCKSDB_LITE) && defined(TARGET_OS_IPHONE))
+#if !defined(ROCKSDB_LITE)
 
 /**
  Creates MemTableReps that are backed by an std::vector.
