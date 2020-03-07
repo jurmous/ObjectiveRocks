@@ -43,7 +43,8 @@ class RocksDBIndexedWriteBatchTests : RocksDBTests {
 		try! wbwi.singleDelete(k5b)
 
 		// add a delete range record
-		try! wbwi.delete(RocksDBKeyRange(start: k6b, end: k7b))
+		// Unsupported for now because of a bug in RocksDB
+//		try! wbwi.delete(RocksDBKeyRange(start: k6b, end: k7b))
 
 		// add a log record
 		try! wbwi.putLogData(v8b)
@@ -68,17 +69,18 @@ class RocksDBIndexedWriteBatchTests : RocksDBTests {
 			RocksDBWriteBatchEntry(
 				type: .singleDeleteRecord,
 				key: RocksDBSlice(string: k5), value: RocksDBSlice()
-			),
-			RocksDBWriteBatchEntry(
-				type: .deleteRangeRecord,
-				key: RocksDBSlice(string: k6), value: RocksDBSlice(string: k7)
 			)
+//			,
+//			RocksDBWriteBatchEntry(
+//				type: .deleteRangeRecord,
+//				key: RocksDBSlice(string: k6), value: RocksDBSlice(string: k7)
+//			)
 		]
 
 		let it = wbwi.iterator()
 
 		// direct access - seek to key offsets
-		let testOffsets = [2, 0, 3, 4, 1, 5]
+		let testOffsets = [2, 0, 3, 4, 1 /* , 5 */]
 
 		for i in testOffsets {
 			let testOffset = testOffsets[i]
