@@ -62,5 +62,43 @@ class RocksDBBasicTests : RocksDBTests {
 		XCTAssertNil(try? rocks.data(forKey: "key 2"));
 
 		try! self.rocks.deleteData(forKey: "key 2")
+
+		let existResult = NSMutableData()
+
+		XCTAssertTrue(rocks.keyMayExist("key 1", value: existResult))
+		XCTAssertEqual(existResult as Data, "value 1".data)
+	}
+
+	func testSwift_keyMayExist() {
+		let options = RocksDBOptions();
+		options.createIfMissing = true
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
+
+		let readOptions = RocksDBReadOptions()
+
+		let writeOptions = RocksDBWriteOptions()
+
+		rocks.setDefault(
+			readOptions: readOptions,
+			writeOptions: writeOptions
+		)
+
+		let nonUtf8 = Data.init(bytes: [80])
+
+		try! rocks.setData(nonUtf8, forKey: "key 1")
+		try! rocks.setData("value 2", forKey: "key 2")
+
+		XCTAssertEqual(try! rocks.data(forKey: "key 1"), nonUtf8);
+		XCTAssertEqual(try! rocks.data(forKey: "key 2"), "value 2".data);
+
+		let existResult = NSMutableData()
+		XCTAssertTrue(rocks.keyMayExist("key 1", value: existResult))
+		XCTAssertEqual(existResult as Data, nonUtf8)
+
+		XCTAssertTrue(rocks.keyMayExist("key 1", value: nil))
+
+		let existResult2 = NSMutableData()
+		XCTAssertTrue(rocks.keyMayExist("key 2", value: existResult2))
+		XCTAssertEqual(existResult2 as Data, "value 2".data)
 	}
 }

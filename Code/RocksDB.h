@@ -652,7 +652,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
  @param value out parameter if a value is found in block-cache.
  @return The object for the given key.
  */
-- (BOOL)keyMayExist:(NSData *)aKey value:(NSString * _Nullable *_Nullable)value;
+- (BOOL)keyMayExist:(NSData *)aKey value:(NSMutableData * _Nullable)value;
 
 /**
  If the [key] definitely does not exist in the database, then this method
@@ -668,7 +668,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
  */
 - (BOOL)keyMayExist:(NSData *)aKey
 	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-			  value:(NSString * _Nullable *_Nullable)value;
+			  value:(NSMutableData * _Nullable)value;
 
 /**
  If the [key] definitely does not exist in the database, then this method
@@ -684,7 +684,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
  */
 - (BOOL)keyMayExist:(NSData *)aKey
 		readOptions:(RocksDBReadOptions *)readOptions
-			  value:(NSString * _Nullable *_Nullable)value;
+			  value:(NSMutableData * _Nullable)value;
 
 /**
  If the [key] definitely does not exist in the database, then this method
@@ -702,7 +702,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 - (BOOL)keyMayExist:(NSData *)aKey
 	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 		readOptions:(RocksDBReadOptions *)readOptions
-			  value:(NSString * _Nullable *_Nullable)value;
+			  value:(NSMutableData * _Nullable)value;
 
 @end
 

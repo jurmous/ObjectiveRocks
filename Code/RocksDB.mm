@@ -654,21 +654,21 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return results;
 }
 
-- (BOOL)keyMayExist:(NSData *)aKey value:(NSString * _Nullable *)value
+- (BOOL)keyMayExist:(NSData *)aKey value:(NSMutableData  * _Nullable)value
 {
 	return [self keyMayExist:aKey readOptions:_readOptions value:value];
 }
 
 - (BOOL)keyMayExist:(NSData *)aKey
 	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
-			  value:(NSString * _Nullable *)value
+			  value:(NSMutableData * _Nullable)value
 {
 	return [self keyMayExist:aKey inColumnFamily:columnFamily readOptions:_readOptions value:value];
 }
 
 - (BOOL)keyMayExist:(NSData *)aKey
 		readOptions:(RocksDBReadOptions *)readOptions
-			  value:(NSString * _Nullable *)value
+			  value:(NSMutableData * _Nullable)value
 {
 	return [self keyMayExist:aKey inColumnFamily:_columnFamily readOptions:_readOptions value:value];
 }
@@ -676,7 +676,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 - (BOOL)keyMayExist:(NSData *)aKey
 	 inColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 		readOptions:(RocksDBReadOptions *)readOptions
-			  value:(NSString * _Nullable *)value
+			  value:(NSMutableData * _Nullable)value
 {
 	bool valueFound = NO;
 	std::string stringValue;
@@ -686,8 +686,8 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 					 &stringValue,
 					 &valueFound);
 
-	if (valueFound) {
-		*value = [NSString stringWithCString:stringValue.c_str() encoding:NSNonLossyASCIIStringEncoding];
+	if (valueFound && value != nil) {
+		[value appendBytes:(void *) stringValue.c_str() length:stringValue.size()];
 	}
 	return found;
 }
