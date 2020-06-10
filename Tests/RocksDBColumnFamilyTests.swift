@@ -107,6 +107,63 @@ class RocksDBColumnFamilyTests : RocksDBTests {
 		XCTAssertNotNil(newColumnFamily)
 	}
 
+	func testSwift_ColumnFamilies_Open_Bytes_And_Chinese_Families() {
+		let options = RocksDBOptions()
+		options.createIfMissing = true
+		options.comparator = RocksDBComparator(type: .stringCompareAscending)
+		rocks = try! RocksDB.database(atPath: self.path, andOptions: options)
+
+		let columnFamilyOptions = RocksDBColumnFamilyOptions()
+		columnFamilyOptions.comparator = RocksDBComparator(type: .bytewiseDescending)
+
+		let cfName1 = String(data: Data(bytes: [0, 0]), encoding: String.Encoding.nonLossyASCII)!
+		let cfName2 = "简体字"
+
+		let columnFamily1 = try! rocks.createColumnFamily(withName: cfName1, andOptions: columnFamilyOptions)
+		XCTAssertNotNil(columnFamily1)
+		columnFamily1.close()
+
+		let columnFamily2 = try! rocks.createColumnFamily(withName: cfName2, andOptions: columnFamilyOptions)
+		XCTAssertNotNil(columnFamily2)
+		columnFamily2.close()
+		rocks.close()
+
+		let names = RocksDB.listColumnFamiliesInDatabase(atPath: self.path, andOptions: options, error: nil)
+
+		XCTAssertTrue(names.count == 3)
+		XCTAssertEqual(names[0], "default")
+		XCTAssertEqual(names[1], cfName1.data)
+		XCTAssertEqual(names[2], cfName2.data)
+
+		let cfOption1 = RocksDBColumnFamilyOptions()
+		cfOption1.comparator = RocksDBComparator(type: .stringCompareAscending)
+
+		let cfOption2 = RocksDBColumnFamilyOptions()
+		cfOption2.comparator = RocksDBComparator(type: .bytewiseDescending)
+
+		let descriptor = RocksDBColumnFamilyDescriptor()
+		descriptor.addDefaultColumnFamily(with: cfOption1)
+		descriptor.addColumnFamily(withName: cfName1, andOptions: cfOption2)
+		descriptor.addColumnFamily(withName: cfName2, andOptions: cfOption2)
+
+		let options2 = RocksDBOptions()
+		options2.createIfMissing = true
+
+		rocks = try! RocksDB.database(atPath: self.path, columnFamilies: descriptor, andOptions: options2)
+
+		XCTAssertNotNil(rocks);
+
+		XCTAssertTrue(rocks.columnFamilies().count == 3)
+
+		let defaultColumnFamily = rocks.columnFamilies()[0]
+		let newColumnFamily1 = rocks.columnFamilies()[1]
+		let newColumnFamily2 = rocks.columnFamilies()[2]
+
+		XCTAssertNotNil(defaultColumnFamily)
+		XCTAssertNotNil(newColumnFamily1)
+		XCTAssertNotNil(newColumnFamily2)
+	}
+
 	func testSwift_ColumnFamilies_Open_ComparatorMismatch() {
 		let options = RocksDBOptions()
 		options.createIfMissing = true

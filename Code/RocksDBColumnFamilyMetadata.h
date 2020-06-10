@@ -96,12 +96,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief Smallest user defined key in the file.
  */
-@property (nonatomic, strong, readonly) NSString *smallestKey;
+@property (nonatomic, strong, readonly) NSData *smallestKey;
 
 /**
  @brief Largest user defined key in the file.
  */
-@property (nonatomic, strong, readonly)  NSString *largestKey;
+@property (nonatomic, strong, readonly)  NSData *largestKey;
 
 /**
  @brief `true` if the file is currently being compacted.

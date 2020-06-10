@@ -31,10 +31,10 @@
 	return _columnFamily->GetID();
 }
 
-- (NSString *)name
+- (NSData *)name
 {
 	std::string name =  _columnFamily->GetName();
-	return [NSString stringWithUTF8String:name.c_str()];
+	return [[NSData alloc] initWithBytes:name.data() length:name.length()];
 }
 
 - (void)close

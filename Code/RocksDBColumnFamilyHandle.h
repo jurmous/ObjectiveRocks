@@ -21,7 +21,7 @@
 
 
 /** @brief Gets the name of the Column Family. */
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSData *name;
 
 /** @brief Closes the handle*/
 - (void)close;

@@ -57,7 +57,7 @@ NSString * const RocksDBDefaultColumnFamilyName = @"default";
 
 - (void)addColumnFamilyWithName:(NSString *)name andOptions:(RocksDBColumnFamilyOptions *)options
 {
-	rocksdb::ColumnFamilyDescriptor descriptor = rocksdb::ColumnFamilyDescriptor(name.UTF8String, options.options);
+	rocksdb::ColumnFamilyDescriptor descriptor = rocksdb::ColumnFamilyDescriptor(std::string(name.UTF8String, [name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]), options.options);
 	_columnFamilies->push_back(descriptor);
 }
 

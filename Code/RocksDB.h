@@ -222,7 +222,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see RocksDBColumnFamily
  */
-+ (NSArray<NSString *> *)listColumnFamiliesInDatabaseAtPath:(NSString *)path
++ (NSArray<NSData *> *)listColumnFamiliesInDatabaseAtPath:(NSString *)path
 												 andOptions:(RocksDBOptions *)options
 													  error:(NSError *__autoreleasing  _Nullable *)error;
 

@@ -294,7 +294,7 @@
 
 	NSMutableArray *columnFamilies = [NSMutableArray array];
 	for(auto it = std::begin(names); it != std::end(names); ++it) {
-		[columnFamilies addObject:[[NSString alloc] initWithCString:it->c_str() encoding:NSNonLossyASCIIStringEncoding]];
+		[columnFamilies addObject:[[NSData alloc] initWithBytes:(void *)it->data() length:it->size()]];
 	}
 	return columnFamilies;
 }
@@ -304,7 +304,7 @@
 													error:(NSError *__autoreleasing  _Nullable *)error
 {
 	rocksdb::ColumnFamilyHandle *handle;
-	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, [name cStringUsingEncoding: NSNonLossyASCIIStringEncoding], &handle);
+	rocksdb::Status status = _db->CreateColumnFamily(columnFamilyOptions.options, std::string(name.UTF8String, [name lengthOfBytesUsingEncoding:NSUTF8StringEncoding]), &handle);
 	if (!status.ok()) {
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
@@ -620,8 +620,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 	NSMutableArray<NSData *> * results = [NSMutableArray array];
 	for (auto &value : values) {
-		NSString * v = [NSString stringWithCString:value.c_str() encoding:NSNonLossyASCIIStringEncoding];
-		[results addObject:[v dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+		[results addObject:[[NSData alloc] initWithBytes:value.data() length:value.size()]];
 	}
 	return results;
 }
@@ -648,8 +647,7 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 
 	NSMutableArray<NSData *> * results = [NSMutableArray array];
 	for (auto &value : values) {
-		NSString * v = [NSString stringWithCString:value.c_str() encoding:NSNonLossyASCIIStringEncoding];
-		[results addObject:[v dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+		[results addObject:[[NSData alloc] initWithBytes:value.data() length:value.size()]];
 	}
 	return results;
 }

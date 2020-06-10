@@ -64,8 +64,8 @@
 		self->_dbPath = [NSString stringWithCString:metadata.db_path.c_str() encoding:NSUTF8StringEncoding];
 		self->_smallestSeqno = metadata.smallest_seqno;
 		self->_largestSeqno = metadata.largest_seqno;
-		self->_smallestKey = [NSString stringWithCString:metadata.smallestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
-		self->_largestKey = [NSString stringWithCString:metadata.largestkey.c_str() encoding:NSNonLossyASCIIStringEncoding];
+		self->_smallestKey = [[NSData alloc] initWithBytes:metadata.smallestkey.data() length:metadata.smallestkey.size()];
+		self->_largestKey = [[NSData alloc] initWithBytes:metadata.largestkey.data() length:metadata.smallestkey.size()];
 		self->_beingCompacted = metadata.being_compacted;
 		self->_numReadsSampled = metadata.num_reads_sampled;
 		self->_numEntries = metadata.num_entries;
