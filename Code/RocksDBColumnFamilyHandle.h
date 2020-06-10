@@ -1,10 +1,3 @@
-//
-//  RocksDBColumnFamilyHandle.h
-//  ObjectiveRocks
-//
-//  Created by Jurriaan Mous on 20/10/2019.
-//
-
 #import <Foundation/Foundation.h>
 #import "RocksDBColumnFamilyDescriptor.h"
 
@@ -19,9 +12,8 @@
 /** @brief Gets the ID of the Column Family. */
 @property (nonatomic, readonly) uint32_t id;
 
-
 /** @brief Gets the name of the Column Family. */
-@property (nonatomic, readonly) NSData *name;
+@property (nonatomic, readonly) NSData* name;
 
 /** @brief Closes the handle*/
 - (void)close;
