@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(uint8_t, RocksDBStatsLevel)
 {
+	/** @brief Disable all metrics */
+	RocksDBStatsLevelDisableAll,
+	/** @brief Disable tickers */
+	RocksDBStatsLevelExceptTickers,
 	/** @brief Disable timer stats, and skip histogram stats */
 	RocksDBStatsLevelExceptHistogramOrTimers,
 	/** @brief Skip timer stats */

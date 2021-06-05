@@ -60,6 +60,10 @@
 - (RocksDBStatsLevel)statsLevel
 {
 	switch (_statistics->get_stats_level()) {
+		case rocksdb::kDisableAll:
+			return RocksDBStatsLevelDisableAll;
+//		case rocksdb::kExceptTickers:
+//			return RocksDBStatsLevelExceptTickers;
 		case rocksdb::kExceptHistogramOrTimers:
 			return RocksDBStatsLevelExceptHistogramOrTimers;
 		case rocksdb::kExceptTimers:
@@ -76,6 +80,10 @@
 - (void)setStatsLevel:(RocksDBStatsLevel)statsLevel
 {
 	switch (statsLevel) {
+		case RocksDBStatsLevelDisableAll:
+			_statistics->set_stats_level(rocksdb::kDisableAll);
+		case RocksDBStatsLevelExceptTickers:
+			_statistics->set_stats_level(rocksdb::kExceptTickers);
 		case RocksDBStatsLevelExceptHistogramOrTimers:
 			_statistics->set_stats_level(rocksdb::kExceptHistogramOrTimers);
 		case RocksDBStatsLevelExceptTimers:
