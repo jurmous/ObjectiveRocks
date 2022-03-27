@@ -996,11 +996,6 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return _db->GetLatestSequenceNumber();
 }
 
-- (BOOL)setPreserveDeletesSequenceNumber:(uint64_t)sequenceNumber
-{
-	return _db->SetPreserveDeletesSequenceNumber(sequenceNumber);
-}
-
 #pragma mark - Level operations
 
 - (int)numberLevels

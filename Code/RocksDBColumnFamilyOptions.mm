@@ -236,26 +236,6 @@
 	return _options.max_bytes_for_level_multiplier;
 }
 
-- (void)setSoftRateLimit:(double)softRateLimit
-{
-	_options.soft_rate_limit = softRateLimit;
-}
-
-- (double)softRateLimit
-{
-	return _options.soft_rate_limit;
-}
-
-- (void)setHardRateLimit:(double)hardRateLimit
-{
-	_options.hard_rate_limit = hardRateLimit;
-}
-
-- (double)hardRateLimit
-{
-	return _options.hard_rate_limit;
-}
-
 - (void)setArenaBlockSize:(size_t)arenaBlockSize
 {
 	_options.arena_block_size = arenaBlockSize;
@@ -274,16 +254,6 @@
 - (BOOL)disableAutoCompactions
 {
 	return _options.disable_auto_compactions;
-}
-
-- (void)setPurgeRedundantKvsWhileFlush:(BOOL)purgeRedundantKvsWhileFlush
-{
-	_options.purge_redundant_kvs_while_flush = purgeRedundantKvsWhileFlush;
-}
-
-- (BOOL)purgeRedundantKvsWhileFlush
-{
-	return _options.purge_redundant_kvs_while_flush;
 }
 
 - (void)setMaxSequentialSkipInIterations:(uint64_t)maxSequentialSkipInIterations
