@@ -10073,7 +10073,7 @@
 					"OS_MACOSX=1",
 					"ROCKSDB_PLATFORM_POSIX=1",
 					"ROCKSDB_LIB_IO_POSIX=1",
-					"ROCKSDB_USING_THREAD_STATUS=1",
+					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -10082,7 +10082,6 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -10112,7 +10111,7 @@
 					"OS_MACOSX=1",
 					"ROCKSDB_PLATFORM_POSIX=1",
 					"ROCKSDB_LIB_IO_POSIX=1",
-					"ROCKSDB_USING_THREAD_STATUS=1",
+					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -10121,7 +10120,6 @@
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/rocksdb";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
