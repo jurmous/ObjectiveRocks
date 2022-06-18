@@ -534,10 +534,6 @@
 		85306F78266AC1B7002A3FBE /* table_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85306F76266AC1B7002A3FBE /* table_factory.cc */; };
 		85306F79266AC1B7002A3FBE /* table_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85306F76266AC1B7002A3FBE /* table_factory.cc */; };
 		85306F7A266AC1B7002A3FBE /* table_factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85306F76266AC1B7002A3FBE /* table_factory.cc */; };
-		85306F7C266AC1D9002A3FBE /* backupable_db_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */; };
-		85306F7D266AC1D9002A3FBE /* backupable_db_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */; };
-		85306F7E266AC1D9002A3FBE /* backupable_db_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */; };
-		85306F7F266AC1D9002A3FBE /* backupable_db_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */; };
 		85306F81266AC239002A3FBE /* layered_compaction_filter_base.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F80266AC239002A3FBE /* layered_compaction_filter_base.h */; };
 		85306F82266AC239002A3FBE /* layered_compaction_filter_base.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F80266AC239002A3FBE /* layered_compaction_filter_base.h */; };
 		85306F83266AC239002A3FBE /* layered_compaction_filter_base.h in Headers */ = {isa = PBXBuildFile; fileRef = 85306F80266AC239002A3FBE /* layered_compaction_filter_base.h */; };
@@ -1796,6 +1792,50 @@
 		85A6C53823A0F37A00B1C6BA /* RocksDBComparator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 623224AB1A2116A400FB6625 /* RocksDBComparator.mm */; };
 		85B27B0323893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
 		85B27B0423893A3D00F08788 /* RocksDBCompactRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */; };
+		85C9B424285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */; };
+		85C9B425285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */; };
+		85C9B426285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */; };
+		85C9B427285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */; };
+		85C9B428285DE61D00482D22 /* compressed_secondary_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */; };
+		85C9B429285DE61D00482D22 /* compressed_secondary_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */; };
+		85C9B42A285DE61D00482D22 /* compressed_secondary_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */; };
+		85C9B42B285DE61D00482D22 /* compressed_secondary_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */; };
+		85C9B42E285DE62900482D22 /* fast_lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B42C285DE62900482D22 /* fast_lru_cache.h */; };
+		85C9B42F285DE62900482D22 /* fast_lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B42C285DE62900482D22 /* fast_lru_cache.h */; };
+		85C9B430285DE62900482D22 /* fast_lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B42C285DE62900482D22 /* fast_lru_cache.h */; };
+		85C9B431285DE62900482D22 /* fast_lru_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B42C285DE62900482D22 /* fast_lru_cache.h */; };
+		85C9B432285DE62900482D22 /* fast_lru_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B42D285DE62900482D22 /* fast_lru_cache.cc */; };
+		85C9B433285DE62900482D22 /* fast_lru_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B42D285DE62900482D22 /* fast_lru_cache.cc */; };
+		85C9B434285DE62900482D22 /* fast_lru_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B42D285DE62900482D22 /* fast_lru_cache.cc */; };
+		85C9B435285DE62900482D22 /* fast_lru_cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B42D285DE62900482D22 /* fast_lru_cache.cc */; };
+		85C9B437285DE76900482D22 /* version_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B436285DE76900482D22 /* version_util.h */; };
+		85C9B438285DE76900482D22 /* version_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B436285DE76900482D22 /* version_util.h */; };
+		85C9B439285DE76900482D22 /* version_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B436285DE76900482D22 /* version_util.h */; };
+		85C9B43A285DE76900482D22 /* version_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B436285DE76900482D22 /* version_util.h */; };
+		85C9B43C285DE81B00482D22 /* agg_merge.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B43B285DE81B00482D22 /* agg_merge.h */; };
+		85C9B43D285DE81B00482D22 /* agg_merge.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B43B285DE81B00482D22 /* agg_merge.h */; };
+		85C9B43E285DE81B00482D22 /* agg_merge.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B43B285DE81B00482D22 /* agg_merge.h */; };
+		85C9B43F285DE81B00482D22 /* agg_merge.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B43B285DE81B00482D22 /* agg_merge.h */; };
+		85C9B441285DE93400482D22 /* coro_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B440285DE93400482D22 /* coro_utils.h */; };
+		85C9B442285DE93400482D22 /* coro_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B440285DE93400482D22 /* coro_utils.h */; };
+		85C9B443285DE93400482D22 /* coro_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B440285DE93400482D22 /* coro_utils.h */; };
+		85C9B444285DE93400482D22 /* coro_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B440285DE93400482D22 /* coro_utils.h */; };
+		85C9B449285DE98100482D22 /* backup_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B446285DE98100482D22 /* backup_engine_impl.h */; };
+		85C9B44A285DE98100482D22 /* backup_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B446285DE98100482D22 /* backup_engine_impl.h */; };
+		85C9B44B285DE98100482D22 /* backup_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B446285DE98100482D22 /* backup_engine_impl.h */; };
+		85C9B44C285DE98100482D22 /* backup_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85C9B446285DE98100482D22 /* backup_engine_impl.h */; };
+		85C9B44D285DE98100482D22 /* backup_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B447285DE98100482D22 /* backup_engine.cc */; };
+		85C9B44E285DE98100482D22 /* backup_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B447285DE98100482D22 /* backup_engine.cc */; };
+		85C9B44F285DE98100482D22 /* backup_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B447285DE98100482D22 /* backup_engine.cc */; };
+		85C9B450285DE98100482D22 /* backup_engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B447285DE98100482D22 /* backup_engine.cc */; };
+		85C9B456285DEDFA00482D22 /* cleanable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B455285DEDFA00482D22 /* cleanable.cc */; };
+		85C9B457285DEDFA00482D22 /* cleanable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B455285DEDFA00482D22 /* cleanable.cc */; };
+		85C9B458285DEDFA00482D22 /* cleanable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B455285DEDFA00482D22 /* cleanable.cc */; };
+		85C9B459285DEDFA00482D22 /* cleanable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B455285DEDFA00482D22 /* cleanable.cc */; };
+		85C9B45B285DEE1E00482D22 /* compression.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B45A285DEE1E00482D22 /* compression.cc */; };
+		85C9B45C285DEE1E00482D22 /* compression.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B45A285DEE1E00482D22 /* compression.cc */; };
+		85C9B45D285DEE1E00482D22 /* compression.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B45A285DEE1E00482D22 /* compression.cc */; };
+		85C9B45E285DEE1E00482D22 /* compression.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85C9B45A285DEE1E00482D22 /* compression.cc */; };
 		85D20E81237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E82237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85D20E83237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2214,10 +2254,6 @@
 		85FED3B12415137100E42AD1 /* db_ttl_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEDD2415136F00E42AD1 /* db_ttl_impl.h */; };
 		85FED3B22415137100E42AD1 /* db_ttl_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEDD2415136F00E42AD1 /* db_ttl_impl.h */; };
 		85FED3B32415137100E42AD1 /* db_ttl_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEDD2415136F00E42AD1 /* db_ttl_impl.h */; };
-		85FED3B42415137100E42AD1 /* backupable_db.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85FECEDF2415136F00E42AD1 /* backupable_db.cc */; };
-		85FED3B52415137100E42AD1 /* backupable_db.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85FECEDF2415136F00E42AD1 /* backupable_db.cc */; };
-		85FED3B62415137100E42AD1 /* backupable_db.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85FECEDF2415136F00E42AD1 /* backupable_db.cc */; };
-		85FED3B72415137100E42AD1 /* backupable_db.cc in Sources */ = {isa = PBXBuildFile; fileRef = 85FECEDF2415136F00E42AD1 /* backupable_db.cc */; };
 		85FED3BC2415137100E42AD1 /* compact_on_deletion_collector.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEE22415136F00E42AD1 /* compact_on_deletion_collector.h */; };
 		85FED3BD2415137100E42AD1 /* compact_on_deletion_collector.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEE22415136F00E42AD1 /* compact_on_deletion_collector.h */; };
 		85FED3BE2415137100E42AD1 /* compact_on_deletion_collector.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FECEE22415136F00E42AD1 /* compact_on_deletion_collector.h */; };
@@ -3573,7 +3609,6 @@
 		85306F6C266AC1AB002A3FBE /* sst_file_dumper.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sst_file_dumper.cc; sourceTree = "<group>"; };
 		85306F6D266AC1AB002A3FBE /* sst_file_dumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sst_file_dumper.h; sourceTree = "<group>"; };
 		85306F76266AC1B7002A3FBE /* table_factory.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = table_factory.cc; sourceTree = "<group>"; };
-		85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backupable_db_impl.h; sourceTree = "<group>"; };
 		85306F80266AC239002A3FBE /* layered_compaction_filter_base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = layered_compaction_filter_base.h; sourceTree = "<group>"; };
 		85306F85266AC25F002A3FBE /* fault_injection_env.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fault_injection_env.cc; sourceTree = "<group>"; };
 		85306F86266AC25F002A3FBE /* fault_injection_env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fault_injection_env.h; sourceTree = "<group>"; };
@@ -3885,6 +3920,17 @@
 		859373112742E5C700548412 /* replayer_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = replayer_impl.h; sourceTree = "<group>"; };
 		8593731A2742E68B00548412 /* block_like_traits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_like_traits.h; sourceTree = "<group>"; };
 		85B27B0223893A3D00F08788 /* RocksDBCompactRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocksDBCompactRangeTests.swift; sourceTree = "<group>"; };
+		85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compressed_secondary_cache.cc; sourceTree = "<group>"; };
+		85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compressed_secondary_cache.h; sourceTree = "<group>"; };
+		85C9B42C285DE62900482D22 /* fast_lru_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fast_lru_cache.h; sourceTree = "<group>"; };
+		85C9B42D285DE62900482D22 /* fast_lru_cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fast_lru_cache.cc; sourceTree = "<group>"; };
+		85C9B436285DE76900482D22 /* version_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version_util.h; sourceTree = "<group>"; };
+		85C9B43B285DE81B00482D22 /* agg_merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = agg_merge.h; sourceTree = "<group>"; };
+		85C9B440285DE93400482D22 /* coro_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = coro_utils.h; sourceTree = "<group>"; };
+		85C9B446285DE98100482D22 /* backup_engine_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backup_engine_impl.h; sourceTree = "<group>"; };
+		85C9B447285DE98100482D22 /* backup_engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = backup_engine.cc; sourceTree = "<group>"; };
+		85C9B455285DEDFA00482D22 /* cleanable.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cleanable.cc; sourceTree = "<group>"; };
+		85C9B45A285DEE1E00482D22 /* compression.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compression.cc; sourceTree = "<group>"; };
 		85D20E80237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocksDBWriteBatchBase+getWriteBatch.h"; sourceTree = "<group>"; };
 		85DE7903237C933700EB03E2 /* RocksDBWriteBatchBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RocksDBWriteBatchBase.h; sourceTree = "<group>"; };
 		85DE7908237C934D00EB03E2 /* RocksDBWriteBatchBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RocksDBWriteBatchBase.mm; sourceTree = "<group>"; };
@@ -3989,7 +4035,6 @@
 		85FECED82415136F00E42AD1 /* memory_util.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory_util.cc; sourceTree = "<group>"; };
 		85FECEDC2415136F00E42AD1 /* db_ttl_impl.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = db_ttl_impl.cc; sourceTree = "<group>"; };
 		85FECEDD2415136F00E42AD1 /* db_ttl_impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = db_ttl_impl.h; sourceTree = "<group>"; };
-		85FECEDF2415136F00E42AD1 /* backupable_db.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = backupable_db.cc; sourceTree = "<group>"; };
 		85FECEE22415136F00E42AD1 /* compact_on_deletion_collector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compact_on_deletion_collector.h; sourceTree = "<group>"; };
 		85FECEE42415136F00E42AD1 /* compact_on_deletion_collector.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = compact_on_deletion_collector.cc; sourceTree = "<group>"; };
 		85FECEE62415136F00E42AD1 /* option_change_migration.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = option_change_migration.cc; sourceTree = "<group>"; };
@@ -4871,6 +4916,15 @@
 			path = test_util;
 			sourceTree = "<group>";
 		};
+		85C9B445285DE98100482D22 /* backup */ = {
+			isa = PBXGroup;
+			children = (
+				85C9B446285DE98100482D22 /* backup_engine_impl.h */,
+				85C9B447285DE98100482D22 /* backup_engine.cc */,
+			);
+			path = backup;
+			sourceTree = "<group>";
+		};
 		85FECE442415136E00E42AD1 /* logging */ = {
 			isa = PBXGroup;
 			children = (
@@ -4898,6 +4952,7 @@
 				853070C9266AC6DA002A3FBE /* build_version.h */,
 				85FECE802415136E00E42AD1 /* cast_util.h */,
 				85FECE562415136E00E42AD1 /* channel.h */,
+				85C9B455285DEDFA00482D22 /* cleanable.cc */,
 				85306F30266AC037002A3FBE /* coding_lean.h */,
 				85FECE9A2415136E00E42AD1 /* coding.cc */,
 				85FECE722415136E00E42AD1 /* coding.h */,
@@ -4905,10 +4960,12 @@
 				85FECE982415136E00E42AD1 /* comparator.cc */,
 				85FECE8F2415136E00E42AD1 /* compression_context_cache.cc */,
 				85FECE862415136E00E42AD1 /* compression_context_cache.h */,
+				85C9B45A285DEE1E00482D22 /* compression.cc */,
 				85FECE762415136E00E42AD1 /* compression.h */,
 				85FECE632415136E00E42AD1 /* concurrent_task_limiter_impl.cc */,
 				85FECE7E2415136E00E42AD1 /* concurrent_task_limiter_impl.h */,
 				85FECE932415136E00E42AD1 /* core_local.h */,
+				85C9B440285DE93400482D22 /* coro_utils.h */,
 				85FECEA32415136E00E42AD1 /* crc32c_arm64.cc */,
 				85FECE6B2415136E00E42AD1 /* crc32c_arm64.h */,
 				85FECE7C2415136E00E42AD1 /* crc32c.cc */,
@@ -4997,6 +5054,10 @@
 				8533484824DB1C85003D6D92 /* cache.cc */,
 				85FECEB92415136F00E42AD1 /* clock_cache.cc */,
 				85FECEBF2415136F00E42AD1 /* clock_cache.h */,
+				85C9B422285DE61C00482D22 /* compressed_secondary_cache.cc */,
+				85C9B423285DE61C00482D22 /* compressed_secondary_cache.h */,
+				85C9B42D285DE62900482D22 /* fast_lru_cache.cc */,
+				85C9B42C285DE62900482D22 /* fast_lru_cache.h */,
 				85FECEBE2415136F00E42AD1 /* lru_cache.cc */,
 				85FECEB72415136F00E42AD1 /* lru_cache.h */,
 				85FECEBB2415136F00E42AD1 /* sharded_cache.cc */,
@@ -5008,7 +5069,7 @@
 		85FECEC02415136F00E42AD1 /* utilities */ = {
 			isa = PBXGroup;
 			children = (
-				85FECEDE2415136F00E42AD1 /* backupable */,
+				85C9B445285DE98100482D22 /* backup */,
 				85FECF4A2415136F00E42AD1 /* blob_db */,
 				85FECECC2415136F00E42AD1 /* checkpoint */,
 				85FECED02415136F00E42AD1 /* compaction_filters */,
@@ -5107,15 +5168,6 @@
 				85FECEDD2415136F00E42AD1 /* db_ttl_impl.h */,
 			);
 			path = ttl;
-			sourceTree = "<group>";
-		};
-		85FECEDE2415136F00E42AD1 /* backupable */ = {
-			isa = PBXGroup;
-			children = (
-				85306F7B266AC1D9002A3FBE /* backupable_db_impl.h */,
-				85FECEDF2415136F00E42AD1 /* backupable_db.cc */,
-			);
-			path = backupable;
 			sourceTree = "<group>";
 		};
 		85FECEE12415136F00E42AD1 /* table_properties_collectors */ = {
@@ -5548,6 +5600,7 @@
 		85FED02E2415136F00E42AD1 /* utilities */ = {
 			isa = PBXGroup;
 			children = (
+				85C9B43B285DE81B00482D22 /* agg_merge.h */,
 				859372BB2742E2EB00548412 /* backup_engine.h */,
 				8578C41427F09C3200522430 /* cache_dump_load.h */,
 				85FED0312415136F00E42AD1 /* checkpoint.h */,
@@ -5792,6 +5845,7 @@
 				8533442524DB1A94003D6D92 /* version_edit.h */,
 				8533444A24DB1A97003D6D92 /* version_set.cc */,
 				8533442724DB1A94003D6D92 /* version_set.h */,
+				85C9B436285DE76900482D22 /* version_util.h */,
 				8530FB86266B8B8B009D03DB /* wal_edit.cc */,
 				8530FB87266B8B8B009D03DB /* wal_edit.h */,
 				8533444724DB1A97003D6D92 /* wal_manager.cc */,
@@ -5852,6 +5906,7 @@
 				85FED9E82415137200E42AD1 /* perf_step_timer.h in Headers */,
 				85FED8A42415137200E42AD1 /* debug.h in Headers */,
 				85FED8542415137200E42AD1 /* merge_operator.h in Headers */,
+				85C9B437285DE76900482D22 /* version_util.h in Headers */,
 				8533478724DB1AA7003D6D92 /* trim_history_scheduler.h in Headers */,
 				8593729E2742E28300548412 /* functor_wrapper.h in Headers */,
 				859372B72742E2D700548412 /* trace_record_result.h in Headers */,
@@ -5883,6 +5938,7 @@
 				85306E82266ABB52002A3FBE /* blob_file_reader.h in Headers */,
 				8533478F24DB1AA7003D6D92 /* flush_job.h in Headers */,
 				85FED9402415137200E42AD1 /* universal_compaction.h in Headers */,
+				85C9B43C285DE81B00482D22 /* agg_merge.h in Headers */,
 				853346C324DB1AA7003D6D92 /* transaction_log_impl.h in Headers */,
 				85FEDA6C2415137300E42AD1 /* skiplist.h in Headers */,
 				85DE790E237C940300EB03E2 /* RocksDBWriteBatchBase+Private.h in Headers */,
@@ -5918,6 +5974,7 @@
 				853343A924DB193E003D6D92 /* full_filter_block.h in Headers */,
 				8533453F24DB1AA6003D6D92 /* event_helpers.h in Headers */,
 				85307075266AC2F8002A3FBE /* wfg.h in Headers */,
+				85C9B449285DE98100482D22 /* backup_engine_impl.h in Headers */,
 				8533440B24DB1A44003D6D92 /* blob_log_format.h in Headers */,
 				8533453724DB1AA6003D6D92 /* logs_with_prep_tracker.h in Headers */,
 				628CEBBB1D0CF4630096AA64 /* RocksDBIndexedWriteBatch+Private.h in Headers */,
@@ -5948,6 +6005,7 @@
 				85FED4182415137100E42AD1 /* write_unprepared_txn_db.h in Headers */,
 				85FED84C2415137200E42AD1 /* types.h in Headers */,
 				85306EBE266ABD85002A3FBE /* file_system_tracer.h in Headers */,
+				85C9B42E285DE62900482D22 /* fast_lru_cache.h in Headers */,
 				624203D71BED64F80043DD6F /* RocksDBComparator.h in Headers */,
 				853346FF24DB1AA7003D6D92 /* compaction_iterator.h in Headers */,
 				853347F324DB1AA7003D6D92 /* builder.h in Headers */,
@@ -6048,7 +6106,6 @@
 				85FED9F42415137200E42AD1 /* in_memory_stats_history.h in Headers */,
 				85FED2B02415137000E42AD1 /* core_local.h in Headers */,
 				85FED1C02415137000E42AD1 /* rate_limiter.h in Headers */,
-				85306F7C266AC1D9002A3FBE /* backupable_db_impl.h in Headers */,
 				624203E11BED64F80043DD6F /* RocksDBBlockBasedTableOptions.h in Headers */,
 				85FED8902415137200E42AD1 /* c.h in Headers */,
 				85FED5582415137100E42AD1 /* blob_file.h in Headers */,
@@ -6208,6 +6265,7 @@
 				85FED2482415137000E42AD1 /* set_comparator.h in Headers */,
 				85FED6842415137100E42AD1 /* block_fetcher.h in Headers */,
 				85FED2502415137000E42AD1 /* threadpool_imp.h in Headers */,
+				85C9B428285DE61D00482D22 /* compressed_secondary_cache.h in Headers */,
 				85FED6882415137100E42AD1 /* meta_blocks.h in Headers */,
 				859372EE2742E48B00548412 /* hash128.h in Headers */,
 				85FED2D02415137000E42AD1 /* hash.h in Headers */,
@@ -6299,6 +6357,7 @@
 				85FED2842415137000E42AD1 /* heap.h in Headers */,
 				85FED6C82415137100E42AD1 /* plain_table_index.h in Headers */,
 				853347AF24DB1AA7003D6D92 /* table_cache.h in Headers */,
+				85C9B441285DE93400482D22 /* coro_utils.h in Headers */,
 				853347EF24DB1AA7003D6D92 /* write_callback.h in Headers */,
 				85306F68266AC0E7002A3FBE /* work_queue.h in Headers */,
 				853343B524DB193E003D6D92 /* filter_block_reader_common.h in Headers */,
@@ -6435,6 +6494,7 @@
 				85306F29266AC00B002A3FBE /* io_tracer.h in Headers */,
 				853070A6266AC2F8002A3FBE /* toku_instrumentation.h in Headers */,
 				85FED4AD2415137100E42AD1 /* bytesxor.h in Headers */,
+				85C9B44A285DE98100482D22 /* backup_engine_impl.h in Headers */,
 				85FED86D2415137200E42AD1 /* slice.h in Headers */,
 				853070BA266AC2F8002A3FBE /* comparator.h in Headers */,
 				624F5DA11BEE41F500497FEF /* RocksDB.h in Headers */,
@@ -6487,6 +6547,7 @@
 				85FED81D2415137200E42AD1 /* sst_file_manager.h in Headers */,
 				859372812742E07C00548412 /* blob_counting_iterator.h in Headers */,
 				859372D62742E3EB00548412 /* lang.h in Headers */,
+				85C9B43D285DE81B00482D22 /* agg_merge.h in Headers */,
 				8533481524DB1BA8003D6D92 /* sync_point.h in Headers */,
 				85FED8612415137200E42AD1 /* thread_status.h in Headers */,
 				85FED6112415137100E42AD1 /* random_access_file_reader.h in Headers */,
@@ -6515,7 +6576,6 @@
 				85306E83266ABB52002A3FBE /* blob_file_reader.h in Headers */,
 				85306EEC266ABE53002A3FBE /* db_bench_tool.h in Headers */,
 				624F5DB31BEE41F600497FEF /* RocksDBReadOptions.h in Headers */,
-				85306F7D266AC1D9002A3FBE /* backupable_db_impl.h in Headers */,
 				624F5DB41BEE41F600497FEF /* RocksDBEnv.h in Headers */,
 				85FED66D2415137100E42AD1 /* port_posix.h in Headers */,
 				853346D424DB1AA7003D6D92 /* arena_wrapped_db_iter.h in Headers */,
@@ -6533,6 +6593,7 @@
 				85FED9A12415137200E42AD1 /* block_cache_tracer.h in Headers */,
 				85FED6A92415137100E42AD1 /* plain_table_key_coding.h in Headers */,
 				85FED5052415137100E42AD1 /* block_cache_tier_file_buffer.h in Headers */,
+				85C9B42F285DE62900482D22 /* fast_lru_cache.h in Headers */,
 				853345F424DB1AA6003D6D92 /* merge_context.h in Headers */,
 				85FED8F12415137200E42AD1 /* transaction.h in Headers */,
 				8593731C2742E68B00548412 /* block_like_traits.h in Headers */,
@@ -6585,6 +6646,7 @@
 				85FED96D2415137200E42AD1 /* memory_allocator.h in Headers */,
 				6273A50F1D0C646C00CF8BF1 /* RocksDBCompactRangeOptions.h in Headers */,
 				853346E024DB1AA7003D6D92 /* pre_release_callback.h in Headers */,
+				85C9B442285DE93400482D22 /* coro_utils.h in Headers */,
 				853343AE24DB193E003D6D92 /* block_type.h in Headers */,
 				85FED6A52415137100E42AD1 /* plain_table_factory.h in Headers */,
 				8533478824DB1AA7003D6D92 /* trim_history_scheduler.h in Headers */,
@@ -6609,6 +6671,7 @@
 				85FED8C52415137200E42AD1 /* memory_util.h in Headers */,
 				85FED22D2415137000E42AD1 /* coding.h in Headers */,
 				8533440024DB1A44003D6D92 /* blob_log_writer.h in Headers */,
+				85C9B429285DE61D00482D22 /* compressed_secondary_cache.h in Headers */,
 				85FED9552415137200E42AD1 /* experimental.h in Headers */,
 				8530704E266AC2F8002A3FBE /* locktree.h in Headers */,
 				853347B824DB1AA7003D6D92 /* db_iter.h in Headers */,
@@ -6662,6 +6725,7 @@
 				853345F024DB1AA6003D6D92 /* memtable.h in Headers */,
 				85306E79266ABB15002A3FBE /* blob_file_completion_callback.h in Headers */,
 				85FED2D12415137000E42AD1 /* hash.h in Headers */,
+				85C9B438285DE76900482D22 /* version_util.h in Headers */,
 				859372632742E02100548412 /* cache_entry_roles.h in Headers */,
 				85FED34D2415137000E42AD1 /* sharded_cache.h in Headers */,
 				85FED5552415137100E42AD1 /* blob_db_gc_stats.h in Headers */,
@@ -6868,6 +6932,7 @@
 				85FED9EA2415137200E42AD1 /* perf_step_timer.h in Headers */,
 				85FED8A62415137200E42AD1 /* debug.h in Headers */,
 				85FED8562415137200E42AD1 /* merge_operator.h in Headers */,
+				85C9B439285DE76900482D22 /* version_util.h in Headers */,
 				8533478924DB1AA7003D6D92 /* trim_history_scheduler.h in Headers */,
 				859372A02742E28300548412 /* functor_wrapper.h in Headers */,
 				859372B92742E2D700548412 /* trace_record_result.h in Headers */,
@@ -6899,6 +6964,7 @@
 				8533479124DB1AA7003D6D92 /* flush_job.h in Headers */,
 				85FED9422415137200E42AD1 /* universal_compaction.h in Headers */,
 				853346C524DB1AA7003D6D92 /* transaction_log_impl.h in Headers */,
+				85C9B43E285DE81B00482D22 /* agg_merge.h in Headers */,
 				85FEDA6E2415137300E42AD1 /* skiplist.h in Headers */,
 				851B856E23449134009721CC /* RocksDBRange.h in Headers */,
 				853342F324DB193E003D6D92 /* block_prefetcher.h in Headers */,
@@ -6934,6 +7000,7 @@
 				8533454124DB1AA6003D6D92 /* event_helpers.h in Headers */,
 				85307077266AC2F8002A3FBE /* wfg.h in Headers */,
 				8533440D24DB1A44003D6D92 /* blob_log_format.h in Headers */,
+				85C9B44B285DE98100482D22 /* backup_engine_impl.h in Headers */,
 				8533453924DB1AA6003D6D92 /* logs_with_prep_tracker.h in Headers */,
 				851B857523449134009721CC /* RocksDBWriteBatch.h in Headers */,
 				85FED8762415137200E42AD1 /* cache.h in Headers */,
@@ -6964,6 +7031,7 @@
 				85FED84E2415137200E42AD1 /* types.h in Headers */,
 				85306EC0266ABD85002A3FBE /* file_system_tracer.h in Headers */,
 				851B857A23449134009721CC /* RocksDBDatabaseOptions.h in Headers */,
+				85C9B430285DE62900482D22 /* fast_lru_cache.h in Headers */,
 				8533470124DB1AA7003D6D92 /* compaction_iterator.h in Headers */,
 				853347F524DB1AA7003D6D92 /* builder.h in Headers */,
 				85FED8AA2415137200E42AD1 /* leveldb_options.h in Headers */,
@@ -7064,7 +7132,6 @@
 				85FED9F62415137200E42AD1 /* in_memory_stats_history.h in Headers */,
 				85FED2B22415137000E42AD1 /* core_local.h in Headers */,
 				85FED1C22415137000E42AD1 /* rate_limiter.h in Headers */,
-				85306F7E266AC1D9002A3FBE /* backupable_db_impl.h in Headers */,
 				851B858323449134009721CC /* RocksDBPlainTableOptions.h in Headers */,
 				85FED8922415137200E42AD1 /* c.h in Headers */,
 				85FED55A2415137100E42AD1 /* blob_file.h in Headers */,
@@ -7224,6 +7291,7 @@
 				85FED24A2415137000E42AD1 /* set_comparator.h in Headers */,
 				85FED6862415137100E42AD1 /* block_fetcher.h in Headers */,
 				85FED2522415137000E42AD1 /* threadpool_imp.h in Headers */,
+				85C9B42A285DE61D00482D22 /* compressed_secondary_cache.h in Headers */,
 				85FED68A2415137100E42AD1 /* meta_blocks.h in Headers */,
 				859372F02742E48B00548412 /* hash128.h in Headers */,
 				85FED2D22415137000E42AD1 /* hash.h in Headers */,
@@ -7315,6 +7383,7 @@
 				85FED2862415137000E42AD1 /* heap.h in Headers */,
 				85FED6CA2415137100E42AD1 /* plain_table_index.h in Headers */,
 				853347B124DB1AA7003D6D92 /* table_cache.h in Headers */,
+				85C9B443285DE93400482D22 /* coro_utils.h in Headers */,
 				853347F124DB1AA7003D6D92 /* write_callback.h in Headers */,
 				85306F6A266AC0E7002A3FBE /* work_queue.h in Headers */,
 				853343B724DB193E003D6D92 /* filter_block_reader_common.h in Headers */,
@@ -7371,6 +7440,7 @@
 				85D20E84237F47D50072BFF2 /* RocksDBWriteBatchBase+getWriteBatch.h in Headers */,
 				85FED9072415137200E42AD1 /* filter_policy.h in Headers */,
 				85306EE4266ABE42002A3FBE /* configurable.h in Headers */,
+				85C9B43F285DE81B00482D22 /* agg_merge.h in Headers */,
 				85FED5672415137100E42AD1 /* blob_dump_tool.h in Headers */,
 				85FED69F2415137100E42AD1 /* table_reader_caller.h in Headers */,
 				8533477624DB1AA7003D6D92 /* range_del_aggregator.h in Headers */,
@@ -7385,7 +7455,6 @@
 				85FED1EB2415137000E42AD1 /* thread_local.h in Headers */,
 				85307020266AC2F8002A3FBE /* growable_array.h in Headers */,
 				85FED93F2415137200E42AD1 /* persistent_cache.h in Headers */,
-				85306F7F266AC1D9002A3FBE /* backupable_db_impl.h in Headers */,
 				85306EC8266ABDAC002A3FBE /* fs_readonly.h in Headers */,
 				85FED7F72415137200E42AD1 /* two_level_iterator.h in Headers */,
 				85FED4FB2415137100E42AD1 /* hash_table.h in Headers */,
@@ -7401,6 +7470,7 @@
 				85FED5032415137100E42AD1 /* block_cache_tier.h in Headers */,
 				85DE7907237C933700EB03E2 /* RocksDBWriteBatchBase.h in Headers */,
 				853342D824DB193E003D6D92 /* block_based_table_builder.h in Headers */,
+				85C9B431285DE62900482D22 /* fast_lru_cache.h in Headers */,
 				851B86C623449295009721CC /* RocksDB.h in Headers */,
 				85307064266AC2F8002A3FBE /* treenode.h in Headers */,
 				85FED38B2415137100E42AD1 /* checkpoint_impl.h in Headers */,
@@ -7547,6 +7617,7 @@
 				8533473A24DB1AA7003D6D92 /* compaction_picker_level.h in Headers */,
 				8533439024DB193E003D6D92 /* block_based_table_factory.h in Headers */,
 				85FED3BF2415137100E42AD1 /* compact_on_deletion_collector.h in Headers */,
+				85C9B444285DE93400482D22 /* coro_utils.h in Headers */,
 				851B86D523449295009721CC /* RocksDBReadOptions.h in Headers */,
 				851B86D623449295009721CC /* RocksDBCompactRangeOptions.h in Headers */,
 				85FED2A72415137000E42AD1 /* autovector.h in Headers */,
@@ -7569,6 +7640,7 @@
 				851B86D923449295009721CC /* RocksDBTableFactory.h in Headers */,
 				85FED9EB2415137200E42AD1 /* perf_step_timer.h in Headers */,
 				859372B62742E2D700548412 /* trace_record.h in Headers */,
+				85C9B42B285DE61D00482D22 /* compressed_secondary_cache.h in Headers */,
 				85307098266AC2F8002A3FBE /* toku_race_tools.h in Headers */,
 				85FED66F2415137100E42AD1 /* port_posix.h in Headers */,
 				8533454224DB1AA6003D6D92 /* event_helpers.h in Headers */,
@@ -7601,6 +7673,7 @@
 				8533472624DB1AA7003D6D92 /* compaction.h in Headers */,
 				85FED3F72415137100E42AD1 /* transaction_base.h in Headers */,
 				8533481724DB1BA8003D6D92 /* sync_point.h in Headers */,
+				85C9B43A285DE76900482D22 /* version_util.h in Headers */,
 				8578C41827F09C3200522430 /* cache_dump_load.h in Headers */,
 				85FED7032415137100E42AD1 /* iterator_wrapper.h in Headers */,
 				85FED67B2415137100E42AD1 /* likely.h in Headers */,
@@ -7658,6 +7731,7 @@
 				85307094266AC2F8002A3FBE /* toku_time.h in Headers */,
 				85FED5132415137100E42AD1 /* lrulist.h in Headers */,
 				85FED9F72415137200E42AD1 /* in_memory_stats_history.h in Headers */,
+				85C9B44C285DE98100482D22 /* backup_engine_impl.h in Headers */,
 				85FED2372415137000E42AD1 /* stop_watch.h in Headers */,
 				8533430424DB193E003D6D92 /* block.h in Headers */,
 				85FED6B32415137100E42AD1 /* plain_table_bloom.h in Headers */,
@@ -8090,7 +8164,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g\" \\\n    > \"${OUTFILE}\"\n";
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g; s/@BUILD_DATE@/${BUILD_DATE}/g; s/@ROCKSDB_PLUGIN_EXTERNS@//g; s/@ROCKSDB_PLUGIN_BUILTINS@//g\" \\\n    > \"${OUTFILE}\"\n";
 		};
 		624F5DC51BEE434700497FEF /* Generate build_version.cc */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8107,7 +8181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g\" \\\n    > \"${OUTFILE}\"\n";
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g; s/@ROCKSDB_PLUGIN_EXTERNS@//g; s/@ROCKSDB_PLUGIN_BUILTINS@//g\" \\\n    > \"${OUTFILE}\"\n";
 		};
 		85B27B05238986E600F08788 /* Build build_version.cc */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8125,7 +8199,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g\" \\\n    > \"${OUTFILE}\"\n";
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g; s/@ROCKSDB_PLUGIN_EXTERNS@//g; s/@ROCKSDB_PLUGIN_BUILTINS@//g\" \\\n    > \"${OUTFILE}\"\n";
 		};
 		85B27B062389871200F08788 /* Build build_version.cc */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8143,7 +8217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g\" \\\n    > \"${OUTFILE}\"\n";
+			shellScript = "#!/bin/sh\n\nROCKSDB_DIR=\"$PWD/rocksdb/.git\"\nINPUT=\"$PWD/rocksdb/util/build_version.cc.in\"\nOUTFILE=\"$PWD/rocksdb/util/build_version.cc\"\nGIT_SHA=\"\"\nGIT_MOD=\"\"\nGIT_DATE=\"\"\nGIT_TAG=\"\"\nBUILD_DATE=\"\"\n\nif command -v git >/dev/null 2>&1; then\n    GIT_SHA=$(git --git-dir=\"$ROCKSDB_DIR\" rev-parse HEAD 2>/dev/null)\n\n    GIT_DATE=$(git --git-dir=\"$ROCKSDB_DIR\" log -1 --date=format:\"%Y-%m-%d %T\" --format=\"%ad\" 2>/dev/null)\n    GIT_TAG=$(git --git-dir=\"$ROCKSDB_DIR\" describe --tags --exact-match OUTPUT_STRIP_TRAILING_WHITESPACE 2>/dev/null)\n    BUILD_DATE=$(date +\"%Y-%m-%d %H:%M:%S\"  2>/dev/null)\n    if [[ -z $(git status -s) ]]\n    then\n      GIT_MOD=0\n    else\n      GIT_MOD=1\n    fi\nfi\n\ncat ${INPUT} | \\\n    sed \"s/@GIT_DATE@/${GIT_DATE}/g; s/@GIT_SHA@/${GIT_SHA}/g; s/@GIT_MOD@/${GIT_MOD}/g; s/@GIT_TAG@/${GIT_TAG}/g ; s/@BUILD_DATE@/${BUILD_DATE}/g; s/@ROCKSDB_PLUGIN_EXTERNS@//g; s/@ROCKSDB_PLUGIN_BUILTINS@//g\" \\\n    > \"${OUTFILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -8154,6 +8228,7 @@
 			files = (
 				8533484924DB1C85003D6D92 /* cache.cc in Sources */,
 				85FED3C42415137100E42AD1 /* compact_on_deletion_collector.cc in Sources */,
+				85C9B432285DE62900482D22 /* fast_lru_cache.cc in Sources */,
 				85FED5DC2415137100E42AD1 /* read_write_util.cc in Sources */,
 				8533465F24DB1AA6003D6D92 /* flush_job.cc in Sources */,
 				85FED2CC2415137000E42AD1 /* coding.cc in Sources */,
@@ -8234,6 +8309,7 @@
 				85FED6C42415137100E42AD1 /* plain_table_index.cc in Sources */,
 				853345E724DB1AA6003D6D92 /* file_indexer.cc in Sources */,
 				85FED6BC2415137100E42AD1 /* plain_table_bloom.cc in Sources */,
+				85C9B44D285DE98100482D22 /* backup_engine.cc in Sources */,
 				85FED9982415137200E42AD1 /* trace_replay.cc in Sources */,
 				85FED55C2415137100E42AD1 /* blob_compaction_filter.cc in Sources */,
 				85FED5182415137100E42AD1 /* block_cache_tier_file.cc in Sources */,
@@ -8309,7 +8385,6 @@
 				85306F77266AC1B7002A3FBE /* table_factory.cc in Sources */,
 				85FEDA542415137300E42AD1 /* env_posix.cc in Sources */,
 				85FED2882415137000E42AD1 /* string_util.cc in Sources */,
-				85FED3B42415137100E42AD1 /* backupable_db.cc in Sources */,
 				8578C40727F09BA900522430 /* unique_id_gen.cc in Sources */,
 				8533455324DB1AA6003D6D92 /* db_impl_write.cc in Sources */,
 				8533471F24DB1AA7003D6D92 /* compaction_picker_fifo.cc in Sources */,
@@ -8317,6 +8392,7 @@
 				6242040E1BED65250043DD6F /* RocksDBEnv.mm in Sources */,
 				85FED3542415137000E42AD1 /* lru_cache.cc in Sources */,
 				6242040F1BED65250043DD6F /* RocksDBThreadStatus.mm in Sources */,
+				85C9B456285DEDFA00482D22 /* cleanable.cc in Sources */,
 				8533479F24DB1AA7003D6D92 /* repair.cc in Sources */,
 				85FED3102415137000E42AD1 /* db_options.cc in Sources */,
 				8533467F24DB1AA7003D6D92 /* version_edit_handler.cc in Sources */,
@@ -8374,6 +8450,7 @@
 				853345E324DB1AA6003D6D92 /* table_properties_collector.cc in Sources */,
 				85FED9D42415137200E42AD1 /* thread_status_updater_debug.cc in Sources */,
 				624204151BED65250043DD6F /* RocksDBFilterPolicy.mm in Sources */,
+				85C9B45B285DEE1E00482D22 /* compression.cc in Sources */,
 				853346B324DB1AA7003D6D92 /* merge_helper.cc in Sources */,
 				853342E124DB193E003D6D92 /* uncompression_dict_reader.cc in Sources */,
 				8530FB9A266B8D6C009D03DB /* db_impl.cc in Sources */,
@@ -8402,6 +8479,7 @@
 				85FED2D82415137000E42AD1 /* compaction_job_stats_impl.cc in Sources */,
 				85FED3DC2415137100E42AD1 /* env_mirror.cc in Sources */,
 				624204181BED65250043DD6F /* RocksDBCheckpoint.mm in Sources */,
+				85C9B424285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */,
 				859373072742E53100548412 /* compaction_filters.cc in Sources */,
 				8533475724DB1AA7003D6D92 /* external_sst_file_ingestion_job.cc in Sources */,
 				8530FB88266B8B8B009D03DB /* wal_edit.cc in Sources */,
@@ -8552,6 +8630,7 @@
 				8533470C24DB1AA7003D6D92 /* compaction_picker.cc in Sources */,
 				85FED44D2415137100E42AD1 /* write_unprepared_txn.cc in Sources */,
 				624F5DCF1BEE437C00497FEF /* RocksDBWriteBatch.mm in Sources */,
+				85C9B44E285DE98100482D22 /* backup_engine.cc in Sources */,
 				8533439E24DB193E003D6D92 /* full_filter_block.cc in Sources */,
 				8533458424DB1AA6003D6D92 /* arena_wrapped_db_iter.cc in Sources */,
 				85FED5192415137100E42AD1 /* block_cache_tier_file.cc in Sources */,
@@ -8584,7 +8663,6 @@
 				85FED4912415137100E42AD1 /* write_batch_with_index.cc in Sources */,
 				8578C43A27F09F5D00522430 /* prefetch_buffer_collection.cc in Sources */,
 				85306EBB266ABD85002A3FBE /* file_system_tracer.cc in Sources */,
-				85FED3B52415137100E42AD1 /* backupable_db.cc in Sources */,
 				85307056266AC2F8002A3FBE /* locktree.cc in Sources */,
 				8533474424DB1AA7003D6D92 /* compaction_job.cc in Sources */,
 				8547BC1B24913B4E0055A4E3 /* RocksDBBackupEngine.mm in Sources */,
@@ -8646,6 +8724,7 @@
 				859372EA2742E43200548412 /* trace_record_handler.cc in Sources */,
 				8533481124DB1BA8003D6D92 /* testutil.cc in Sources */,
 				85FEDA552415137300E42AD1 /* env_posix.cc in Sources */,
+				85C9B457285DEDFA00482D22 /* cleanable.cc in Sources */,
 				8533484A24DB1C85003D6D92 /* cache.cc in Sources */,
 				85306F01266ABF1D002A3FBE /* memkind_kmem_allocator.cc in Sources */,
 				8547BC2124913B840055A4E3 /* RocksDBColumnFamilyMetadata.mm in Sources */,
@@ -8695,6 +8774,7 @@
 				624F5DDB1BEE437C00497FEF /* RocksDBTableFactory.mm in Sources */,
 				85FED4CD2415137100E42AD1 /* bytesxor.cc in Sources */,
 				85FEDA212415137200E42AD1 /* file_system.cc in Sources */,
+				85C9B425285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */,
 				85FED5292415137100E42AD1 /* leveldb_options.cc in Sources */,
 				85FEDA852415137300E42AD1 /* skiplistrep.cc in Sources */,
 				85306EB0266ABD48002A3FBE /* composite_env.cc in Sources */,
@@ -8729,6 +8809,7 @@
 				8533435624DB193E003D6D92 /* block.cc in Sources */,
 				85306E7F266ABB52002A3FBE /* blob_file_reader.cc in Sources */,
 				624F5DDF1BEE437C00497FEF /* RocksDBCache.mm in Sources */,
+				85C9B45C285DEE1E00482D22 /* compression.cc in Sources */,
 				8547BC1A24913B460055A4E3 /* RocksDBCheckpoint.mm in Sources */,
 				8533431624DB193E003D6D92 /* filter_block_reader_common.cc in Sources */,
 				853346C824DB1AA7003D6D92 /* internal_stats.cc in Sources */,
@@ -8764,6 +8845,7 @@
 				85FED8012415137200E42AD1 /* get_context.cc in Sources */,
 				624F5DE51BEE437C00497FEF /* RocksDBStatistics.mm in Sources */,
 				85FED9B52415137200E42AD1 /* histogram_windowing.cc in Sources */,
+				85C9B433285DE62900482D22 /* fast_lru_cache.cc in Sources */,
 				853343D424DB1A44003D6D92 /* blob_log_format.cc in Sources */,
 				85FED2A12415137000E42AD1 /* compression_context_cache.cc in Sources */,
 				85FED4C12415137100E42AD1 /* stringappend.cc in Sources */,
@@ -8878,6 +8960,7 @@
 			files = (
 				8533484B24DB1C85003D6D92 /* cache.cc in Sources */,
 				85FED3C62415137100E42AD1 /* compact_on_deletion_collector.cc in Sources */,
+				85C9B434285DE62900482D22 /* fast_lru_cache.cc in Sources */,
 				85FED5DE2415137100E42AD1 /* read_write_util.cc in Sources */,
 				8533466124DB1AA6003D6D92 /* flush_job.cc in Sources */,
 				85FED2CE2415137000E42AD1 /* coding.cc in Sources */,
@@ -8958,6 +9041,7 @@
 				85FEDA962415137300E42AD1 /* vectorrep.cc in Sources */,
 				85FED6C62415137100E42AD1 /* plain_table_index.cc in Sources */,
 				853345E924DB1AA6003D6D92 /* file_indexer.cc in Sources */,
+				85C9B44F285DE98100482D22 /* backup_engine.cc in Sources */,
 				85FED6BE2415137100E42AD1 /* plain_table_bloom.cc in Sources */,
 				85FED99A2415137200E42AD1 /* trace_replay.cc in Sources */,
 				85FED55E2415137100E42AD1 /* blob_compaction_filter.cc in Sources */,
@@ -9035,12 +9119,12 @@
 				85FEDA562415137300E42AD1 /* env_posix.cc in Sources */,
 				85FED28A2415137000E42AD1 /* string_util.cc in Sources */,
 				8578C40927F09BA900522430 /* unique_id_gen.cc in Sources */,
-				85FED3B62415137100E42AD1 /* backupable_db.cc in Sources */,
 				8533455524DB1AA6003D6D92 /* db_impl_write.cc in Sources */,
 				8533472124DB1AA7003D6D92 /* compaction_picker_fifo.cc in Sources */,
 				8533437F24DB193E003D6D92 /* parsed_full_filter_block.cc in Sources */,
 				851B84792344910C009721CC /* RocksDBOptions.mm in Sources */,
 				85FED3562415137000E42AD1 /* lru_cache.cc in Sources */,
+				85C9B458285DEDFA00482D22 /* cleanable.cc in Sources */,
 				851B847A2344910C009721CC /* RocksDBDatabaseOptions.mm in Sources */,
 				853347A124DB1AA7003D6D92 /* repair.cc in Sources */,
 				85FED3122415137000E42AD1 /* db_options.cc in Sources */,
@@ -9098,6 +9182,7 @@
 				8530707B266AC2F8002A3FBE /* concurrent_tree.cc in Sources */,
 				853345E524DB1AA6003D6D92 /* table_properties_collector.cc in Sources */,
 				85FED9D62415137200E42AD1 /* thread_status_updater_debug.cc in Sources */,
+				85C9B45D285DEE1E00482D22 /* compression.cc in Sources */,
 				851B84822344910C009721CC /* RocksDBBlockBasedTableOptions.mm in Sources */,
 				853346B524DB1AA7003D6D92 /* merge_helper.cc in Sources */,
 				853342E324DB193E003D6D92 /* uncompression_dict_reader.cc in Sources */,
@@ -9126,6 +9211,7 @@
 				85FED2DA2415137000E42AD1 /* compaction_job_stats_impl.cc in Sources */,
 				85FED3DE2415137100E42AD1 /* env_mirror.cc in Sources */,
 				851B84852344910C009721CC /* RocksDBCache.mm in Sources */,
+				85C9B426285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */,
 				859373092742E53100548412 /* compaction_filters.cc in Sources */,
 				8533475924DB1AA7003D6D92 /* external_sst_file_ingestion_job.cc in Sources */,
 				8530FB8A266B8B8B009D03DB /* wal_edit.cc in Sources */,
@@ -9227,6 +9313,7 @@
 				8533435824DB193E003D6D92 /* block.cc in Sources */,
 				85FED4932415137100E42AD1 /* write_batch_with_index.cc in Sources */,
 				85FED80F2415137200E42AD1 /* block_fetcher.cc in Sources */,
+				85C9B435285DE62900482D22 /* fast_lru_cache.cc in Sources */,
 				853343D624DB1A44003D6D92 /* blob_log_format.cc in Sources */,
 				85FED3AF2415137100E42AD1 /* db_ttl_impl.cc in Sources */,
 				85FED37F2415137100E42AD1 /* env_timed.cc in Sources */,
@@ -9340,6 +9427,7 @@
 				85FED9D72415137200E42AD1 /* thread_status_updater_debug.cc in Sources */,
 				85FED49F2415137100E42AD1 /* object_registry.cc in Sources */,
 				85FED6D72415137100E42AD1 /* iterator.cc in Sources */,
+				85C9B45E285DEE1E00482D22 /* compression.cc in Sources */,
 				8530FB8B266B8B8B009D03DB /* wal_edit.cc in Sources */,
 				85306ED0266ABDAC002A3FBE /* fs_remap.cc in Sources */,
 				851B88ED23449295009721CC /* RocksDBError.mm in Sources */,
@@ -9377,6 +9465,7 @@
 				85FED4B72415137100E42AD1 /* put.cc in Sources */,
 				85FEDDAD2415173500E42AD1 /* mock_env.cc in Sources */,
 				85FED36F2415137000E42AD1 /* sim_cache.cc in Sources */,
+				85C9B450285DE98100482D22 /* backup_engine.cc in Sources */,
 				851B88F123449295009721CC /* RocksDBIterator.mm in Sources */,
 				8530704C266AC2F8002A3FBE /* keyrange.cc in Sources */,
 				85FED3832415137100E42AD1 /* checkpoint_impl.cc in Sources */,
@@ -9402,6 +9491,7 @@
 				853346CA24DB1AA7003D6D92 /* internal_stats.cc in Sources */,
 				85FED9FB2415137200E42AD1 /* thread_status_impl.cc in Sources */,
 				8533479A24DB1AA7003D6D92 /* c.cc in Sources */,
+				85C9B427285DE61D00482D22 /* compressed_secondary_cache.cc in Sources */,
 				85FED3132415137000E42AD1 /* db_options.cc in Sources */,
 				85306F11266ABF83002A3FBE /* configurable.cc in Sources */,
 				859372EC2742E43200548412 /* trace_record_handler.cc in Sources */,
@@ -9489,6 +9579,7 @@
 				853347CA24DB1AA7003D6D92 /* transaction_log_impl.cc in Sources */,
 				8578C44527F0A13000522430 /* wal_filter.cc in Sources */,
 				85FEDA5F2415137300E42AD1 /* env.cc in Sources */,
+				85C9B459285DEDFA00482D22 /* cleanable.cc in Sources */,
 				853345FE24DB1AA6003D6D92 /* builder.cc in Sources */,
 				8533478224DB1AA7003D6D92 /* trim_history_scheduler.cc in Sources */,
 				85306F4C266AC09F002A3FBE /* ribbon_config.cc in Sources */,
@@ -9519,7 +9610,6 @@
 				85FED5D72415137100E42AD1 /* readahead_raf.cc in Sources */,
 				85FED2C32415137000E42AD1 /* slice.cc in Sources */,
 				8533440A24DB1A44003D6D92 /* blob_file_meta.cc in Sources */,
-				85FED3B72415137100E42AD1 /* backupable_db.cc in Sources */,
 				85FED44B2415137100E42AD1 /* write_unprepared_txn_db.cc in Sources */,
 				851B890723449295009721CC /* RocksDBSnapshot.mm in Sources */,
 				853345E624DB1AA6003D6D92 /* table_properties_collector.cc in Sources */,
@@ -9591,7 +9681,7 @@
 					"OS_MACOSX=1",
 					"ROCKSDB_PLATFORM_POSIX=1",
 					"ROCKSDB_LIB_IO_POSIX=1",
-					"ROCKSDB_USING_THREAD_STATUS=1",
+					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
 					"NIOSTATS_CONTEXT=0",
 				);
@@ -9607,7 +9697,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/rocksdb",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = de.iabudiab.ObjectiveRocks;
 				PRODUCT_NAME = ObjectiveRocks;
 				SDKROOT = macosx;
@@ -9639,7 +9729,7 @@
 					"OS_MACOSX=1",
 					"ROCKSDB_PLATFORM_POSIX=1",
 					"ROCKSDB_LIB_IO_POSIX=1",
-					"ROCKSDB_USING_THREAD_STATUS=1",
+					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
@@ -9654,7 +9744,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/rocksdb",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = de.iabudiab.ObjectiveRocks;
 				PRODUCT_NAME = ObjectiveRocks;
 				SDKROOT = macosx;
@@ -9686,6 +9776,7 @@
 					"IOS_CROSS_COMPILE=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9733,6 +9824,7 @@
 					"IOS_CROSS_COMPILE=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

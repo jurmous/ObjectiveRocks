@@ -67,16 +67,6 @@
 	return (BlockBasedTableIndexType)_options.index_type;
 }
 
-- (void)setHashIndexAllowCollision:(BOOL)hashIndexAllowCollision
-{
-	_options.hash_index_allow_collision = hashIndexAllowCollision;
-}
-
-- (BOOL)hashIndexAllowCollision
-{
-	return _options.hash_index_allow_collision;
-}
-
 - (void)setChecksumType:(BlockBasedTableChecksumType)checksumType
 {
 	_options.checksum = (rocksdb::ChecksumType)checksumType;
