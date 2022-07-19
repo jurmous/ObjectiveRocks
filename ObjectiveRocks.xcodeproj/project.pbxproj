@@ -9731,6 +9731,7 @@
 					"ROCKSDB_LIB_IO_POSIX=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10075,6 +10076,7 @@
 					"ROCKSDB_LIB_IO_POSIX=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/rocksdb/include",
@@ -10113,6 +10115,7 @@
 					"ROCKSDB_LIB_IO_POSIX=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/rocksdb/include",
@@ -10148,6 +10151,7 @@
 					"NROCKSDB_THREAD_STATUS=1",
 					"IOS_CROSS_COMPILE=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/rocksdb/include",
@@ -10186,6 +10190,7 @@
 					"IOS_CROSS_COMPILE=1",
 					"NROCKSDB_THREAD_STATUS=1",
 					"NPERF_CONTEXT=0",
+					"NIOSTATS_CONTEXT=0",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/rocksdb/include",
