@@ -933,9 +933,9 @@ forColumnFamily:(RocksDBColumnFamilyHandle *)columnFamily
 	return YES;
 }
 
-- (BOOL)enableFileDelections:(BOOL)force error:(NSError * __autoreleasing *)error
+- (BOOL)enableFileDelections:(NSError * __autoreleasing *)error
 {
-	rocksdb::Status status = _db->EnableFileDeletions(force);
+	rocksdb::Status status = _db->EnableFileDeletions();
 	if (!status.ok()) {
 		NSError *temp = [RocksDBError errorWithRocksStatus:status];
 		if (error && *error == nil) {
