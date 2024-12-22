@@ -832,8 +832,11 @@ typedef NS_ENUM(uint32_t, RocksDBHistogram)
 	/** @brief Time spent during compaction. */
 	RocksDBHistogramCompactionTime,
 
-	/** @brief Time spent during subcompaction. */
-	RocksDBHistogramSubcompactionTime,
+	/** @brief Total CPU time spent during compaction. */
+	RocksDBHistogramCompactionCpuTime,
+
+	/** @brief Time spent setting up subcompactions. */
+	RocksDBHistogramSubcompactionSetupTime,
 
 	/** @brief Time spent during table syncs. */
 	RocksDBHistogramTableSyncMicros,
@@ -847,119 +850,173 @@ typedef NS_ENUM(uint32_t, RocksDBHistogram)
 	/** @brief Time spent during manifest file syncs. */
 	RocksDBHistogramManifestFileSyncMicros,
 
-	/** @brief Time spent during in IO during table open. */
+	/** @brief Time spent in IO during table open. */
 	RocksDBHistogramTableOpenIOMicros,
 
-	/** @brief Time spend during DB MultiGet() calls. */
+	/** @brief Time spent in DB MultiGet() calls. */
 	RocksDBHistogramDBMultiget,
 
-	/** @brief Time spend during read block compaction. */
+	/** @brief Time spent during read block compaction. */
 	RocksDBHistogramReadBlockCompactionMicros,
 
-	/** @brief Time spend during read block Get(). */
+	/** @brief Time spent during read block Get(). */
 	RocksDBHistogramReadBlockGetMicros,
 
-	/** @brief Time spend during write raw blocks. */
+	/** @brief Time spent writing raw blocks. */
 	RocksDBHistogramWriteRawBlockMicros,
 
-	/** @brief The number of stalls in L0 slowdowns. */
-	RocksDBHistogramStall_L0SlowdownCount,
-
-	/** @brief The number of stalls in memtable compations */
-	RocksDBHistogramStallMemtableCompactionCount,
-
-	/** @brief The number of stalls in L0 files. */
-	RocksDBHistogramStall_L0NumFilesCount,
-
-	/** @brief The count of delays in hard rate limiting. */
-	RocksDBHistogramHardRateLimitDelayCount,
-
-	/** @brief The count of delays in soft rate limiting. */
-	RocksDBHistogramSoftRateLimitDelayCount,
-
-	/** @brief The number of files in a single compaction. */
+	/** @brief Number of files in a single compaction. */
 	RocksDBHistogramNumFilesInSingleCompaction,
 
-	/** @brief Time Spent in Seek() calls. */
+	/** @brief Time spent in Seek() calls. */
 	RocksDBHistogramDBSeek,
 
 	/** @brief Time spent in Write Stall. */
 	RocksDBHistogramWriteStall,
 
-	/** @brief  Time spent in SST Read. */
+	/** @brief Time spent in SST Read operations. */
 	RocksDBHistogramSSTReadMicros,
 
-	/** @brief The number of subcompactions actually scheduled during a compaction. */
-	RocksDBHistogramNumCompactionsScheduled,
+	/** @brief Time spent in IO during file flush. */
+	RocksDBHistogramFileReadFlushMicros,
 
-	/** @brief Distribution of bytes read in each operations. */
+	/** @brief Time spent in IO during file compaction. */
+	RocksDBHistogramFileReadCompactionMicros,
+
+	/** @brief Time spent in IO during DB open. */
+	RocksDBHistogramFileReadDBOpenMicros,
+
+	/** @brief Time spent in Get operations during file read. */
+	RocksDBHistogramFileReadGetMicros,
+
+	/** @brief Time spent in MultiGet operations during file read. */
+	RocksDBHistogramFileReadMultigetMicros,
+
+	/** @brief Time spent in iterator operations during file read. */
+	RocksDBHistogramFileReadDBIteratorMicros,
+
+	/** @brief Time spent verifying DB checksums during file read. */
+	RocksDBHistogramFileReadVerifyDbChecksumMicros,
+
+	/** @brief Time spent verifying file checksums during file read. */
+	RocksDBHistogramFileReadVerifyFileChecksumsMicros,
+
+	/** @brief Time spent writing SST files. */
+	RocksDBHistogramSstWriteMicros,
+
+	/** @brief Time spent writing SST table during flush or compaction. */
+	RocksDBHistogramFileWriteFlushMicros,
+
+	/** @brief Time spent writing SST table during compaction. */
+	RocksDBHistogramFileWriteCompactionMicros,
+
+	/** @brief Time spent writing SST table during DB open. */
+	RocksDBHistogramFileWriteDBOpenMicros,
+
+	/** @brief Number of subcompactions actually scheduled during a compaction. */
+	RocksDBHistogramNumSubcompactionsScheduled,
+
+	/** @brief Distribution of bytes read in each operation. */
 	RocksDBHistogramBytesPerRead,
 
-	/** @brief Distribution of bytes written in each operations. */
+	/** @brief Distribution of bytes written in each operation. */
 	RocksDBHistogramBytesPerWrite,
 
-	/** @brief Distribution of bytes via multiget in each operations. */
-	RocksDBHistogramBytesPerMultiGet,
+	/** @brief Distribution of bytes read in MultiGet operations. */
+	RocksDBHistogramBytesPerMultiget,
 
-	/** @brief # of bytes compressed. */
+	/** @brief Number of bytes compressed. */
 	RocksDBHistogramBytesCompressed,
 
-	/** @brief # of bytes decompressed. */
+	/** @brief Number of bytes decompressed. */
 	RocksDBHistogramBytesDecompressed,
 
-	/** @brief Compression time. */
-	RocksDBHistogramCompressionTimeNanos,
+	/** @brief Time spent in compression operations (nanoseconds). */
+	RocksDBHistogramCompressionTimesNanos,
 
-	/** @brief Decompression time. */
-	RocksDBHistogramDecompressionTimeNanos,
+	/** @brief Time spent in decompression operations (nanoseconds). */
+	RocksDBHistogramDecompressionTimesNanos,
 
-	/** @brief Number of merge operands passed to the merge operator in user read requests. **/
+	/** @brief Number of merge operands passed to the merge operator in user read requests. */
 	RocksDBHistogramReadNumMergeOperands,
 
-	/** @brief Size of keys written to BlobDB. **/
+	/** @brief Size of keys written to BlobDB. */
 	RocksDBHistogramBlobDbKeySize,
 
-	/** @brief Size of values written to BlobDB. **/
+	/** @brief Size of values written to BlobDB. */
 	RocksDBHistogramBlobDbValueSize,
 
-	/** @brief BlobDB Put/PutWithTTL/PutUntil/Write latency. **/
+	/** @brief BlobDB Put/PutWithTTL/PutUntil/Write latency. */
 	RocksDBHistogramBlobDbWriteMicros,
 
-	/** @brief BlobDB Get lagency. **/
+	/** @brief BlobDB Get latency. */
 	RocksDBHistogramBlobDbGetMicros,
 
-	/** @brief BlobDB MultiGet lagency. **/
+	/** @brief BlobDB MultiGet latency. */
 	RocksDBHistogramBlobDbMultigetMicros,
 
-	/** @brief BlobDB Seek/SeekToFirst/SeekToLast/SeekForPrev latency. **/
+	/** @brief BlobDB Seek/SeekToFirst/SeekToLast/SeekForPrev latency. */
 	RocksDBHistogramBlobDbSeekMicros,
 
-	/** @brief BlobDB Next latency. **/
+	/** @brief BlobDB Next latency. */
 	RocksDBHistogramBlobDbNextMicros,
 
-	/** @brief BlobDB Prev latency. **/
+	/** @brief BlobDB Prev latency. */
 	RocksDBHistogramBlobDbPrevMicros,
 
-	/** @brief Blob file write latency. **/
+	/** @brief Blob file write latency. */
 	RocksDBHistogramBlobDbBlobFileWriteMicros,
 
-	/** @brief Blob file read latency. **/
+	/** @brief Blob file read latency. */
 	RocksDBHistogramBlobDbBlobFileReadMicros,
 
-	/** @brief Blob file sync latency. **/
+	/** @brief Blob file sync latency. */
 	RocksDBHistogramBlobDbBlobFileSyncMicros,
 
-	/** @brief BlobDB garbage collection time. **/
-	RocksDBHistogramBlobDbGcMicros,
-
-	/** @brief BlobDB compression time. **/
+	/** @brief BlobDB compression time. */
 	RocksDBHistogramBlobDbCompressionMicros,
 
-	/** @brief BlobDB decompression time. **/
+	/** @brief BlobDB decompression time. */
 	RocksDBHistogramBlobDbDecompressionMicros,
 
-	/** @brief Time spent flushing memtable to disk. **/
-	RocksDBHistogramFlushTime
+	/** @brief Time spent flushing memtable to disk. */
+	RocksDBHistogramFlushTime,
+
+	/** @brief Size of SST batches. */
+	RocksDBHistogramSstBatchSize,
+
+	/** @brief Number of IOs issued in parallel in a MultiGet batch. */
+	RocksDBHistogramMultigetIoBatchSize,
+
+	/** @brief Number of index and filter blocks read from file system per level during MultiGet. */
+	RocksDBHistogramNumIndexAndFilterBlocksReadPerLevel,
+
+	/** @brief Number of SST files read from file system per level during MultiGet. */
+	RocksDBHistogramNumSstReadPerLevel,
+
+	/** @brief Number of levels requiring IO for MultiGet operations. */
+	RocksDBHistogramNumLevelReadPerMultiget,
+
+	/** @brief Number of autoresume retries in the error handler. */
+	RocksDBHistogramErrorHandlerAutoresumeRetryCount,
+
+	/** @brief Number of bytes read for asynchronous read requests. */
+	RocksDBHistogramAsyncReadBytes,
+
+	/** @brief Poll wait time in microseconds for asynchronous reads. */
+	RocksDBHistogramPollWaitMicros,
+
+	/** @brief Number of prefetched bytes discarded by RocksDB. */
+	RocksDBHistogramPrefetchedBytesDiscarded,
+
+	/** @brief Wait time for aborting async read in FilePrefetchBuffer destructor (microseconds). */
+	RocksDBHistogramAsyncPrefetchAbortMicros,
+
+	/** @brief Number of bytes read from the end of SST table during block-based table open (prefetch tail read bytes). */
+	RocksDBHistogramTableOpenPrefetchTailReadBytes,
+
+	/** @brief Maximum value to determine the size of the enum. */
+	RocksDBHistogramEnumMax
 };
 
 /**
