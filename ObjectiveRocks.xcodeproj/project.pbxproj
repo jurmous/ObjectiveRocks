@@ -1601,8 +1601,8 @@
 		85FED88A2415137200E42AD1 /* options.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02A2415136F00E42AD1 /* options.h */; };
 		85FED88C2415137200E42AD1 /* table_properties.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02B2415136F00E42AD1 /* table_properties.h */; };
 		85FED88E2415137200E42AD1 /* table_properties.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02B2415136F00E42AD1 /* table_properties.h */; };
-		85FED8902415137200E42AD1 /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02C2415136F00E42AD1 /* c.h */; };
-		85FED8922415137200E42AD1 /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02C2415136F00E42AD1 /* c.h */; };
+		85FED8902415137200E42AD1 /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02C2415136F00E42AD1 /* c.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85FED8922415137200E42AD1 /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02C2415136F00E42AD1 /* c.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		85FED8942415137200E42AD1 /* cleanable.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02D2415136F00E42AD1 /* cleanable.h */; };
 		85FED8962415137200E42AD1 /* cleanable.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02D2415136F00E42AD1 /* cleanable.h */; };
 		85FED8982415137200E42AD1 /* sim_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 85FED02F2415136F00E42AD1 /* sim_cache.h */; };
@@ -4323,6 +4323,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85FED8902415137200E42AD1 /* c.h in Headers */,
 				8533450724DB1AA6003D6D92 /* error_handler.h in Headers */,
 				853347D324DB1AA7003D6D92 /* log_reader.h in Headers */,
 				85C602AE2D16171700E347D9 /* wide_columns_helper.h in Headers */,
@@ -4576,7 +4577,6 @@
 				85FED9F42415137200E42AD1 /* in_memory_stats_history.h in Headers */,
 				85FED2B02415137000E42AD1 /* core_local.h in Headers */,
 				624203E11BED64F80043DD6F /* RocksDBBlockBasedTableOptions.h in Headers */,
-				85FED8902415137200E42AD1 /* c.h in Headers */,
 				85FED5582415137100E42AD1 /* blob_file.h in Headers */,
 				85FED25C2415137000E42AD1 /* concurrent_task_limiter_impl.h in Headers */,
 				85FED8282415137200E42AD1 /* sst_file_writer.h in Headers */,
@@ -4862,6 +4862,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85FED8922415137200E42AD1 /* c.h in Headers */,
 				8533450924DB1AA6003D6D92 /* error_handler.h in Headers */,
 				853347D524DB1AA7003D6D92 /* log_reader.h in Headers */,
 				85C602AB2D16171700E347D9 /* wide_columns_helper.h in Headers */,
@@ -5115,7 +5116,6 @@
 				85FED9F62415137200E42AD1 /* in_memory_stats_history.h in Headers */,
 				85FED2B22415137000E42AD1 /* core_local.h in Headers */,
 				851B858323449134009721CC /* RocksDBPlainTableOptions.h in Headers */,
-				85FED8922415137200E42AD1 /* c.h in Headers */,
 				85FED55A2415137100E42AD1 /* blob_file.h in Headers */,
 				85FED25E2415137000E42AD1 /* concurrent_task_limiter_impl.h in Headers */,
 				85FED82A2415137200E42AD1 /* sst_file_writer.h in Headers */,
